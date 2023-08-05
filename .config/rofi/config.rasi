@@ -1,1 +1,9 @@
 @theme "/usr/share/rofi/themes/DarkBlue.rasi"
+
+configuration {
+  show-icons: true;
+  display-drun: "Apps";
+  display-window: "Windows";
+  modi: "window,drun,run,emoji,clipboard:greenclip print";
+  kb-custom-1: "Ctrl+c";
+}

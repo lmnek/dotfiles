@@ -22,17 +22,15 @@
 (defalias
   ch    (tap-next esc (layer-toggle characters))
   nav   (layer-toggle navigation)
+  rofi   (layer-toggle rofi)
   ;;
   tbct  (tap-next tab lctl)
   altb  A-tab ;; (around lalt tab)
-  ;;
-  rfdr   (cmd-button "rofi -show drun")
-  rfw    (cmd-button "rofi -show window"))
-  
+) 
       
 (deflayer base
   caps  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12          
-  @cza  1    2    3    4    5    6    7    8    9    0    @rfw  @rfdr bspc    
+  @cza  1    2    3    4    5    6    7    8    9    0    @rofi _     bspc    
   @tbct q    w    e    r    t    y    u    i    o    p    lctl  _     _      
   @ch   a    s    d    f    g    h    j    k    l    @nav _     ret                              
   lsft  z    x    c    v    b    n    m    ,    .    _    rsft                          
@@ -57,6 +55,23 @@
   _     _    _                 bspc             _         _     _           
 )
 
+(defalias
+  dr     (cmd-button "rofi -show drun")
+  win    (cmd-button "rofi -show window")
+  r      (cmd-button "rofi -show run")
+  e      (cmd-button "rofi -show emoji")
+  cl     (cmd-button "rofi -show clipboard -run-command '{cmd}'"))
+	
+
+(deflayer rofi 
+  _     _    _    _    _    _    _    _    _    _    _    _     _          
+  _     _    _    _    _    _    _    _    _    _    _    _     _     _    
+  _     _    @win @e   @r   _    _    _    _    _    _    _     _     _      
+  _     _    _    @dr   _   _    _    _    _    _    _    _     _                     
+  _     _    _    @cl   _    _    _    _    _    _    _    _                          
+  _     _    _                 ret              _         _     _           
+)
+
 (defalias 
 	cza   (layer-add czechLow)
   	czr   (layer-rem czechLow)
@@ -78,10 +93,10 @@
 (deflayer czechUp
   _     _    _    _    _    _    _    _    _    _    _    _     _          
   _     @U1  Ě    Š    Č    Ř    Ž    Ý    Á    Í    É    @U2   _     _    
-  _     _    _    _    _    _    _    _    _    _    _    _     _     _      
-  _     _    _    _    _    _    _    _    _    _    _    _     _                              
-  _     _    _    _    _    _    _    _    _    _    _    _                          
-  _     _    _                 _                _         _     _           
+  _     Q    W    E    R    T    Y    U    I    O    P    _     _     _
+  _     A    S    D    F    G    H    J    K    L    _    _     _         
+  _     Z    X    C    V    B    N    M    _    _    _    _
+  _     _    _                 _                _         _     _ 
 )
 
 (deflayer empty
