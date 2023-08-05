@@ -25,14 +25,15 @@
   rofi   (layer-toggle rofi)
   ;;
   tbct  (tap-next tab lctl)
-  altb  A-tab ;; (around lalt tab)
-) 
-      
+  altb   A-tab ;; (around lalt tab)
+  rs    (cmd-button "echo \"\" | rofi -dmenu -p \"Search\" | xargs -I{} xdg-open https://www.google.de/search?q={}")
+  atg   pause)
+
 (deflayer base
   caps  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12          
-  @cza  1    2    3    4    5    6    7    8    9    0    @rofi _     bspc    
-  @tbct q    w    e    r    t    y    u    i    o    p    lctl  _     _      
-  @ch   a    s    d    f    g    h    j    k    l    @nav _     ret                              
+  @cza  1    2    3    4    5    6    7    8    9    0    _     @atg  bspc    
+  @tbct q    w    e    r    t    y    u    i    o    p    lctl  @rofi _      
+  @ch   a    s    d    f    g    h    j    k    l    @nav @rs   ret                              
   lsft  z    x    c    v    b    n    m    ,    .    _    rsft                          
   _     lmet lalt             spc               ralt      cmps  rctl           
 )
