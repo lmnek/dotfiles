@@ -21,13 +21,13 @@
 
 (defalias
   ch    (tap-next esc (layer-toggle characters))
-  nav   (layer-toggle navigation)
+  nav   (tap-next ret (layer-toggle navigation))
   rofi   (layer-toggle rofi)
   ;;
   tbct  (tap-next tab lctl)
   altb   A-tab ;; (around lalt tab)
   rs    (cmd-button "echo \"\" | rofi -dmenu -p \"Search\" | xargs -I{} xdg-open https://www.google.de/search?q={}")
-  atg   pause)
+  atg   KeyPlayPause)
 
 (deflayer base
   caps  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12          
