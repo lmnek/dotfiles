@@ -10,8 +10,13 @@
   allow-cmd true
 )
 
+;; TODO:
+;; move setxkbmap to i3 config
+;; change way of selecting czech chars - maybe altGr -> accented letter?
+;; rofi google
+
 (defsrc
-  esc   f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12
+  esc   f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12    
   `     1    2    3    4    5    6    7    8    9    0    -     =     bspc 
   tab   q    w    e    r    t    y    u    i    o    p    [     ]     \       
   caps  a    s    d    f    g    h    j    k    l    ;    '     ret                              
@@ -22,17 +27,15 @@
 (defalias
   ch    (tap-next esc (layer-toggle characters))
   nav   (tap-next ret (layer-toggle navigation))
-  rofi   (layer-toggle rofi)
   ;;
-  tbct  (tap-next tab lctl)
   altb   A-tab ;; (around lalt tab)
   rs    (cmd-button "echo \"\" | rofi -dmenu -p \"Search\" | xargs -I{} xdg-open https://www.google.de/search?q={}")
-  atg   KeyPlayPause)
+  pp   (cmd-button "playerctl play-pause"))
 
 (deflayer base
   caps  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12          
-  @cza  1    2    3    4    5    6    7    8    9    0    _     @atg  bspc    
-  @tbct q    w    e    r    t    y    u    i    o    p    lctl  @rofi _      
+  @cza  1    2    3    4    5    6    7    8    9    0    _     @pp  bspc    
+  tab   q    w    e    r    t    y    u    i    o    p    lctl  _     _      
   @ch   a    s    d    f    g    h    j    k    l    @nav @rs   ret                              
   lsft  z    x    c    v    b    n    m    ,    .    _    rsft                          
   _     lmet lalt             spc               ralt      cmps  rctl           
@@ -56,22 +59,6 @@
   _     _    _                 bspc             _         _     _           
 )
 
-(defalias
-  dr     (cmd-button "rofi -show drun")
-  win    (cmd-button "rofi -show window")
-  r      (cmd-button "rofi -show run")
-  e      (cmd-button "rofi -show emoji")
-  cl     (cmd-button "rofi -show clipboard -run-command '{cmd}'"))
-	
-
-(deflayer rofi 
-  _     _    _    _    _    _    _    _    _    _    _    _     _          
-  _     _    _    _    _    _    _    _    _    _    _    _     _     _    
-  _     _    @win @e   @r   _    _    _    _    _    _    _     _     _      
-  _     _    _    @dr   _   _    _    _    _    _    _    _     _                     
-  _     _    _    @cl   _    _    _    _    _    _    _    _                          
-  _     _    _                 ret              _         _     _           
-)
 
 (defalias 
 	cza   (layer-add czechLow)
@@ -85,9 +72,9 @@
 (deflayer czechLow
   _     _    _    _    _    _    _    _    _    _    _    _     _          
   @czr  ů    ě    š    č    ř    ž    ý    á    í    é    ú     _     _    
-  _     q    w    e    r    t    y    u    i    o    p    _     _     _    
+  _     q    w    e    r    t    y    u    i    o    p    _     @czU  _    
   _     a    s    d    f    g    h    j    k    l    _    _     _                              
-  @czU  z    x    c    v    b    n    m    _    _    _    _                     
+  _     z    x    c    v    b    n    m    _    _    _    _                     
   _     _    _                 _                _         _     _           
 )
 
