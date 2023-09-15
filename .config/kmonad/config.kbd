@@ -1,8 +1,6 @@
 (defcfg
   input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
-  output (uinput-sink 
-  			"KMonad kbd"
-  			"/usr/bin/sleep 1 && /usr/bin/setxkbmap -option compose:ralt")
+  output (uinput-sink "KMonad kbd")
 
   cmp-seq ralt ;; need to be set to write unicode chars
   
@@ -27,6 +25,8 @@
 (defalias
   ch    (tap-next esc (layer-toggle characters))
   nav   (tap-next ret (layer-toggle navigation))
+  cz    (layer-toggle czechLow)
+  czU   (layer-toggle czechUp)
   ;;
   altb   A-tab ;; (around lalt tab)
   rs    (cmd-button "echo \"\" | rofi -dmenu -p \"Search\" | xargs -I{} xdg-open https://www.google.de/search?q={}")
@@ -34,11 +34,11 @@
 
 (deflayer base
   caps  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12          
-  @cza  1    2    3    4    5    6    7    8    9    0    _     @pp  bspc    
-  tab   q    w    e    r    t    y    u    i    o    p    lctl  _     _      
+  _     1    2    3    4    5    6    7    8    9    0    _     @pp  bspc    
+  tab   q    w    e    r    t    y    u    i    o    p    lctl  _    _      
   @ch   a    s    d    f    g    h    j    k    l    @nav @rs   ret                              
   lsft  z    x    c    v    b    n    m    ,    .    _    rsft                          
-  _     lmet lalt             spc               ralt      cmps  rctl           
+  _     lmet lalt             spc               @cz       cmps  rctl           
 )
 
 (deflayer navigation
@@ -61,30 +61,25 @@
 
 
 (defalias 
-	cza   (layer-add czechLow)
-  	czr   (layer-rem czechLow)
- 	czU   (layer-toggle czechUp)
- 	
-	U1    (around ralt (around o U))
-	U2    (around +' U)
-	)
+   U1    (around ralt (around o U))
+   U2    (around +' U))
 
 (deflayer czechLow
   _     _    _    _    _    _    _    _    _    _    _    _     _          
-  @czr  ů    ě    š    č    ř    ž    ý    á    í    é    ú     _     _    
-  _     q    w    e    r    t    y    u    i    o    p    _     @czU  _    
-  _     a    s    d    f    g    h    j    k    l    _    _     _                              
-  _     z    x    c    v    b    n    m    _    _    _    _                     
-  _     _    _                 _                _         _     _           
+  _     _    _    _    _    _    _    _    _    _    _    _     _     _    
+  _     _    é    ě    ř    ť    ý    ů    í    ó    _    _     _     _    
+  _     á    š    ď    _    _    _    ú    _    _    _    _     _                              
+  @czU  ž    _    č    _    _    ň    _    _    _    _    _                     
+  _     _    _                 bspc             _         _     _           
 )
 
 (deflayer czechUp
   _     _    _    _    _    _    _    _    _    _    _    _     _          
-  _     @U1  Ě    Š    Č    Ř    Ž    Ý    Á    Í    É    @U2   _     _    
-  _     Q    W    E    R    T    Y    U    I    O    P    _     _     _
-  _     A    S    D    F    G    H    J    K    L    _    _     _         
-  _     Z    X    C    V    B    N    M    _    _    _    _
-  _     _    _                 _                _         _     _ 
+  _     _    _    _    _    _    _    _    _    _    _    _     _     _    
+  _     _    É    Ě    Ř    Ť    Ý    @U1  Í    Ó    _    _     _     _    
+  _     Á    Š    Ď    _    _    _    @U2  _    _    _    _     _                              
+  _     Ž    _    Č    _    _    Ň    _    _    _    _    _                     
+  _     _    _                 _                _         _     _           
 )
 
 (deflayer empty
