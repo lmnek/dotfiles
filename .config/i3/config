@@ -164,6 +164,7 @@ bindsym $mod+r mode "resize"
 
 # start a terminal
 bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+Shift+Return exec xfce4-terminal
 
 # kill focused window
 bindsym $mod+q kill
@@ -306,7 +307,7 @@ set $ws10 "10"
 
 # bind program to workspace and focus to them on startup:
 assign [class="Xfce4-terminal"] $ws1
-assign [class="(?i)brave"] $ws2
+# assign [class="(?i)brave"] $ws2
 assign [class="Thunar"] $ws3
 assign [class="thunderbird"] $ws4
 assign [class="Signal"] $ws5
@@ -580,6 +581,11 @@ exec --no-startup-id "setxkbmap -option compose:ralt"
 
 exec --no-startup-id xinput set-prop "Elan Touchpad" "libinput Natural Scrolling Enabled" 1
 
+bindsym $mod+Shift+s exec --no-startup-id rofi -show emoji
+
+bindsym $mod+Shift+g exec --no-startup-id  ~/.config/i3/scripts/gc_tt_layout.sh 
+
+## Scratchpads
 
 for_window [class="Xfce4-terminal" title="spotify"] floating enable, resize set 1200 1000, move scratchpad
 exec xfce4-terminal -e "spt" --title=spotify
