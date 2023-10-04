@@ -55,6 +55,8 @@ new_window pixel 1
 # Set inner/outer gaps
 gaps inner 6
 gaps outer 3
+smart_gaps on
+smart_borders on
 
 # show window title bars (not officially supported with i3gaps)
 #default_border normal
@@ -587,7 +589,7 @@ exec --no-startup-id xinput set-prop "Elan Touchpad" "libinput Natural Scrolling
 
 
 for_window [class="Xfce4-terminal" title="spotify"] floating enable, resize set 1200 1000, move scratchpad
-exec xfce4-terminal -e spt --title=spotify
+exec xfce4-terminal -e "spt" --title=spotify
 bindsym $mod+p [class="Xfce4-terminal" title="spotify"] scratchpad show move position center
 
 for_window [class="Xfce4-terminal" title="translate"] floating enable, resize set 600 1000, move scratchpad
