@@ -2,6 +2,7 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+set -gx EDITOR nvim
 
 # git
 abbr g 'git'
@@ -34,8 +35,16 @@ abbr ls 'exa'
 abbr la 'exa -a'
 abbr ll 'exa --long --header --git'
 abbr lla 'exa --long --header -a --git'
+abbr dnd 'dragon-drop'
 
 abbr c 'codium .'
+abbr v 'nvim'
+abbr lf 'lfrun'
+
+# newline after cmd
+function postexec_test --on-event fish_postexec
+   echo
+end
 
 thefuck --alias | source
 

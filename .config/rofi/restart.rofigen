@@ -1,0 +1,13 @@
+#!/bin/bash
+
+title="Restart"
+
+typeset -A menu
+menu=(
+  [spotifyd]="systemctl --user restart spotifyd.service"
+  [xset: cmp key]="setxkbmap -option compose:ralt"
+  [spotify-scratchpad]="i3-msg \"exec xfce4-terminal --title=spotify\""
+  [translate-scratchpad]="i3-msg \"exec xfce4-terminal --title=translate\""
+  # [KMonad]=""
+)
+

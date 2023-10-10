@@ -1,0 +1,20 @@
+#!/bin/bash
+# source and credit goes to:
+# https://github.com/losoliveirasilva/rofigen?search=1
+
+source "$1"
+
+# Window title
+ROFI_TEXT=$title
+
+launcher_options=(-dmenu -i -lines "${#menu[@]}" -p "${ROFI_TEXT}" \
+         		-config ~/.config/rofi/rofidmenu.rasi) 
+
+launcher=(rofi "${launcher_options[@]}")
+
+selection="$(printf '%s\n' "${!menu[@]}" | sort | "${launcher[@]}")"
+
+if [[ -n $selection ]]
+then
+    exec ${menu[${selection}]}
+fi

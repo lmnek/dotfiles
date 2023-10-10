@@ -8,11 +8,6 @@
   allow-cmd true
 )
 
-;; TODO:
-;; move setxkbmap to i3 config
-;; change way of selecting czech chars - maybe altGr -> accented letter?
-;; rofi google
-
 (defsrc
   esc   f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12    
   `     1    2    3    4    5    6    7    8    9    0    -     =     bspc 
@@ -27,25 +22,22 @@
   nav   (tap-next ret (layer-toggle navigation))
   cz    (layer-toggle czechLow)
   czU   (layer-toggle czechUp)
-  ;;
-  altb   A-tab ;; (around lalt tab)
-  rs    (cmd-button "echo \"\" | rofi -dmenu -p \"Search\" | xargs -I{} xdg-open https://www.google.de/search?q={}")
-  pp   (cmd-button "playerctl play-pause"))
+  pp    (cmd-button "playerctl play-pause"))
 
 (deflayer base
   caps  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12          
   _     1    2    3    4    5    6    7    8    9    0    _     @pp  bspc    
   tab   q    w    e    r    t    y    u    i    o    p    lctl  _    _      
-  @ch   a    s    d    f    g    h    j    k    l    @nav @rs   ret                              
+  @ch   a    s    d    f    g    h    j    k    l    @nav bspc  ret                              
   lsft  z    x    c    v    b    n    m    ,    .    _    rsft                          
-  _     lmet lalt             spc               @cz       cmps  rctl           
+  _     lmet lalt             spc               @cz       cmps rctl           
 )
 
 (deflayer navigation
   _     _    _    _    _    _    _    _    _    _    _    _     _          
   _     _    _    _    _    _    _    _    _    _    _    _     _     _    
   _     home end  pgup pgdn _    _    bspc _    del  _    _     _     _      
-  _     esc @altb lctl lsft _    left down up   rght _   _     _                              
+  _     esc  _    lctl lsft _    left down up   rght _   _     _                              
   _     _    _    _    _    _    _    _    _    _    _    _                          
   _     _    _                 ret              _         _     _           
 )

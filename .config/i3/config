@@ -26,6 +26,7 @@ font pango: Noto Sans Regular 10
 
 # set the mod key to the winkey:
 set $mod Mod4
+set $term "alacritty msg create-window || alacritty"
 
 #####################
 # workspace layout: #
@@ -163,11 +164,12 @@ bindsym $mod+r mode "resize"
 ######################################
 
 # start a terminal
-bindsym $mod+Return exec xfce4-terminal
-bindsym $mod+Shift+Return exec xfce4-terminal
+bindsym $mod+Return workspace $ws1; exec $term
+bindsym $mod+Shift+Return exec $term
 
-# kill focused window
+# kill focused window (not scratchpad)
 bindsym $mod+q kill
+# bindsym $mod+q [con_id="__focused__" instance="^(?!scratchpad-name).*$"] kill
 
 # exit-menu
 bindsym $mod+Shift+e exec ~/.config/i3/scripts/powermenu
@@ -306,14 +308,14 @@ set $ws10 "10"
 #workspace $ws5 output HDMI-0
 
 # bind program to workspace and focus to them on startup:
-assign [class="Xfce4-terminal"] $ws1
+# assign [class="Xfce4-terminal"] $ws1
 # assign [class="(?i)brave"] $ws2
 assign [class="Thunar"] $ws3
 assign [class="thunderbird"] $ws4
 assign [class="Signal"] $ws5
 
 # automatic set focus new window if it opens on another workspace than the current:
-for_window [class=Xfce4-terminal] focus
+for_window [class=alacritty] focus
 for_window [class=(?i)brave] focus
 for_window [class=Thunar] focus
 
@@ -412,24 +414,19 @@ exec --no-startup-id /usr/bin/dunst
 #exec_always --no-startup-id autotiling
 
 # Autostart apps as you like
-exec --no-startup-id sleep 2 && xfce4-terminal
+exec --no-startup-id sleep 2 && allacrity 
 exec --no-startup-id sleep 7 && brave 
 #exec --no-startup-id sleep 3 && thunar
 
 ###############
 # system tray #
 ###############
-# if you do not use dex: exec --no-startup-id dex --autostart --environment i3
-# you need to have tray apps started manually one by one:
 
 # start blueberry app for managing bluetooth devices from tray:
 #exec --no-startup-id blueberry-tray
 
 # networkmanager-applet
 #exec --no-startup-id nm-applet
-
-# clipman-applet
-#exec --no-startup-id xfce4-clipman
 
 ##################
 # floating rules #
@@ -517,37 +514,6 @@ strip_workspace_numbers yes
 	}
 }
 
-# you can add different bars for multidisplay setups on each display:
-# set output HDMI-0 to the display you want the bar, --transparency can be set.
-# Transparency needs rgba color codes to be used where the last two letters are the transparency factor see here:
-# https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4
-# #08052be6 --> e6=90%
-
-# bar {
-#	font pango: Noto Sans Regular 10
-#	status_command i3blocks -c ~/.config/i3/i3blocks-2.conf
-#	i3bar_command i3bar --transparency
-#	output HDMI-0
-#	position bottom
-#
-# When strip_workspace_numbers is set to yes,
-# any workspace that has a name of the form
-# “[n][:][NAME]” will display only the name.
-#strip_workspace_numbers yes
-##strip_workspace_name no
-#
-#	colors {
-#		separator          $purple
-#		background         $darkbluetrans
-#        	statusline         $white
-#					border		bg		txt		indicator
-#		focused_workspace	$lighterblue	$lighterblue	$darkblue	$purple
-#		active_workspace	$lightdblue	$lightdblue	$darkblue	$purple
-#		inactive_workspace	$darkblue	$darkblue	$lightdblue	$purple
-#		urgent_workspace	$urgentred	$urgentred	$white		$purple
-#	}
-#}
-
 #####################################
 # Application menu handled by rofi: #
 #####################################
@@ -572,12 +538,14 @@ bindsym $mod+Shift+t exec rofi -show window \
 
 exec --no-startup-id greenclip daemon>/dev/null
 bindsym $mod+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard \
-		-config ~/.config/rofi/rofidmenu.rasi
+		-config ~/.config/rofi/rofidmenu.rasi -run-command '{cmd}' 
 
 ## ---------------------- MINE ----------------
 
+set $rofigen ~/.config/rofi/rofigen
+bindsym $mod+Shift+I exec --no-startup-id $rofigen ~/.config/rofi/restart.rofigen 
+
 exec --no-startup-id sleep 3 && kmonad ~/.config/kmonad/config.kbd
-exec --no-startup-id "setxkbmap -option compose:ralt"
 
 exec --no-startup-id xinput set-prop "Elan Touchpad" "libinput Natural Scrolling Enabled" 1
 
@@ -587,10 +555,14 @@ bindsym $mod+Shift+g exec --no-startup-id  ~/.config/i3/scripts/gc_tt_layout.sh
 
 ## Scratchpads
 
-for_window [class="Xfce4-terminal" title="spotify"] floating enable, resize set 1200 1000, move scratchpad
-exec xfce4-terminal -e "spt" --title=spotify
-bindsym $mod+p [class="Xfce4-terminal" title="spotify"] scratchpad show move position center
+for_window [class="spotify"] floating enable, resize set 1200 1000, move scratchpad, border pixel 2
+exec alacritty msg create-window --class=spotify \
+	|| alacritty --class=spotify
+bindsym $mod+p [class="spotify"] scratchpad show move position center
 
-for_window [class="Xfce4-terminal" title="translate"] floating enable, resize set 600 1000, move scratchpad
-exec xfce4-terminal -e "trans --shell" --title=translate
-bindsym $mod+t [class="Xfce4-terminal" title="translate"] scratchpad show move position center
+for_window [class="translate"] floating enable, resize set 600 1000, move scratchpad
+exec alacritty msg create-window --class=translate \
+	|| alacritty --class=translate
+bindsym $mod+t [class="translate"] scratchpad show move position center
+
+

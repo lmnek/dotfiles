@@ -1,0 +1,3 @@
+# adds blank line when new shell opened
+add_newline = false 
+
