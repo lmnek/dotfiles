@@ -1,0 +1,14 @@
+
+copy_command "xclip -selection clipboard"
+
+default_shell "fish"
+
+scrollback_editor "/usr/bin/nvim"
+
+theme "dracula"
+
+simplified_ui true
+
+pane_frames false
+
+default_layout "compact"
