@@ -1,0 +1,12 @@
+[Added Associations]
+x-scheme-handler/mailto=userapp-Thunderbird-XMUR81.desktop;
+x-scheme-handler/mid=userapp-Thunderbird-XMUR81.desktop;
+
+[Default Applications]
+x-scheme-handler/mailto=userapp-Thunderbird-XMUR81.desktop
+message/rfc822=userapp-Thunderbird-XMUR81.desktop
+x-scheme-handler/mid=userapp-Thunderbird-XMUR81.desktop
+application/pdf=okularApplication_pdf.desktop
+image/png=feh.desktop
+image/jpeg=feh.desktop
+image/jpg=feh.desktop
