@@ -41,6 +41,12 @@ abbr c 'codium .'
 abbr v 'nvim'
 abbr lf 'lfrun'
 
+abbr te  'trans en:cs'
+abbr tc  'trans cs:en'
+abbr td  'trans -d'
+abbr tse 'trans -shell en:cs'
+abbr tsc 'trans -shell cs:en'
+
 # newline after cmd
 function postexec_test --on-event fish_postexec
    echo
