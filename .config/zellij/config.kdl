@@ -11,4 +11,29 @@ simplified_ui true
 
 pane_frames false
 
-default_layout "compact"
+default_mode "locked"
+
+// default_layout "compact"
+
+session_serialization true
+
+// all binds:
+// https://github.com/gmr458/.dotfiles/blob/main/zellij/.config/zellij/config.kdl
+keybinds {
+    locked {
+        bind "Alt h" { MoveFocusOrTab "Left"; }
+        bind "Alt l" { MoveFocusOrTab "Right"; }
+        bind "Alt j" { MoveFocus "Down"; }
+        bind "Alt k" { MoveFocus "Up"; }
+
+        bind "Alt t" { ToggleFloatingPanes; }
+
+        bind "Alt w" {
+            LaunchOrFocusPlugin "zellij:session-manager" {
+                floating true
+                move_to_focused_tab true
+            };
+        }
+    }
+}
+

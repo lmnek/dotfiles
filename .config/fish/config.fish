@@ -3,6 +3,8 @@ if status is-interactive
 end
 
 set -gx EDITOR nvim
+set -gx BROWSER "brave" # --password-store=basic"
+fish_add_path /home/lmnk/bin
 
 # git
 abbr g 'git'
@@ -31,15 +33,17 @@ abbr pq 'sudo pacman -Q | fzf'
 abbr ys 'yay -S'
 abbr yr 'yay -Rs'
 
-abbr ls 'exa'  
-abbr la 'exa -a'
-abbr ll 'exa --long --header --git'
-abbr lla 'exa --long --header -a --git'
+abbr ls 'eza'  
+abbr la 'eza -a'
+abbr ll 'eza --long --header --git'
+abbr lla 'eza --long --header -a --git'
 abbr dnd 'dragon-drop'
 
 abbr c 'codium .'
-abbr v 'nvim'
+abbr n 'nvim'
 abbr lf 'lfrun'
+abbr zl 'zellij' 
+abbr zla 'zellij attach'
 
 abbr te  'trans en:cs'
 abbr tc  'trans cs:en'

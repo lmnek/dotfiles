@@ -7,19 +7,19 @@ window:
 
 font:
   normal:
-    family: JetBrains Mono
+    family: JetBrainsMono NFM
     style: Regular
 
   bold:
-    family: JetBrains Mono
+    family: JetBrainsMono NFM
     style: Bold
 
   italic:
-    family: JetBrains Mono
+    family: JetBrainsMono NFM
     style: Italic
 
   bold_italic:
-    family: JetBrains Mono
+    family: JetBrainsMono NFM
     style: Bold Italic
 
   size: 11

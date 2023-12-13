@@ -27,6 +27,7 @@ font pango: Noto Sans Regular 10
 # set the mod key to the winkey:
 set $mod Mod4
 set $term "alacritty msg create-window || alacritty"
+set $browser "/usr/bin/brave --password-store=basic"
 
 #####################
 # workspace layout: #
@@ -269,14 +270,14 @@ bindsym XF86AudioPrev exec playerctl previous
 # bindsym $mod+p exec /usr/local/bin/switch-audio-port
 
 ## App shortcuts
-bindsym $mod+w exec /usr/bin/brave
+bindsym $mod+w exec $browser
 bindsym $mod+n exec /usr/bin/thunar
 #bindsym Print exec scrot ~/%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/$(date +"%Y-%m-%d-%T")-screenshot.png"
 
 ## Need to install: maim, xclip, xdotool
 ##  Screenshots in files
 bindsym Print       exec --no-startup-id flameshot gui -c
-bindsym Shift+Print exec --no-startup-id flameshot gui -p "/home/$USER/Pictures/screenshots/"
+bindsym Shift+Print exec --no-startup-id flameshot gui -p "/home/$USER/pics/screens/"
 
 # Power Profiles menu switcher (rofi)
 bindsym $mod+Shift+p exec ~/.config/i3/scripts/power-profiles
@@ -381,7 +382,7 @@ exec --no-startup-id ~/.screenlayout/monitor.sh
 
 # set wallpaper
 # exec --no-startup-id sleep 2 && nitrogen --restore
-exec --no-startup-id sleep 1 && feh --bg-fill /usr/share/endeavouros/backgrounds/eos_wallpapers_community/Endy_vector_satelliet.png
+exec --no-startup-id sleep 1 && feh --bg-fill ~/.config/bg.png
 
 # set powersavings for display:
 exec --no-startup-id xset s 480 dpms 600 600 600
@@ -415,7 +416,7 @@ exec --no-startup-id /usr/bin/dunst
 
 # Autostart apps as you like
 exec --no-startup-id sleep 2 && allacrity 
-exec --no-startup-id sleep 7 && brave 
+exec --no-startup-id sleep 7 && $broswer 
 #exec --no-startup-id sleep 3 && thunar
 
 ###############

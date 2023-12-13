@@ -1,6 +1,5 @@
 vim.g.mapleader = " " 
-
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.g.maplocalleader = " "
 
 -- move blocks of code
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -15,7 +14,6 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
-
 -- paste over and stay copied
 -- vim.keymap.set("x", "<leader>p", "\"_dP")
 -- delete to void register...
@@ -27,5 +25,10 @@ vim.keymap.set("n", "<leader>Y", "\"+Y")
 
 vim.keymap.set("n", "Q", "<nop>")
 
--- TMUX sessions
+vim.keymap.set("n", "<Enter>", "o<ESC>")
+-- todo: add O; mark to stay in place?
+-- vim.keymap.set("n", "<C-Enter>", "O<ESC>")
+
 -- quickfix list for LSP
+
+

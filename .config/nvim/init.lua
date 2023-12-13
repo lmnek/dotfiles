@@ -1,10 +1,6 @@
 -- clean and inspirational config:
 -- https://github.com/dorrajmachai/nvim/tree/main 
 
--- TODO: 
--- add harpoon
--- LSP
-
 -- either create lmnk/init.lua with all requires
 -- and here require("lmnk")
 -- or:
@@ -31,6 +27,9 @@ local opts = {
 		border = "single"
 	}
 }
+
+vim.lsp.set_log_level("debug")
+vim.env.NVIM_LSP_LOG_FILE = "/~/.cache/nvim/nvim-lsp.log"
 
 -- Automatically load from plugins folder 
 require("lazy").setup('plugins', opts)

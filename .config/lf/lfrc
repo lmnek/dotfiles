@@ -1,2 +1,35 @@
 set previewer ~/.config/lf/preview
 set cleaner ~/.config/lf/cleaner
+
+set icons
+set scrolloff 5 
+# set number
+# set relativenumber
+
+cmd mkdir %{{
+    printf "Dir name: "
+    read dir
+    mkdir $dir 
+}}
+
+cmd z %{{
+    printf "Dir name: "
+    read dir
+	result="$(zoxide query --exclude $PWD $dir | sed 's/\\/\\\\/g;s/"/\\"/g')"
+	lf -remote "send $id cd \"$result\""
+}}
+
+cmd chmodx &{{
+	chmod u+x $fx
+	lf -remote "send $id reload"
+}}
+
+cmd trash %trash-put $fx
+
+map . set hidden!
+map DD trash
+map gz z
+
+map xd mkdir
+
+map X chmodx

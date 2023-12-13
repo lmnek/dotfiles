@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Open Brave in the background
-brave --app="https://calendar.google.com/" &
+brave --password-store=basic --app="https://calendar.google.com/" &
 
 # Open TickTick in the background
 ticktick &
