@@ -1,27 +1,28 @@
 return {
     "folke/which-key.nvim",
     event = "VeryLazy",
-    init = function()
-        vim.o.timeout = true
-        vim.o.timeoutlen = 300
-    end,
-    opts = {
-        -- your configuration comes here
-    },
+    opts = {},
     config = function()
-        local wk = require("which-key")
-        wk.register({
-            o = {
-                name = "+open",
+        -- document existing key chains
+        require('which-key').register {
+            ['<leader>c'] = { name = 'Code', _ = 'which_key_ignore' },
+            ['<leader>d'] = { name = 'Document', _ = 'which_key_ignore' },
+            ['<leader>r'] = { name = 'Rename', _ = 'which_key_ignore' },
+            ['<leader>s'] = { name = 'Search', _ = 'which_key_ignore' },
+            ['<leader>w'] = { name = 'Workspace', _ = 'which_key_ignore' },
+            -- ['<leader>t'] = { name = 'Toggle', _ = 'which_key_ignore' },
+            -- ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
+            -- ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
+            ['<leader>p'] = { name = 'Project', _ = 'which_key_ignore' },
+            ['<leader>h'] = { name = 'Harpoon', _ = 'which_key_ignore' },
+
+            -- TODO: move somewhere else + required?
+            ['<leader>o'] = {
+                name = "+Open",
                 l = { ":Lazy<CR>", "Lazy" },
                 g = { ":Git<CR>", "Git" },
-                m = { ":Mason<CR>", "Mason" },
-            },
-            p = {
-                name = "+project",
-                v = { vim.cmd.Ex, "Project View" }
+                m = { ":Mason<CR>", "Mason" }
             }
-        }, { prefix="<leader>" })
-
+        }
     end
 }

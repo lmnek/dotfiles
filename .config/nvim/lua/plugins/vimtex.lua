@@ -1,5 +1,4 @@
 return {
-  'folke/which-key.nvim', -- astrovim needs
   "lervag/vimtex",
   lazy = false,
   init = function()

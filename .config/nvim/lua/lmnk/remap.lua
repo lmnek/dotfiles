@@ -18,19 +18,24 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- vim.keymap.set("x", "<leader>p", "\"_dP")
 -- delete to void register...
 
--- system clipboard
-vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keymap.set("v", "<leader>y", "\"+y")
-vim.keymap.set("n", "<leader>Y", "\"+Y")
+vim.keymap.set({ "n", "v" }, "<leader>y", "\"+y", { desc = "Yank to Cliboard" })
 
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "gl", "<nop>")
 vim.keymap.set("n", "gh", "<nop>")
 
 vim.keymap.set("n", "<Enter>", "o<ESC>")
--- todo: add O; mark to stay in place?
+-- TODO: add O; mark to stay in place?
 -- vim.keymap.set("n", "<C-Enter>", "O<ESC>")
 
--- quickfix list for LSP
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Project view"})
 
+-- Remap for dealing with word wrap
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
+-- Diagnostic keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Prev diagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Floating diagnostic message' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
