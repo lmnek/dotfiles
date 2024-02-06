@@ -24,6 +24,8 @@ vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
 
 vim.keymap.set("n", "Q", "<nop>")
+vim.keymap.set("n", "gl", "<nop>")
+vim.keymap.set("n", "gh", "<nop>")
 
 vim.keymap.set("n", "<Enter>", "o<ESC>")
 -- todo: add O; mark to stay in place?

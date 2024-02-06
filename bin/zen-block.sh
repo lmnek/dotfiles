@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # doesnt work for youtube and twitter
-append="127.0.0.1 www.facebook.com www.youtube.com www.twitter.com twitter.com www.twitter.hk www.x.com x.com www.instagram.com www.linkedin.com www.twitch.tv" 
+append="127.0.0.1 www.facebook.com www.youtube.com www.twitter.com twitter.com www.twitter.hk www.x.com x.com www.instagram.com www.linkedin.com www.twitch.tv www.chess.com" 
 
 original=$(</etc/hosts)
 

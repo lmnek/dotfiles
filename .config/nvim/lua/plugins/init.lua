@@ -1,5 +1,6 @@
 -- LSP zero setup -> can split later
 return {
+    'tidalcycles/vim-tidal',
     {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v3.x',
