@@ -271,7 +271,8 @@ bindsym XF86AudioPrev exec playerctl previous
 
 ## App shortcuts
 bindsym $mod+w exec $browser
-bindsym $mod+n exec /usr/bin/thunar
+# bindsym $mod+n exec /usr/bin/thunar
+bindsym $mod+n exec alacritty --class=lf -e fish -c 'lf'
 #bindsym Print exec scrot ~/%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/$(date +"%Y-%m-%d-%T")-screenshot.png"
 
 ## Need to install: maim, xclip, xdotool
@@ -312,6 +313,7 @@ set $ws10 "10"
 # assign [class="Xfce4-terminal"] $ws1
 # assign [class="(?i)brave"] $ws2
 assign [class="Thunar"] $ws3
+assign [class="lf"] $ws3
 assign [class="thunderbird"] $ws4
 assign [class="Signal"] $ws5
 
@@ -319,6 +321,7 @@ assign [class="Signal"] $ws5
 for_window [class=alacritty] focus
 for_window [class=(?i)brave] focus
 for_window [class=Thunar] focus
+for_window [class=lf] focus
 
 ##############
 # compositor #

@@ -6,30 +6,177 @@ set scrolloff 5
 # set number
 # set relativenumber
 
-cmd mkdir %{{
-    printf "Dir name: "
-    read dir
-    mkdir $dir 
+# helpful article:
+# https://www.joshmedeski.com/posts/manage-files-with-lf/
+
+# nice and extensive configs:
+# https://codeberg.org/tplasdio/lf-config  
+# https://github.com/BrodieRobertson/dotfiles/blob/master/config/lf/lfrc
+
+# CUSTOM FUNCTIONS ----------------------
+
+cmd open ${{
+    case $(file --mime-type "$f" -bL) in
+        text/*|application/json) $EDITOR "$f";;
+        application/x-executable) "$f";;
+        *) xdg-open "$f" ;;
+    esac
 }}
 
-cmd z %{{
-    printf "Dir name: "
+cmd mkdir ${{
+  printf "Directory Name: "
+  read ans
+  mkdir $ans
+}}
+
+cmd mkfile ${{
+  printf "File Name: "
+  read ans
+  $EDITOR $ans
+}}
+
+cmd chmod ${{
+  printf "Mode Bits: "
+  read ans
+
+  for file in "$fx"
+  do
+    chmod $ans $file
+  done
+
+  lf -remote 'send reload'
+}}
+
+cmd sudomkfile ${{
+  printf "File Name: "
+  read ans
+  sudo $EDITOR $ans
+}}
+
+cmd fzf_jump ${{
+  res="$(find . -maxdepth 3 | fzf --reverse --header='Jump to location')"
+  if [ -f "$res" ]; then
+    cmd="select"
+  elif [ -d "$res" ]; then
+    cmd="cd"
+  fi
+  lf -remote "send $id $cmd \"$res\""
+}}
+
+# TODO: integrate more fzf - z, moveto, copyto, ...
+
+cmd zoxide ${{
+    printf "Zoxide search: "
     read dir
 	result="$(zoxide query --exclude $PWD $dir | sed 's/\\/\\\\/g;s/"/\\"/g')"
 	lf -remote "send $id cd \"$result\""
 }}
 
-cmd chmodx &{{
-	chmod u+x $fx
-	lf -remote "send $id reload"
-}}
+cmd dragon %dragon-drop -a -x $fx
+cmd dragon-stay %dragon-drop -a $fx
+cmd dragon-individual %dragon-drop $fx
 
 cmd trash %trash-put $fx
 
+# TODO: fix archive behavior
+cmd unarchive ${{
+  case "$f" in
+      *.zip) unzip "$f" ;;
+      *.tar.gz) tar -xzvf "$f" ;;
+      *.tar.bz2) tar -xjvf "$f" ;;
+      *.tar) tar -xvf "$f" ;;
+      *) echo "Unsupported format" ;;
+  esac
+}}
+cmd zip %zip -r "$f" "$f"
+cmd tar %tar cvf "$f.tar" "$f"
+cmd targz %tar cvzf "$f.tar.gz" "$f"
+cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
+
+# Trash cli bindings
+cmd trash ${{
+  files=$(printf "$fx" | tr '\n' ';')
+  while [ "$files" ]; do
+    file=${files%%;*}
+
+    trash-put "$(basename "$file")"
+    if [ "$files" = "$file" ]; then
+      files=''
+    else
+      files="${files#*;}"
+    fi
+  done
+}}
+
+
+# KEYBINDS ------------------------
+
+# unbind marks
+map "'" 
+map '"' 
+map m
+map n
+map d
+map e
+map c
+map u
+# lf find
+map f
+map F
+map zh
+map zr
+map zn
+map zs
+map zt
+map za
+map ss
+
+map Km maps  # List normal mode mappings
+map Kc cmaps  # List command mode mappings
+
+# Basic Functions
 map . set hidden!
-map DD trash
-map gz z
+map r rename  # Before extension
+map R push i<c-a>  # At the very beginning
+map D trash
+map p paste
+map x cut
+map y copy
+map <enter> open
+map mf mkfile
+map mr sudomkfile
+map md mkdir
+map ch chmod
+map C clear
+map U unselect
 
-map xd mkdir
+map sb set sortby size; set info size
+map ssr set reverse!
+map ssn set info
+map sss set info size
+map sst set info time
+map ssa set info size:time
 
-map X chmodx
+# archives
+map au unarchive
+map az zip
+map at tar
+map ag targz
+map ab tarbz2
+
+# dragon-drop
+# NOTE: what is the exact difference?
+map dr dragon
+map ds dragon-stay
+map di dragon-individual
+
+# movement
+map f fzf_jump
+map F find
+map z zoxide
+
+map gd cd ~/docs
+map gw cd ~/Downloads
+map gr cd ~/repos
+map gp cd ~/pics
+map g. cd ~/repos/dotfiles

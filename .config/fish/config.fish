@@ -41,7 +41,6 @@ abbr dnd 'dragon-drop'
 
 abbr c 'codium .'
 abbr n 'nvim'
-abbr lf 'lfrun'
 abbr zl 'zellij' 
 abbr zla 'zellij attach'
 
@@ -50,6 +49,8 @@ abbr tc  'trans cs:en'
 abbr td  'trans -d'
 abbr tse 'trans -shell en:cs'
 abbr tsc 'trans -shell cs:en'
+
+alias lf=lfcd
 
 # newline after cmd
 function postexec_test --on-event fish_postexec

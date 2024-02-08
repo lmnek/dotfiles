@@ -43,5 +43,12 @@ return {
     'tpope/vim-fugitive',
 
     -- RANDOM -------------------
+    -- TODO: f-ing haskell ....
+    -- {
+    --     'mrcjkb/haskell-tools.nvim',
+    --     version = '^3', -- Recommended
+    --     ft = { 'haskell', 'lhaskell', 'cabal', 'cabalproject', 'tidal' },
+    -- },
     'tidalcycles/vim-tidal',
+    'VebbNix/lf-vim' -- syntax highlighting for lfrc
 }
