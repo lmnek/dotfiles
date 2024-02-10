@@ -8,6 +8,8 @@ set scrolloff 5
 
 # helpful article:
 # https://www.joshmedeski.com/posts/manage-files-with-lf/
+# lf integrations
+# https://github.com/gokcehan/lf/wiki/Integrations
 
 # nice and extensive configs:
 # https://codeberg.org/tplasdio/lf-config  
@@ -78,7 +80,7 @@ cmd dragon-individual %dragon-drop $fx
 
 cmd trash %trash-put $fx
 
-# TODO: fix archive behavior
+#TODO: can use atool integration instead
 cmd unarchive ${{
   case "$f" in
       *.zip) unzip "$f" ;;
@@ -88,6 +90,7 @@ cmd unarchive ${{
       *) echo "Unsupported format" ;;
   esac
 }}
+# TODO: fix archive behavior
 cmd zip %zip -r "$f" "$f"
 cmd tar %tar cvf "$f.tar" "$f"
 cmd targz %tar cvzf "$f.tar.gz" "$f"
@@ -108,6 +111,7 @@ cmd trash ${{
   done
 }}
 
+# TODO: add "strip spaces" of filename command
 
 # KEYBINDS ------------------------
 

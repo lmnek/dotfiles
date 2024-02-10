@@ -13,7 +13,6 @@ return {
             -- ['<leader>t'] = { name = 'Toggle', _ = 'which_key_ignore' },
             -- ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
             -- ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
-            ['<leader>p'] = { name = 'Project', _ = 'which_key_ignore' },
             ['<leader>h'] = { name = 'Harpoon', _ = 'which_key_ignore' },
 
             -- TODO: move somewhere else + required?
