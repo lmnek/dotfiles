@@ -10,25 +10,85 @@ return {
     {
         "folke/todo-comments.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
-        config = function()
-            require('todo-comments').setup({})
-            vim.keymap.set('n', '<leader>st', ":TodoTelescope<CR>", { desc = 'Todos' })
-        end
+        event = 'VimEnter',
+        opts = {
+            signs = false
+        },
+        keys = {
+            { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todos" },
+        }
     },
     -- "gc" to comment visual regions/lines
     { 'numToStr/Comment.nvim', opts = {} },
+    -- for Lf and Lazygit commands
+    {
+        "akinsho/toggleterm.nvim",
+        opts = {},
+        config = function()
+            function _G.lazygit_toggle()
+                local Terminal = require("toggleterm.terminal").Terminal
+                local lazygit = Terminal:new({
+                    cmd = "lazygit",
+                    hidden = true,
+                    direction = "float",
+                    float_opts = {
+                        -- fullscreen
+                        height = vim.fn.float2nr(vim.o.lines),
+                        width = vim.fn.float2nr(vim.o.columns),
+                        border = "none",
+                        winblend = 0
+                    },
+                })
+                lazygit:toggle()
+            end
+
+            vim.keymap.set("n", "<leader>g", "<cmd>lua lazygit_toggle()<CR>",
+                { desc = "lazyGit", noremap = true, silent = true })
+        end
+    },
+    { -- Autoformat
+        'stevearc/conform.nvim',
+        opts = {
+            notify_on_error = false,
+            format_on_save = {
+                timeout_ms = 500,
+                lsp_fallback = true,
+            },
+            formatters_by_ft = {
+                lua = { 'stylua' },
+                python = { "black" },
+                -- You can use a sub-list to tell conform to run *until* a formatter is found.
+                javascript = { { "prettierd", "prettier" } },
+            },
+        },
+    },
 
     -- VISUALS -------------------
     {
         -- Set lualine as statusline
         'nvim-lualine/lualine.nvim',
-        -- See `:help lualine.txt`
         opts = {
             options = {
                 icons_enabled = false,
                 theme = 'auto',
                 component_separators = '|',
                 section_separators = '',
+            },
+            sections = {
+                lualine_a = {
+                    { 'mode', fmt = function(str) return str:sub(1, 1) end } },
+            }
+        },
+    },
+    { -- Adds git related signs to the gutter, as well as utilities for managing changes
+        'lewis6991/gitsigns.nvim',
+        opts = {
+            signs = {
+                add = { text = '+' },
+                change = { text = '~' },
+                delete = { text = '_' },
+                topdelete = { text = '‾' },
+                changedelete = { text = '~' },
             },
         },
     },
@@ -40,7 +100,6 @@ return {
     },
 
     -- NICE-TO-HAVE -------------------
-    'tpope/vim-fugitive',
 
     -- RANDOM -------------------
     -- TODO: f-ing haskell ....
@@ -50,5 +109,8 @@ return {
     --     ft = { 'haskell', 'lhaskell', 'cabal', 'cabalproject', 'tidal' },
     -- },
     'tidalcycles/vim-tidal',
-    'VebbNix/lf-vim' -- syntax highlighting for lfrc
+    'VebbNix/lf-vim', -- syntax highlighting for lfrc
+    config = function()
+        vim.g.tidal_ghci = "stack exec ghci --"
+    end
 }
