@@ -1,4 +1,3 @@
-
 vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.o.mouse = 'a'
@@ -28,9 +27,17 @@ vim.o.completeopt = 'menuone,noselect'
 -- Highlight on yank
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+    group = highlight_group,
+    pattern = '*',
 })
+
+vim.diagnostic.config {
+    float = {
+        header = false,
+        border = 'rounded',
+        focusable = true,
+    },
+}
