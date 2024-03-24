@@ -14,10 +14,9 @@ return {
             default_file_manager = true,
             disable_netrw_warning = true,
             -- fullscreen
-            height = vim.fn.float2nr(vim.o.lines),
+            height = vim.fn.float2nr(vim.o.lines - 1),
             width = vim.fn.float2nr(vim.o.columns),
             border = "none",
         })
     end
 }
-

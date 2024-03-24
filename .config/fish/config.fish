@@ -2,11 +2,23 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+# NOTE: Fisher plugins:
+# joshmedeski/fish-lf-icons
+# patrickf1/fzf.fish
+# -> keybinds: 
+#       Ctrl+Alt+F      search files/dirs - automcomplete + cd
+#       Ctrl+R          search history
+#       Ctrl+Alt+P      search processes - return PID
+#       Ctrl+V          search variables
+
 set -gx EDITOR nvim
 set -gx BROWSER "brave" # --password-store=basic"
 fish_add_path /home/lmnk/bin
 
+fish_vi_key_bindings
+
 # git
+abbr lg 'lazygit' # only important thing lol
 abbr g 'git'
 abbr ga 'git add'
 abbr gb 'git branch'

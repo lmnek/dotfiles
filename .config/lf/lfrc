@@ -31,12 +31,6 @@ cmd mkdir ${{
   mkdir $ans
 }}
 
-cmd mkfile ${{
-  printf "File Name: "
-  read ans
-  $EDITOR $ans
-}}
-
 cmd chmod ${{
   printf "Mode Bits: "
   read ans
@@ -45,8 +39,12 @@ cmd chmod ${{
   do
     chmod $ans $file
   done
+  lf -remote "send reload"
+}}
 
-  lf -remote 'send reload'
+cmd removespaces ${{
+  new_path="$(remove-space-filename.sh "$f")"
+  lf -remote "send $id select $new_path"
 }}
 
 cmd sudomkfile ${{
@@ -80,7 +78,7 @@ cmd dragon-individual %dragon-drop $fx
 
 cmd trash %trash-put $fx
 
-#TODO: can use atool integration instead
+# TODO: can use atool integration instead
 cmd unarchive ${{
   case "$f" in
       *.zip) unzip "$f" ;;
@@ -111,7 +109,6 @@ cmd trash ${{
   done
 }}
 
-# TODO: add "strip spaces" of filename command
 
 # KEYBINDS ------------------------
 
@@ -147,12 +144,14 @@ map p paste
 map x cut
 map y copy
 map <enter> open
-map mf mkfile
+map mf push $touch<space> 
 map mr sudomkfile
 map md mkdir
 map ch chmod
 map C clear
 map U unselect
+
+map nr removespaces 
 
 map sb set sortby size; set info size
 map ssr set reverse!

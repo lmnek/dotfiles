@@ -17,11 +17,7 @@ image() {
 batorcat() {
 	file="$1"
 	shift
-	if command -v bat > /dev/null 2>&1; then
-		bat --color=always --style=plain --pager=never "$file" "$@"
-	else
-		cat "$file"
-	fi
+    bat --color=always --style=plain --pager=never "$file" "$@"
 }
 
 glowormdcat() {
@@ -34,6 +30,7 @@ glowormdcat() {
 	fi
 }
 
+# NOTE: possible that some programs for preview are not installed -> comment case
 case "$(printf "%s\n" "$(readlink -f "$1")" | awk '{print tolower($0)}')" in
 	*.tgz|*.tar.gz) tar tzf "$1" ;;
 	*.tar.bz2|*.tbz2) tar tjf "$1" ;;
@@ -48,13 +45,13 @@ case "$(printf "%s\n" "$(readlink -f "$1")" | awk '{print tolower($0)}')" in
 	*.o) nm "$1";;
 	*.torrent) transmission-show "$1" ;;
 	*.iso) iso-info --no-header -l "$1" ;;
-	*.odt|*.ods|*.odp|*.sxw) odt2txt "$1" ;;
-	*.doc) catdoc "$1" ;;
-	*.docx) docx2txt "$1" ;;
-	*.xml|*.html) w3m -dump "$1";;
-	*.xls|*.xlsx)
-		ssconvert --export-type=Gnumeric_stf:stf_csv "$1" "fd://1" | batorcat --language=csv
-		;;
+	# *.odt|*.ods|*.odp|*.sxw) odt2txt "$1" ;;
+	# *.doc) catdoc "$1" ;;
+	# *.docx) docx2txt "$1" ;;
+	# *.xml|*.html) w3m -dump "$1";;
+	# *.xls|*.xlsx)
+	#	ssconvert --export-type=Gnumeric_stf:stf_csv "$1" "fd://1" | batorcat --language=csv
+	#	;;
 	*.wav|*.mp3|*.flac|*.m4a|*.wma|*.ape|*.ac3|*.og[agx]|*.spx|*.opus|*.as[fx]|*.mka)
 		exiftool "$1"
 		;;
@@ -70,7 +67,7 @@ case "$(printf "%s\n" "$(readlink -f "$1")" | awk '{print tolower($0)}')" in
 		[ ! -f "$CACHE" ] && comicthumb "$1" "$CACHE" 1024
 		image "$CACHE" "$2" "$3" "$4" "$5"
 		;;
-	*.avi|*.mp4|*.wmv|*.dat|*.3gp|*.ogv|*.mkv|*.mpg|*.mpeg|*.vob|*.fl[icv]|*.m2v|*.mov|*.webm|*.ts|*.mts|*.m4v|*.r[am]|*.qt|*.divx)
+	*.avi|*.mp4|*.wmv|*.dat|*.3gp|*.ogv|*.mkv|*.mpg|*.mpeg|*.vob|*.fl[icv]|*.m2v|*.mov|*.webm|*.mts|*.m4v|*.r[am]|*.qt|*.divx)
 		[ ! -f "${CACHE}.jpg" ] && \
 			ffmpegthumbnailer -i "$1" -o "${CACHE}.jpg" -s 0 -q 5
 		image "${CACHE}.jpg" "$2" "$3" "$4" "$5"
@@ -82,7 +79,11 @@ case "$(printf "%s\n" "$(readlink -f "$1")" | awk '{print tolower($0)}')" in
 		[ ! -f "${CACHE}.jpg" ] && convert "$1" "${CACHE}.jpg"
 		image "${CACHE}.jpg" "$2" "$3" "$4" "$5"
 		;;
+    *.heic)
+        [ ! -f "${CACHE}.jpg" ] && heif-convert "$1" "${CACHE}.jpg"
+        image "${CACHE}.jpg" "$2" "$3" "$4" "$5"
+        ;;
 	*.ino) batorcat --language=cpp "$1" ;;
-	*) file -ibL "$1" | grep -q text && batorcat "$1" || file -Lb "$1" ;;
+	*) file -ibL "$1" | grep -Eq "text/|json|JSON|javascript" && batorcat "$1" || file -Lb "$1" | fold -s -w70 ;;
 esac
 exit 0

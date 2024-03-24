@@ -33,7 +33,7 @@ return {
                     direction = "float",
                     float_opts = {
                         -- fullscreen
-                        height = vim.fn.float2nr(vim.o.lines),
+                        height = vim.fn.float2nr(vim.o.lines - 1),
                         width = vim.fn.float2nr(vim.o.columns),
                         border = "none",
                         winblend = 0
@@ -108,9 +108,12 @@ return {
     --     version = '^3', -- Recommended
     --     ft = { 'haskell', 'lhaskell', 'cabal', 'cabalproject', 'tidal' },
     -- },
-    'tidalcycles/vim-tidal',
+    {
+        'tidalcycles/vim-tidal',
+        ft = "tidal",
+        config = function()
+            vim.g.tidal_ghci = "stack exec ghci --"
+        end
+    },
     'VebbNix/lf-vim', -- syntax highlighting for lfrc
-    config = function()
-        vim.g.tidal_ghci = "stack exec ghci --"
-    end
 }
