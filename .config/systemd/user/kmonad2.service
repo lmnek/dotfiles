@@ -1,0 +1,14 @@
+# systemctl --user daemon-reload
+# systemctl --user enable --now kmonad
+# systemctl --user status kmonad
+
+[Unit]
+Description=kmonad external keyboard config
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/kmonad %h/.config/kmonad/config2.kbd
+Nice=-20
+
+[Install]
+WantedBy=default.target
