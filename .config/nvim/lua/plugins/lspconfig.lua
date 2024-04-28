@@ -76,7 +76,7 @@ return {
             texlab = {},
             vale_ls = {},
             -- web
-            emmet_ls = {}, -- html snippet expansion
+            -- emmet_ls = {}, -- html snippet expansion
             svelte = {},
             tailwindcss = {},
             tsserver = {},

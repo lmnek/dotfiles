@@ -4,7 +4,6 @@ return {
         'nvim-treesitter/nvim-treesitter-textobjects',
     },
     config = function()
-
         -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
         vim.defer_fn(function()
             require('nvim-treesitter.configs').setup {
@@ -19,7 +18,7 @@ return {
                 -- You can specify additional Treesitter modules here: -- For example: -- playground = {--enable = true,-- },
                 modules = {},
                 highlight = { enable = true,
-                additional_vim_regex_highlighting = false
+                    additional_vim_regex_highlighting = false
                 },
                 indent = { enable = true },
                 incremental_selection = {

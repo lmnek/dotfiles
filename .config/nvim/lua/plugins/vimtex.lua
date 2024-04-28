@@ -1,6 +1,6 @@
 return {
     "lervag/vimtex",
-    lazy = false,
+    ft = 'tex',
     init = function()
         -- add which-key mapping descriptions for VimTex
         vim.api.nvim_create_autocmd("FileType", {
@@ -104,4 +104,7 @@ return {
             end,
         })
     end,
+    config = function()
+        vim.g.vimtex_fold_enabled = true
+    end
 }

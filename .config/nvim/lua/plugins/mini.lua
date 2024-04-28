@@ -16,6 +16,9 @@ return { -- Collection of various small independent plugins/modules
         -- - sr)'  - [S]urround [R]eplace [)] [']
         require('mini.surround').setup()
 
+        -- Automatically write pairing {([ ...
+        require('mini.pairs').setup()
+
         -- ... and there is more!
         --  Check out: https://github.com/echasnovski/mini.nvim
     end,
