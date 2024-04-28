@@ -72,6 +72,7 @@ floating_modifier $mod
 # switch/iterate between workspaces
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
+bindsym $mod+Ctrl+Tab move workspace to output next
 
 # switch to workspace
 bindsym $mod+1    workspace  $ws1
