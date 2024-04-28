@@ -1,6 +1,6 @@
 (defcfg
-  input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
-  output (uinput-sink "KMonad kbd")
+  input  (device-file "/dev/input/by-id/usb-SONiX_USB_DEVICE-event-kbd")
+  output (uinput-sink "KMonad kbd external")
 
   cmp-seq ralt ;; need to be set to write unicode chars
   
