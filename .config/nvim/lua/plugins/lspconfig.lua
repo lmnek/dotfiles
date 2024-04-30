@@ -74,7 +74,7 @@ return {
             lua_ls = {},
             -- latex
             texlab = {},
-            vale_ls = {},
+            ltex = {},
             -- web
             -- emmet_ls = {}, -- html snippet expansion
             svelte = {},
