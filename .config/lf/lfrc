@@ -179,7 +179,7 @@ map F find
 map z zoxide
 
 map gd cd ~/docs
-map gw cd ~/Downloads
+map gw cd ~/Downloads; set sortby time; set reverse
 map gr cd ~/repos
 map gp cd ~/pics
 map g. cd ~/repos/dotfiles

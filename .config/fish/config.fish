@@ -7,6 +7,7 @@ end
 # patrickf1/fzf.fish
 # -> keybinds: 
 #       Ctrl+Alt+F      search files/dirs - automcomplete + cd
+set fzf_fd_opts --hidden --max-depth 5
 #       Ctrl+R          search history
 #       Ctrl+Alt+P      search processes - return PID
 #       Ctrl+V          search variables
@@ -66,6 +67,8 @@ abbr tse 'trans -shell en:cs'
 abbr tsc 'trans -shell cs:en'
 
 alias lf=lfcd
+alias yank='xsel --input --clipboard'
+alias paste='xsel --output --clipboard'
 
 # newline after cmd
 function postexec_test --on-event fish_postexec
