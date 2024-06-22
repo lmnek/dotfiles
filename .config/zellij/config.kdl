@@ -7,33 +7,68 @@ scrollback_editor "/usr/bin/nvim"
 
 theme "dracula"
 
-simplified_ui true
-
 pane_frames false
 
-default_mode "locked"
-
-// default_layout "compact"
+simplified_ui true
 
 session_serialization true
 
 // all binds:
 // https://github.com/gmr458/.dotfiles/blob/main/zellij/.config/zellij/config.kdl
 keybinds {
-    locked {
+    shared_among "locked" "normal" {
         bind "Alt h" { MoveFocusOrTab "Left"; }
         bind "Alt l" { MoveFocusOrTab "Right"; }
         bind "Alt j" { MoveFocus "Down"; }
         bind "Alt k" { MoveFocus "Up"; }
 
-        bind "Alt t" { ToggleFloatingPanes; }
+        bind "Alt n" { NewPane; }
+        bind "Alt x" { CloseFocus; }
+        bind "Alt z" { CloseTab; }
+        bind "Alt t" { NewTab; }
+        bind "Alt f" { ToggleFocusFullscreen; }
+        bind "Alt v" { NextSwapLayout; }
 
+        bind "Alt 1" { GoToTab 1; }
+        bind "Alt 2" { GoToTab 2; }
+        bind "Alt 3" { GoToTab 3; }
+        bind "Alt 4" { GoToTab 4; }
+        bind "Alt 5" { GoToTab 5; }
+
+        bind "Alt p" { ToggleFloatingPanes; }
         bind "Alt w" {
             LaunchOrFocusPlugin "zellij:session-manager" {
                 floating true
                 move_to_focused_tab true
             };
         }
+        // bind "Alt h" {
+        //     MessagePlugin "https://github.com/hiasr/vim-zellij-navigator/releases/download/0.2.1/vim-zellij-navigator.wasm" {
+        //         name "move_focus_or_tab";
+        //         payload "left";
+        //         // Plugin Configuration
+        //         // move_mod "ctrl"; // Optional, should be added on every command if you want to use it
+        //         // resize_mod "alt"; // Optional, should be added on every command if you want to use it
+        //     };
+        // }
+        // bind "Alt j" {
+        //     MessagePlugin "https://github.com/hiasr/vim-zellij-navigator/releases/download/0.2.1/vim-zellij-navigator.wasm" {
+        //         name "move_focus";
+        //         payload "down";
+        //     };
+        // }
+        // bind "Alt k" {
+        //     MessagePlugin "https://github.com/hiasr/vim-zellij-navigator/releases/download/0.2.1/vim-zellij-navigator.wasm" {
+        //         name "move_focus";
+        //         payload "up";
+        //     };
+        // }
+        // bind "Alt l" {
+        //     MessagePlugin "https://github.com/hiasr/vim-zellij-navigator/releases/download/0.2.1/vim-zellij-navigator.wasm" {
+        //         name "move_focus_or_tab";
+        //         payload "right";
+        //     };
+        // }
     }
 }
 
