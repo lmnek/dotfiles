@@ -20,33 +20,8 @@ return {
     },
     -- "gc" to comment visual regions/lines
     { 'numToStr/Comment.nvim', opts = {} },
-    -- for Lf and Lazygit commands
+    -- Autoformat
     {
-        "akinsho/toggleterm.nvim",
-        opts = {},
-        config = function()
-            function _G.lazygit_toggle()
-                local Terminal = require("toggleterm.terminal").Terminal
-                local lazygit = Terminal:new({
-                    cmd = "lazygit",
-                    hidden = true,
-                    direction = "float",
-                    float_opts = {
-                        -- fullscreen
-                        height = vim.fn.float2nr(vim.o.lines - 1),
-                        width = vim.fn.float2nr(vim.o.columns),
-                        border = "none",
-                        winblend = 0
-                    },
-                })
-                lazygit:toggle()
-            end
-
-            vim.keymap.set("n", "<leader>g", "<cmd>lua lazygit_toggle()<CR>",
-                { desc = "lazyGit", noremap = true, silent = true })
-        end
-    },
-    { -- Autoformat
         'stevearc/conform.nvim',
         opts = {
             notify_on_error = false,
@@ -62,7 +37,29 @@ return {
             },
         },
     },
-
+    -- CODE ACTIONS with diff
+    {
+        'aznhe21/actions-preview.nvim',
+        config = function()
+            local actions_preview = require("actions-preview")
+            actions_preview.setup({
+                telescope = {
+                    sorting_strategy = "ascending",
+                    layout_strategy = "vertical",
+                    layout_config = {
+                        width = 0.8,
+                        height = 0.9,
+                        prompt_position = "top",
+                        preview_cutoff = 20,
+                        preview_height = function(_, _, max_lines)
+                            return max_lines - 15
+                        end,
+                    },
+                },
+            })
+            vim.keymap.set({ 'n', 'v' }, "<leader>c", actions_preview.code_actions, { desc = "Code Actions" })
+        end
+    },
     -- VISUALS -------------------
     {
         -- Set lualine as statusline
@@ -115,5 +112,36 @@ return {
             vim.g.tidal_ghci = "stack exec ghci --"
         end
     },
-    'VebbNix/lf-vim', -- syntax highlighting for lfrc
+    {
+        -- color theme for plantuml
+        'javiorfo/nvim-nyctophilia',
+        lazy = true,
+        ft = 'plantuml',
+        config = function()
+            -- Available themes: nox, umbra, nebula and tenebra
+            vim.cmd [[colorscheme nox]]
+        end
+    },
+    {
+        'javiorfo/nvim-soil',
+        dependencies = { 'javiorfo/nvim-nyctophilia' },
+        lazy = true,
+        ft = "plantuml",
+        opts = {},
+        keys = {
+            { ',s', '<cmd>Soil<CR>', { desc = { 'Soil PlantUML file' } } }
+        }
+    },
+    -- {
+    --     "https://git.sr.ht/~swaits/zellij-nav.nvim",
+    --     lazy = true,
+    --     event = "VeryLazy",
+    --     keys = {
+    --         { "<M-h>", "<cmd>ZellijNavigateLeft<cr>",  { silent = true, desc = "navigate left" } },
+    --         { "<M-j>", "<cmd>ZellijNavigateDown<cr>",  { silent = true, desc = "navigate down" } },
+    --         { "<M-k>", "<cmd>ZellijNavigateUp<cr>",    { silent = true, desc = "navigate up" } },
+    --         { "<M-l>", "<cmd>ZellijNavigateRight<cr>", { silent = true, desc = "navigate right" } },
+    --     },
+    --     opts = {},
+    -- }
 }
