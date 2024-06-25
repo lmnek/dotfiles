@@ -6,19 +6,11 @@ return {
         -- Automatically install LSPs to stdpath for neovim
         { 'williamboman/mason.nvim', config = true },
         'williamboman/mason-lspconfig.nvim',
-
-        -- NOTE: could not get transparent background
         -- Useful status updates for LSP
-        -- {
-        --     'j-hui/fidget.nvim',
-        --     opts = {
-        --         window = {
-        --             blend = 0, -- note: not winblend!
-        --             relative = "editor"
-        --         }
-        --     },
-        --     tag = "legacy"
-        -- },
+        {
+            'j-hui/fidget.nvim',
+            opts = {}
+        },
         -- Additional lua configuration, makes nvim stuff amazing!
         'folke/neodev.nvim',
     },
@@ -34,10 +26,6 @@ return {
             end
 
             nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-            nmap('<leader>ca', function()
-                vim.lsp.buf.code_action { context = { only = { 'quickfix', 'refactor', 'source' } } }
-            end, '[C]ode [A]ction')
-
             nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
             nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
             nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
@@ -45,7 +33,6 @@ return {
             nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
             nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
-            nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
             -- nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
             -- Lesser used LSP functionality

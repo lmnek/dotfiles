@@ -18,8 +18,6 @@ return {
             { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todos" },
         }
     },
-    -- "gc" to comment visual regions/lines
-    { 'numToStr/Comment.nvim', opts = {} },
     -- Autoformat
     {
         'stevearc/conform.nvim',
@@ -78,6 +76,7 @@ return {
         },
     },
     { -- Adds git related signs to the gutter, as well as utilities for managing changes
+        -- TODO: add actions
         'lewis6991/gitsigns.nvim',
         opts = {
             signs = {
@@ -96,8 +95,6 @@ return {
         opts = {},
     },
 
-    -- NICE-TO-HAVE -------------------
-
     -- RANDOM -------------------
     -- TODO: f-ing haskell ....
     -- {
@@ -112,26 +109,18 @@ return {
             vim.g.tidal_ghci = "stack exec ghci --"
         end
     },
-    {
-        -- color theme for plantuml
-        'javiorfo/nvim-nyctophilia',
-        lazy = true,
-        ft = 'plantuml',
-        config = function()
-            -- Available themes: nox, umbra, nebula and tenebra
-            vim.cmd [[colorscheme nox]]
-        end
-    },
-    {
-        'javiorfo/nvim-soil',
-        dependencies = { 'javiorfo/nvim-nyctophilia' },
-        lazy = true,
-        ft = "plantuml",
-        opts = {},
-        keys = {
-            { ',s', '<cmd>Soil<CR>', { desc = { 'Soil PlantUML file' } } }
-        }
-    },
+
+    -- TESTING --------------
+    -- TODO: fix inlay hints
+    -- Simple plugin to just enable inlay hints for each LSP server
+    -- {
+    --     "MysticalDevil/inlay-hints.nvim",
+    --     event = "LspAttach",
+    --     dependencies = { "neovim/nvim-lspconfig" },
+    --     config = function()
+    --         require("inlay-hints").setup()
+    --     end
+    -- },
     -- {
     --     "https://git.sr.ht/~swaits/zellij-nav.nvim",
     --     lazy = true,
