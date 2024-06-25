@@ -1,0 +1,38 @@
+
+# All keymaps:
+# https://github.com/sxyazi/yazi/blob/latest/yazi-config/preset/keymap.toml
+
+# FOR KEYBIND HELP: ~
+
+# ---------- CUSTOM KEYBINDS --------------
+
+# TODO: unarchive, remove-spaces, dragon-drop, fzf jump to (/copy to/ move to) dir
+
+[[manager.prepend_keymap]]
+on  = [ "u" ]
+run = '''
+	shell 'ripdrag -a "$@" -x 2>/dev/null &' --confirm
+'''
+
+[[manager.prepend_keymap]]
+on   = [ "c", "m" ]
+run  = "plugin chmod"
+desc = "Chmod on selected files"
+
+[[manager.prepend_keymap]]
+on   = [ "H" ]
+run  = "plugin --sync hide-preview"
+desc = "Hide or show preview"
+
+[[manager.prepend_keymap]]
+on   = [ "l" ]
+run  = "plugin --sync fast-enter"
+desc = "Enter the subfolder faster, or open the file directly"
+
+# Image scaling to max doesnt work
+# [[manager.prepend_keymap]]
+# on   = [ "T" ]
+# run  = "plugin --sync max-preview"
+# desc = "Maximize or restore preview"
+
+# Other not used plugins: smart filter, jump to char

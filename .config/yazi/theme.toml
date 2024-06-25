@@ -1,0 +1,9 @@
+
+[status]
+separator_open  = ""
+separator_close = ""
+separator_style = { fg = "black", bg = "darkgrey" }
+
+mode_normal = { bg = "blue", bold = true }
+mode_select = { bg = "yellow", bold = true }
+mode_unset  = { bg = "cyan", bold = true }

@@ -3,18 +3,18 @@ if status is-interactive
 end
 
 # NOTE: Fisher plugins:
-# joshmedeski/fish-lf-icons
 # patrickf1/fzf.fish
 # -> keybinds: 
 #       Ctrl+Alt+F      search files/dirs - automcomplete + cd
-set fzf_fd_opts --hidden --max-depth 5
 #       Ctrl+R          search history
 #       Ctrl+Alt+P      search processes - return PID
 #       Ctrl+V          search variables
+set fzf_fd_opts --hidden --max-depth 5
+
+fish_add_path /home/lmnk/bin
 
 set -gx EDITOR nvim
 set -gx BROWSER "brave" # --password-store=basic"
-fish_add_path /home/lmnk/bin
 
 fish_vi_key_bindings
 
@@ -26,17 +26,13 @@ abbr gb 'git branch'
 abbr gbl 'git blame'
 abbr gc 'git commit -m'
 abbr gca 'git commit --amend -m'
-abbr gco 'git checkout'
-abbr gcp 'git cherry-pick'
 abbr gd 'git diff'
 abbr gf 'git fetch'
 abbr gl 'git log --all --decorate --oneline --graph'
 abbr gm 'git merge'
 abbr gp 'git push'
-abbr gpf 'git push --force-with-lease'
 abbr gpl 'git pull'
 abbr gr 'git remote'
-abbr grb 'git rebase'
 abbr gs 'git status'
 abbr gst 'git stash'
 
@@ -75,6 +71,14 @@ function postexec_test --on-event fish_postexec
    echo
 end
 
-thefuck --alias | source
-
 starship init fish | source
+
+# Switch to dir with Yazi
+function y
+	set tmp (mktemp -t "yazi-cwd.XXXXXX")
+	yazi $argv --cwd-file="$tmp"
+	if set cwd (cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+		cd -- "$cwd"
+	end
+	rm -f -- "$tmp"
+end
