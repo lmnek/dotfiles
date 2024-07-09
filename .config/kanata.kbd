@@ -1,0 +1,123 @@
+
+(defcfg
+    process-unmapped-keys yes
+    log-layer-changes no
+)
+
+(defvar
+    tap-time 200
+    hold-time 250
+)
+
+(defalias
+;; characters
+	!  S-1
+	@  S-2
+	#  S-3
+	$  S-4 
+	%  S-5
+	^  S-6
+	&  S-7
+	*  S-8
+	l  S-9
+	r  S-0
+
+	~  S-`
+	|  S-\
+	+  S-=
+	{  S-[
+	}  S-]
+	?  S-/
+	:  S-; 
+	_  S-- 
+	q  S-'
+	<  S-,
+	>  S-.
+;; vim keybindings
+	vl   right
+	vk   up
+	vj   down
+	vh   left
+	vb   C-left
+	ve   C-right
+	v^   home
+	v$   end  ;; conflicting with 'b' -> unmaped!
+	vu   pgup
+	vd   pgdn
+;; zoom/unzoom
+	z-    C--
+	z+    C-=
+)
+
+;; unmapped keyboard
+(defsrc
+  esc   f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12    
+  `     1    2    3    4    5    6    7    8    9    0    -     =     bspc 
+  tab   q    w    e    r    t    y    u    i    o    p    [     ]     \       
+  caps  a    s    d    f    g    h    j    k    l    ;    '     ret                              
+  lsft  z    x    c    v    b    n    m    ,    .    /    rsft                         
+  lctl  lmet lalt             spc               ralt      cmps  rctl    
+)
+
+;; base layer
+(deflayer base
+  caps  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12          
+  _     1    2    3    4    5    6    7    8    9    0    _     _    bspc    
+  tab   q    w    e    r    t    y    u    i    o    p    @nav  _    _      
+  @ch   a    s    d    f    g    h    j    k    l    @ctl _     ret                              
+  lsft  z    x    c    v    b    n    m    ,    .    _    rsft                          
+  _     lmet lalt             spc               @cz       cmps rctl           
+)
+
+;; vim motions 
+;; + other special keycombinations layer
+(deflayer navigation
+  _     _    _    _    _    _    _    _    _    _    _    _     _          
+  _     _    _    _    _    _    _    _    _    _    _    _     _     _    
+  _     _    _   @ve   _   @vu   _    _    _    _    _    _     _     _ 
+  _     _    _   @vd   _    _   @vh  @vj  @vk  @vl   _    _     _                              
+  _    @z-  @z+   _   @v^  @vb    _    _    _   _    _    _                          
+  _     _    _                 ret              _         _     _           
+)
+
+(deflayer characters
+  _     _    _    _    _    _    _    _    _    _    _    _     _
+  _     @~   @@  @#    _   @%    _    _    _    _    _    _     _     _     
+  _     \    /   @{   @}   @&   @|   @_   @q    '    `    _     _     _    
+  _     _    ;   @l   @r   @?   @!    =    -   @+    _    _     _           
+  _     _    [    ]   @^   @$   @:   @*   @<   @>    _    _                                                       
+  _     _    _                 _                _         _     _           
+)
+
+(deflayer czechLow
+  _     _    _    _    _    _    _    _    _    _    _    _     _          
+  _     _    _    _    _    _    _    _    _    _    _    _     _     _    
+  _   🔣ä  🔣é  🔣ě  🔣ř  🔣ť  🔣ý  🔣ů  🔣í  🔣ó    _    _     _     _    
+  _   🔣á  🔣š  🔣ď    _    _    _  🔣ú    _    _    _    _     _                              
+@czU  🔣ž   _   🔣č    _    _  🔣ň    _    _    _    _    _                     
+  _     _    _                 bspc             _         _     _           
+)
+
+(deflayer czechUp
+  _     _    _    _    _    _    _    _    _    _    _    _     _          
+  _     _    _    _    _    _    _    _    _    _    _    _     _     _    
+  _     _  🔣É  🔣Ě  🔣Ř  🔣Ť  🔣Ý  🔣Ů  🔣Í  🔣Ó    _    _     _     _    
+  _   🔣Á  🔣Š  🔣Ď    _    _    _  🔣Ú    _    _    _    _     _                              
+  _   🔣Ž   _   🔣Č    _    _  🔣Ň    _    _    _    _    _                     
+  _     _    _                 bspc             _         _     _           
+)
+
+;; meta keys and layer switching
+(defalias
+  ch 	(tap-hold $tap-time $hold-time 
+  		esc 
+		(layer-toggle characters))
+  ctl 	(tap-hold $tap-time $hold-time 
+  		ret 
+		lctl)
+  nav   (tap-hold $tap-time $hold-time 
+  		bspc 
+		(layer-toggle navigation))
+  cz    (layer-toggle czechLow)
+  czU   (layer-toggle czechUp)
+)
