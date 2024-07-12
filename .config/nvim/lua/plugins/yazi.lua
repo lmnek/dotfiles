@@ -10,14 +10,14 @@ return {
             function()
                 require("yazi").yazi()
             end,
-            desc = "Open the file manager",
+            desc = "File manager",
         },
         {
             "<leader>F",
             function()
                 require("yazi").yazi(nil, vim.fn.getcwd())
             end,
-            desc = "Open the file manager in nvim's working directory",
+            desc = "File manager in home dir",
         },
     },
     opts = {

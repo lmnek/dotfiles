@@ -40,3 +40,9 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('n', '<leader>th', function()
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, { desc = 'Inlay hints' })
+
+-- TODO: -> maybe have to disable spellcheck LSP
+local function toggle_spell_check()
+    vim.opt.spell = not vim.opt.spell
+end
+vim.keymap.set('n', '<leader>ts', toggle_spell_check, { desc = 'Spellcheck' })

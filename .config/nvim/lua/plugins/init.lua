@@ -1,19 +1,16 @@
 -- Plugins with short setups
 return {
     -- ESSENTIALS -------------------
+    -- FIXME: broken?
     {
         'mbbill/undotree',
-        config = function()
-            vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undo tree" })
-        end
+        keys = { { '<leader>u', vim.cmd.UndotreeToggle, { desc = "Undo tree" } } }
     },
     {
         "folke/todo-comments.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
         event = 'VimEnter',
-        opts = {
-            signs = false
-        },
+        opts = { signs = false },
         keys = {
             { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todos" },
         }
@@ -72,20 +69,12 @@ return {
             sections = {
                 lualine_a = {
                     { 'mode', fmt = function(str) return str:sub(1, 1) end } },
+                lualine_b = { 'branch', 'diff', 'diagnostics' },
+                lualine_c = { 'filename' },
+                lualine_x = {},
+                lualine_y = { 'progress' },
+                lualine_z = { 'location' }
             }
-        },
-    },
-    { -- Adds git related signs to the gutter, as well as utilities for managing changes
-        -- TODO: add actions
-        'lewis6991/gitsigns.nvim',
-        opts = {
-            signs = {
-                add = { text = '+' },
-                change = { text = '~' },
-                delete = { text = '_' },
-                topdelete = { text = '‾' },
-                changedelete = { text = '~' },
-            },
         },
     },
     {
@@ -111,6 +100,17 @@ return {
     },
 
     -- TESTING --------------
+    {
+        'Wansmer/treesj',
+        dependencies = { 'nvim-treesitter/nvim-treesitter' },
+        event = "VeryLazy",
+        config = function()
+            require('treesj').setup({
+                use_default_keymaps = false,
+            })
+            vim.keymap.set('n', '<leader>ms', require('treesj').toggle, { desc = 'split/join block' })
+        end
+    }
     -- TODO: fix inlay hints
     -- Simple plugin to just enable inlay hints for each LSP server
     -- {
