@@ -279,7 +279,7 @@ bindsym $mod+n exec "wezterm start --class yazi -- fish -c 'y; exec fish'"
 ## Need to install: maim, xclip, xdotool
 ##  Screenshots in files
 bindsym Print       exec --no-startup-id flameshot gui -c
-bindsym Shift+Print exec --no-startup-id flameshot gui -p "/home/$USER/pics/screens/"
+bindsym Shift+Print exec --no-startup-id flameshot gui -p "/home/$USER/pix/screens/"
 
 # Power Profiles menu switcher (rofi)
 bindsym $mod+Shift+p exec ~/.config/i3/scripts/power-profiles
