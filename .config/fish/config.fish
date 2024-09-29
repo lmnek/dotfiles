@@ -55,6 +55,7 @@ abbr zla 'zellij attach'
 abbr p 'python'
 abbr sc 'systemctl'
 abbr scu 'systemctl --user'
+abbr ff fastfetch
 
 abbr te  'trans en:cs'
 abbr tc  'trans cs:en'
