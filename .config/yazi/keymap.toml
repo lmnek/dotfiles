@@ -10,13 +10,13 @@
 [manager]
 
 prepend_keymap = [
-{ on = "u", run = '''shell 'ripdrag -a "$@" -x 2>/dev/null &' --confirm''', desc = "drag&drop" },
 { on = "H", run  = "plugin --sync hide-preview", desc = "Hide or show preview" },
 { on = "l", run  = "plugin --sync fast-enter", desc = "Enter the subfolder faster, or open the file directly" },
 { on = "z", run = "plugin fzf", desc = "Jump to a directory or reveal a file using fzf" }, # override zoxide
 # ------ execute ------
 { on = [ "e", "c" ], run  = "plugin chmod", desc = "Chmod on selected files" },
 { on = [ "e", "r" ], run  = '''shell 'remove-space-filename.sh "$0"' --confirm''', desc = "Remove spaces from filename" },
+{ on = [ "e", "d" ], run = '''shell 'ripdrag -a "$@" -x 2>/dev/null &' --confirm''', desc = "drag&drop" },
 # ------ jump to dir ------
 { on = [ "g", "m" ], run  = "cd /mnt", desc = "Go to mounted dirs" },
 { on = [ "g", "D" ], run  = "cd ~/dox", desc = "Go to dox" },
