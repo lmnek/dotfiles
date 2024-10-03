@@ -66,7 +66,7 @@ return {
             -- emmet_ls = {}, -- html snippet expansion
             svelte = {},
             tailwindcss = {},
-            tsserver = {},
+            -- tsserver = {},
             html = { filetypes = { 'html', 'svelte' } },
         }
 
