@@ -38,7 +38,8 @@ abbr gst 'git stash'
 
 abbr ps 'sudo pacman -S'
 abbr pr 'sudo pacman -Rs'
-abbr pq 'sudo pacman -Q | fzf'
+abbr psq 'pacman -Slq | fzf --multi --preview "pacman -Si {1}" | xargs -ro sudo pacman -S'
+abbr pq 'pacman -Qq | fzf --multi --preview "pacman -Qi {1}" | xargs -ro sudo pacman -Rns'
 abbr ys 'yay -S'
 abbr yr 'yay -Rs'
 
@@ -63,7 +64,6 @@ abbr td  'trans -d'
 abbr tse 'trans -shell en:cs'
 abbr tsc 'trans -shell cs:en'
 
-alias lf=lfcd
 alias yank='xsel --input --clipboard'
 alias paste='xsel --output --clipboard'
 

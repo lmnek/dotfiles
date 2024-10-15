@@ -30,7 +30,7 @@ workspace_layout default
 ##############################
 
 # border indicator on windows:
-new_window pixel 1
+default_border pixel 1
 
 # thin borders
 # hide_edge_borders both
@@ -404,3 +404,6 @@ bindsym $mod+t [class="term2"] scratchpad show move position center
 for_window [class="term1"] floating enable, resize set 600 1000, move scratchpad, border pixel 3
 exec wezterm start --class term1
 bindsym $mod+shift+t [class="term1"] scratchpad show move position center
+
+# sticky minized video in top right
+bindsym $mod+y fullscreen disable; floating enable; resize set 422 240; sticky enable; move position 1450 25
