@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# Script that toggles the current scratchpad window
+# - either hides currently focused floating window
+# - or shows the last used scratchpad
+
+i3_layout=$(i3-msg -t get_tree)
+
+# Extract the currently focused window (including floating nodes)
+focused_window=$(echo "$i3_layout" | jq 'recurse(.nodes[], .floating_nodes[]) | select(.focused == true)')
+
+# Check if the currently focused window is floating
+is_floating=$(echo "$focused_window" | jq '.floating')
+
+# If the focused window is floating 
+if [ "$is_floating" == "\"user_on\"" ] || [ "$is_floating" == "\"auto_on\"" ]; then
+  # Send the focused window to the scratchpad
+  focused_window_id=$(echo "$focused_window" | jq '.id')
+  i3-msg "[con_id=\"$focused_window_id\"] move scratchpad"
+  exit
+fi
+
+# Extract the focused scratchpad container (use recurse to navigate all levels)
+scratchpad=$(echo "$i3_layout" | jq 'recurse(.nodes[], .floating_nodes[]) | select(.name == "__i3_scratch")')
+
+# Get the last window in the scratchpad
+last_window=$(echo "$scratchpad" | jq '.floating_nodes[-1].nodes[0]')
+
+# Get the last window's ID and name
+last_window_id=$(echo "$last_window" | jq '.id')
+last_window_name=$(echo "$last_window" | jq '.window_properties.title')
+
+# If no floating window, show the last scratchpad window
+if [ "$last_window_id" != "null" ]; then
+  i3-msg "[con_id=\"$last_window_id\"] scratchpad show; move position center"
+fi
