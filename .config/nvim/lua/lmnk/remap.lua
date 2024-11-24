@@ -32,6 +32,9 @@ vim.keymap.set("n", "<S-CR>", "O<ESC>")
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
+vim.keymap.set('n', '<leader>w', ":up<CR>", { desc = 'Save file - :up' })
+vim.keymap.set('n', '<leader>W', ":wa<CR>", { desc = 'Save all files - :wa' })
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })

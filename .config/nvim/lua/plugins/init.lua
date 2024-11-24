@@ -1,10 +1,9 @@
 -- Plugins with short setups
 return {
     -- ESSENTIALS -------------------
-    -- FIXME: broken?
     {
         'mbbill/undotree',
-        keys = { { '<leader>u', vim.cmd.UndotreeToggle, { desc = "Undo tree" } } }
+        keys = { { '<leader>u', vim.cmd.UndotreeToggle, desc = "Undo tree" } }
     },
     {
         "folke/todo-comments.nvim",
