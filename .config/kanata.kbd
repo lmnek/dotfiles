@@ -2,6 +2,11 @@
 (defcfg
     process-unmapped-keys yes
     log-layer-changes no
+
+    linux-dev-names-exclude (
+        "Keychron Keychron K9 Pro"
+    )
+    ;; linux-unicode-termination enter
 )
 
 (defvar
@@ -66,7 +71,7 @@
   tab   q    w    e    r    t    y    u    i    o    p    @nav  _    _      
   @ch   a    s    d    f    g    h    j    k    l    @ctl _     ret                              
   lsft  z    x    c    v    b    n    m    ,    .    _    rsft                          
-  _     lmet lalt             spc               @cz       cmps rctl           
+  _     lmet lalt             @s-m               @cz       cmps rctl           
 )
 
 ;; vim motions 
@@ -118,6 +123,9 @@
   nav   (tap-hold $tap-time $hold-time 
   		bspc 
 		(layer-toggle navigation))
+  s-m 	(tap-hold $tap-time $hold-time 
+  		spc 
+		lmet)
   cz    (layer-toggle czechLow)
   czU   (layer-toggle czechUp)
 )
