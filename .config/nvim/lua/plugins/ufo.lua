@@ -29,6 +29,7 @@ end
 
 return {
     'kevinhwang91/nvim-ufo',
+    dependencies = { 'kevinhwang91/promise-async' },
     opts = {
         fold_virt_text_handler = handler,
         provider_selector = function(bufnr, filetype, buftype)
@@ -50,18 +51,22 @@ return {
         vim.o.foldlevelstart = 99
         vim.o.foldenable = true
     end,
-    dependencies = { 'kevinhwang91/promise-async' },
     config = function(_, opts)
-        local ufo = require('ufo')
-        ufo.setup(opts)
-
-        vim.keymap.set('n', 'zR', ufo.openAllFolds, { desc = 'Open all folds' })
-        vim.keymap.set('n', 'zM', ufo.closeAllFolds, { desc = 'Close all folds' })
-        vim.keymap.set('n', 'zk', function()
-            local winid = ufo.peekFoldedLinesUnderCursor(true)
-            if not winid then
-                vim.lsp.buf.hover()
-            end
-        end, { desc = 'Inspect fold' })
-    end
+        require('ufo').setup(opts)
+    end,
+    keys = {
+        { 'za' }, -- toggle fold -> need to press twice to activate plugin
+        { 'zR', function() require('ufo').openAllFolds() end,  desc = 'Open all folds' },
+        { 'zM', function() require('ufo').closeAllFolds() end, desc = 'Close all folds' },
+        {
+            'zk',
+            function()
+                local winid = require('ufo').peekFoldedLinesUnderCursor(true)
+                if not winid then
+                    vim.lsp.buf.hover()
+                end
+            end,
+            desc = 'Inspect fold'
+        },
+    }
 }

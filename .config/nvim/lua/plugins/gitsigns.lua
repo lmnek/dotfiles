@@ -1,5 +1,6 @@
 return { -- Adds git related signs to the gutter, hunks, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
+    event = "VeryLazy",
     opts = {
         signs = {
             add = { text = '+' },

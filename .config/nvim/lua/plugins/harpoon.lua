@@ -1,16 +1,41 @@
 return {
     'ThePrimeagen/harpoon',
-    config = function()
-        local mark = require("harpoon.mark")
-        local ui = require("harpoon.ui")
-        require("harpoon").setup {
-            vim.keymap.set("n", "<leader>Ha", mark.add_file, { desc = "Add file" }),
-            vim.keymap.set("n", "<leader>He", ui.toggle_quick_menu, { desc = "Open menu" }),
-
-            vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end),
-            vim.keymap.set("n", "<C-j>", function() ui.nav_file(2) end),
-            vim.keymap.set("n", "<C-k>", function() ui.nav_file(3) end),
-            vim.keymap.set("n", "<C-l>", function() ui.nav_file(4) end),
-        }
-    end
+    opts = {},
+    keys = {
+        { "<leader>Ha", function() require('harpoon.mark').add_file() end,        desc = "Add file" },
+        { "<leader>He", function() require('harpoon.ui').toggle_quick_menu() end, desc = "Open menu" },
+        { "<C-h>",      function() require('harpoon.ui').nav_file(1) end },
+        { "<C-j>",      function() require('harpoon.ui').nav_file(2) end },
+        { "<C-k>",      function() require('harpoon.ui').nav_file(3) end },
+        { "<C-l>",      function() require('harpoon.ui').nav_file(4) end },
+    }
 }
+
+-- return {
+--     "ThePrimeagen/harpoon",
+--     branch = "harpoon2",
+--     dependencies = { "nvim-lua/plenary.nvim" },
+--     opts = {
+--         menu = {
+--             width = vim.api.nvim_win_get_width(0) - 4,
+--         },
+--         settings = {
+--             save_on_toggle = true,
+--         },
+--     },
+--     keys = {
+--         { "<leader>Ha", function() require('harpoon'):list():add() end,    desc = "Add file" },
+--         {
+--             "<leader>He",
+--             function()
+--                 local h = require('harpoon')
+--                 h.ui:toggle_quick_menu(h:list())
+--             end,
+--             desc = "Open menu"
+--         },
+--         { "<C-h>",      function() require('harpoon'):list():select(1) end },
+--         { "<C-j>",      function() require('harpoon'):list():select(2) end },
+--         { "<C-k>",      function() require('harpoon'):list():select(3) end },
+--         { "<C-l>",      function() require('harpoon'):list():select(4) end },
+--     }
+-- }
