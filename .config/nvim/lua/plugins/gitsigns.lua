@@ -47,10 +47,10 @@ return { -- Adds git related signs to the gutter, hunks, as well as utilities fo
             map('n', '<leader>hR', gitsigns.reset_buffer, { desc = 'Reset buffer' })
             map('n', '<leader>hp', gitsigns.preview_hunk, { desc = 'Preview hunk' })
             map('n', '<leader>hb', function() gitsigns.blame_line { full = true } end, { desc = 'Blame line' })
-            map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = 'Toggle git blame' })
+            map('n', '<leader>hB', gitsigns.toggle_current_line_blame, { desc = 'Toggle git Blame' })
             map('n', '<leader>hd', gitsigns.diffthis, { desc = 'Diff' })
             map('n', '<leader>hD', function() gitsigns.diffthis('~') end, { desc = 'Diff ~' })
-            map('n', '<leader>td', gitsigns.toggle_deleted, { desc = 'Toggle git deleted' })
+            map('n', '<leader>ht', gitsigns.toggle_deleted, { desc = 'Toggle git Deleted' })
 
             -- Text object
             map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')

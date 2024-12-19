@@ -1,17 +1,11 @@
 -- Plugins currently being tested / worked on
 return {
     {
-        'Wansmer/treesj',
-        dependencies = { 'nvim-treesitter/nvim-treesitter' },
-        opts = { use_default_keymaps = false },
-        keys = { { '<leader>ms', function() require('treesj').toggle() end, desc = 'split/join block' } }
-    },
-    {
         'chomosuke/typst-preview.nvim',
         ft = 'typst',
         version = '1.*',
         opts = {},
-    }
+    },
     -- TODO: fix inlay hints
     -- Simple plugin to just enable inlay hints for each LSP server
     -- {

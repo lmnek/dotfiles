@@ -19,6 +19,34 @@ return {
         end,
     },
     {
+        -- Use it only as floating CMD
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        dependencies = { "MunifTanjim/nui.nvim", },
+        opts = {
+            cmdline = {
+                enabled = true,         -- enables the Noice cmdline UI
+                view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
+            },
+            messages = {
+                enabled = true,
+                -- send info to right bottom corner
+                view = "mini",
+                -- snacks.notify will take care of it (I hope)
+                view_warn = nil,
+                view_error = nil
+            },
+            -- mini = { focusable = true },
+            -- Disable all other features
+            popupmenu = { enabled = false },
+            lsp = {
+                progress = { enabled = false },
+                hover = { enabled = false },
+                signature = { enabled = false },
+            }
+        }
+    },
+    {
         -- Set lualine as statusline
         'nvim-lualine/lualine.nvim',
         opts = {
@@ -45,5 +73,19 @@ return {
         main = 'ibl',
         event = "VeryLazy",
         opts = {},
-    }
+    },
+    {
+        "folke/zen-mode.nvim",
+        opts = {
+            window = {
+                options = {
+                    signcolumn = "no"
+                }
+            }
+        },
+        keys = {
+            { "<leader>tz", "<cmd>ZenMode<cr>", desc = "Zen mode" },
+        }
+    },
+    -- { 'petertriho/nvim-scrollbar', opts = {} },
 }

@@ -23,13 +23,15 @@ return {
             { "<leader>r",  group = "+Rename" },
             { "<leader>s",  group = "+Search" },
             { "<leader>t",  group = "+Toggle" },
+            { "<leader>g",  group = "+Git" },
+            { "<leader>n",  group = "+Notifications" },
+            { "<leader>q",  group = "+Trouble Diagnostics" },
             -- { "<leader>w",  group = "+Workspace" },
             -- TODO: move somewhere else + required/dependency?
             { "<leader>o",  group = "+Open" },
-            { "<leader>og", ":Git<CR>",                desc = "Git" },
-            { "<leader>ol", ":Lazy<CR>",               desc = "Lazy" },
-            { "<leader>om", ":Mason<CR>",              desc = "Mason" },
-            { "<leader>oL", ":LspInfo<CR>",            desc = "Lsp Info" },
+            { "<leader>ol", "<cmd>Lazy<CR>",               desc = "Lazy" },
+            { "<leader>om", "<cmd>Mason<CR>",              desc = "Mason" },
+            { "<leader>oL", "<cmd>LspInfo<CR>",            desc = "Lsp Info" },
         })
     end,
 

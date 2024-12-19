@@ -8,18 +8,21 @@ return {
             build = (function()
                 return 'make install_jsregexp'
             end)(),
-            dependencies = {
-                -- `friendly-snippets` contains a variety of premade snippets.
-                --  https://github.com/rafamadriz/friendly-snippets
-                {
-                    'rafamadriz/friendly-snippets',
-                    config = function()
-                        require('luasnip.loaders.from_vscode').lazy_load()
-                    end,
-                }
-            },
         },
+
+        ---- Sources for CMP
         'saadparwaiz1/cmp_luasnip',
+        -- `friendly-snippets` contains a variety of premade snippets.
+        --  https://github.com/rafamadriz/friendly-snippets
+        {
+            'rafamadriz/friendly-snippets',
+            config = function()
+                require('luasnip.loaders.from_vscode').lazy_load()
+            end,
+        },
+        -- for cmd
+        { 'hrsh7th/cmp-cmdline' },
+        { 'hrsh7th/cmp-buffer' },
 
         -- Adds LSP completion capabilities
         'hrsh7th/cmp-nvim-lsp',
@@ -84,7 +87,30 @@ return {
                 { name = 'nvim_lsp' },
                 { name = 'luasnip' },
                 { name = 'path' },
+                { name = 'buffer' },
             },
         }
+
+        -- `/` cmdline setup.
+        cmp.setup.cmdline('/', {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = {
+                { name = 'buffer' }
+            }
+        })
+        -- `:` cmdline setup.
+        cmp.setup.cmdline(':', {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = cmp.config.sources({
+                { name = 'path' }
+            }, {
+                {
+                    name = 'cmdline',
+                    option = {
+                        ignore_cmds = { 'Man', '!' }
+                    }
+                }
+            })
+        })
     end
 }
