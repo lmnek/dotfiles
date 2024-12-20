@@ -31,15 +31,18 @@ return {
                 section_separators = '',
             },
             sections = {
-                lualine_a = {
-                    { 'mode', fmt = function(str) return str:sub(1, 1) end } },
-                lualine_b = { 'branch', 'diff', 'diagnostics' },
-                lualine_c = {
+                lualine_a = { { 'mode', fmt = function(str) return str:sub(1, 1) end } },
+                lualine_b = {
+                    -- fixme: Dont how to get filetyp icon without component separator afterwards
+                    -- { 'filetype', icon_only = true, icon = { align = 'right' }, },
                     {
                         'filename',
-                        -- NOTE: waiting for merge: https://github.com/nvim-lualine/lualine.nvim/pull/1285
+                        separator = nil,
+                        -- note: waiting for merge: https://github.com/nvim-lualine/lualine.nvim/pull/1285
                         path = 4, -- add parent dir
                     },
+                },
+                lualine_c = {
                     {
                         "navic",
                         color_correction = "dynamic",
@@ -51,9 +54,9 @@ return {
                         },
                     }
                 },
-                lualine_x = { 'encoding', 'filetype' },
-                lualine_y = { 'progress' },
-                lualine_z = { 'location' }
+                lualine_x = { 'grapple' },
+                lualine_y = { 'branch', 'diff', 'diagnostics' },
+                lualine_z = { 'progress' }
             }
         },
     },
