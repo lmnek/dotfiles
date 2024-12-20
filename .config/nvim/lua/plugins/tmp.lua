@@ -1,6 +1,15 @@
 -- Plugins currently being tested / worked on
 return {
     {
+        "tris203/precognition.nvim",
+        opts = {
+            startVisible = false,
+        },
+        keys = {
+            { '<leader>tp', function() require("precognition").toggle() end, desc = 'Precognition hints' }
+        }
+    },
+    {
         'chomosuke/typst-preview.nvim',
         ft = 'typst',
         version = '1.*',

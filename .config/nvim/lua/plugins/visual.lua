@@ -45,7 +45,7 @@ return {
                         color_correction = "dynamic",
                         navic_opts = {
                             depth_limit = 6,
-                            -- separator = " ",
+                            separator = " ",
                             -- bug: true adds one last char with wrong color
                             highlight = false
                         },

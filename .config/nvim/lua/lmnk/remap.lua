@@ -46,3 +46,5 @@ vim.keymap.set('n', '<leader>th', function()
 end, { desc = 'Inlay hints' })
 
 vim.keymap.set('n', '<leader>gm', "<cmd>Git<CR>", { desc = ':Git Menu' })
+
+-- TODO: paste into / delete with void register
