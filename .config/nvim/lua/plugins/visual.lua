@@ -19,6 +19,45 @@ return {
         end,
     },
     {
+        -- Set lualine as statusline
+        'nvim-lualine/lualine.nvim',
+        -- for breadcrumbs
+        dependencies = { 'nvim-tree/nvim-web-devicons', { 'SmiteshP/nvim-navic', event = "VeryLazy" } },
+        opts = {
+            options = {
+                icons_enabled = true,
+                theme = 'auto',
+                component_separators = '|',
+                section_separators = '',
+            },
+            sections = {
+                lualine_a = {
+                    { 'mode', fmt = function(str) return str:sub(1, 1) end } },
+                lualine_b = { 'branch', 'diff', 'diagnostics' },
+                lualine_c = {
+                    {
+                        'filename',
+                        -- NOTE: waiting for merge: https://github.com/nvim-lualine/lualine.nvim/pull/1285
+                        path = 4, -- add parent dir
+                    },
+                    {
+                        "navic",
+                        color_correction = "dynamic",
+                        navic_opts = {
+                            depth_limit = 6,
+                            -- separator = " ",
+                            -- bug: true adds one last char with wrong color
+                            highlight = false
+                        },
+                    }
+                },
+                lualine_x = { 'encoding', 'filetype' },
+                lualine_y = { 'progress' },
+                lualine_z = { 'location' }
+            }
+        },
+    },
+    {
         -- Use it only as floating CMD
         "folke/noice.nvim",
         event = "VeryLazy",
@@ -33,8 +72,8 @@ return {
                 -- send info to right bottom corner
                 view = "mini",
                 -- snacks.notify will take care of it (I hope)
-                view_warn = nil,
-                view_error = nil
+                -- view_warn = nil,
+                -- view_error = nil
             },
             -- mini = { focusable = true },
             -- Disable all other features
@@ -45,27 +84,6 @@ return {
                 signature = { enabled = false },
             }
         }
-    },
-    {
-        -- Set lualine as statusline
-        'nvim-lualine/lualine.nvim',
-        opts = {
-            options = {
-                icons_enabled = false,
-                theme = 'auto',
-                component_separators = '|',
-                section_separators = '',
-            },
-            sections = {
-                lualine_a = {
-                    { 'mode', fmt = function(str) return str:sub(1, 1) end } },
-                lualine_b = { 'branch', 'diff', 'diagnostics' },
-                lualine_c = { 'filename' },
-                lualine_x = {},
-                lualine_y = { 'progress' },
-                lualine_z = { 'location' }
-            }
-        },
     },
     {
         -- Add indentation guides even on blank lines

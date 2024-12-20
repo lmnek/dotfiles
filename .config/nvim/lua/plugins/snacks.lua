@@ -10,7 +10,7 @@ return {
         notifier = { enabled = true },  -- notifications, instead of line
         quickfile = { enabled = true }, -- render new file quickly before plugins load
         dim = { enabled = true },
-        toggle = { enabled = true },
+        toggle = { enabled = true, notify = false },
     },
     keys = {
         -- Notifications

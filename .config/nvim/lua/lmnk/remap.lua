@@ -37,7 +37,7 @@ vim.keymap.set('n', '<leader>w', "<cmd>up<CR>", { desc = 'Save file - :up' })
 vim.keymap.set('n', '<leader>W', "<cmd>wa<CR>", { desc = 'Save all files - :wa' })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Floating diagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Floating diagnostic' })
 -- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' }) --> replaced with trouble
 
 -- Inlay hints -> needs to enabled for each lang server

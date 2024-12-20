@@ -29,4 +29,24 @@ return {
     --     },
     --     opts = {},
     -- }
+    -- NOTE: probably will not use...
+    -- {
+    -- 'Bekaboo/dropbar.nvim',
+    -- dependencies = { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    -- event = "VeryLazy",
+    -- -- todo: open fzf mode
+    -- keys = {
+    --     { '<leader>b', function() require('dropbar.api').pick() end,                desc = 'Bar symbol navigation' },
+    --     { '[;',        function() require('dropbar.api').goto_context_start() end,  desc = 'Go to start of current context' },
+    --     { '];',        function() require('dropbar.api').select_next_context() end, desc = 'Select next context' },
+    --     -- fixme: toggle bar
+    --     {
+    --         '<leader>tb',
+    --         function()
+    --             require('dropbar.api').enable = not require('dropbar.api').opts.enable
+    --         end,
+    --         desc = 'Toggle dropbar (winbar)'
+    --     },
+    -- }
+    --}
 }
