@@ -1,21 +1,34 @@
 -- Autoformat
+-- TODO: add toggle auto-format (and other advanced features in readmes)
+-- TODO: (add nvim-lint package)
 return {
     'stevearc/conform.nvim',
-    -- lazy loading
     event = { "BufWritePre" },
     cmd = { "ConformInfo" },
-    keys = { { "<leader>of", "<cmd>ConformInfo<cr>", desc = "Formatting (Conform)" } },
-    opts = {
-        notify_on_error = false,
-        format_on_save = {
-            timeout_ms = 500,
-            lsp_fallback = true,
-        },
-        formatters_by_ft = {
-            lua = { 'stylua' },
-            python = { "black" },
-            -- You can use a sub-list to tell conform to run *until* a formatter is found.
-            javascript = { { "prettierd", "prettier" } },
-        },
+    keys = {
+        { "<leader>of", "<cmd>ConformInfo<cr>", desc = "Formatting (Conform)" }
     },
+    config = function()
+        require("conform").setup({
+            notify_on_error = false,
+            format_on_save = {
+                timeout_ms = 500,
+                lsp_fallback = true,
+            },
+            formatters_by_ft = {
+                lua = { 'stylua' },
+                python = { "isort", "black" },
+                -- You can use a sub-list to tell conform to run *until* a formatter is found.
+                javascript = { { "prettierd", "prettier" } },
+            },
+        })
+
+        -- Format on save
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            pattern = "*",
+            callback = function(args)
+                require("conform").format({ bufnr = args.buf })
+            end,
+        })
+    end,
 }

@@ -13,7 +13,16 @@ return {
         'chomosuke/typst-preview.nvim',
         ft = 'typst',
         version = '1.*',
-        opts = {},
+        cmd = { "TypstPreview", "TypstPreviewToggle", "TypstPreviewUpdate" },
+        build = function() require("typst-preview").update() end,
+        opts = {
+            dependencies_bin = { tinymist = "tinymist" }
+        },
+        keys = {
+            { ',p', "<cmd>TypstPreview<CR>",       desc = 'Typst Preview' },
+            { ',t', "<cmd>TypstPreviewToggle<CR>", desc = 'Typst Preview Toggle' },
+            { ',u', "<cmd>TypstPreviewUpdate<CR>", desc = 'Typst Preview Update' },
+        }
     },
     -- TODO: fix inlay hints
     -- Simple plugin to just enable inlay hints for each LSP server

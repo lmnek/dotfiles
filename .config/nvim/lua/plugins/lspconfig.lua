@@ -62,6 +62,10 @@ return {
             rust_analyzer = {},
             bashls = {},
             lua_ls = {},
+            tinymist = { -- typst
+                single_file_support = true,
+                settings = {},
+            },
             -- latex
             texlab = {},
             ltex = {},
