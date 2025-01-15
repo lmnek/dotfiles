@@ -5,5 +5,4 @@ configuration {
   display-drun: "Apps";
   display-window: "Windows";
   modi: "window,drun,run,emoji,clipboard:greenclip print";
-  kb-custom-1: "Ctrl+c";
 }
