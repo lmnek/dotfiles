@@ -1,0 +1,60 @@
+
+(defcfg
+    process-unmapped-keys yes
+    log-layer-changes no
+
+    linux-dev-names-include (
+        "Keychron Keychron K9 Pro"
+    )
+    linux-unicode-termination enter
+)
+
+(defvar
+    tap-time 200
+    hold-time 250
+)
+
+;; unmapped keyboard
+(defsrc
+  esc   f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12    
+  `     1    2    3    4    5    6    7    8    9    0    -     =     bspc 
+  tab   q    w    e    r    t    y    u    i    o    p    [     ]     \       
+  caps  a    s    d    f    g    h    j    k    l    ;    '     ret                              
+  lsft  z    x    c    v    b    n    m    ,    .    /    rsft                         
+  lctl  lmet lalt             spc               ralt      cmps  rctl    
+)
+
+(deflayer base
+  _     _    _    _    _    _    _    _    _    _    _    _     _          
+  _     _    _    _    _    _    _    _    _    _    _    _     _     _    
+  _     _    _    _    _    _    _    _    _    _    _    _     _     _ 
+  _     _    _    _    _    _    _    _    _    _    _    _     _                              
+  _     _    _    _    _    _    _    _    _    _    _    _                          
+  _     _    _                 @s-m               @cz         _     _           
+)
+
+(deflayer czechLow
+  _     _    _    _    _    _    _    _    _    _    _    _     _          
+  _     _    _    _    _    _    _    _    _    _    _    _     _     _    
+  _   🔣ä  🔣é  🔣ě  🔣ř  🔣ť  🔣ý  🔣ů  🔣í  🔣ó    _    _     _     _    
+  _   🔣á  🔣š  🔣ď    _    _    _  🔣ú    _    _    _    _     _                              
+@czU  🔣ž   _   🔣č    _    _  🔣ň    _    _    _    _    _                     
+  _     _    _                 bspc             _         _     _           
+)
+
+(deflayer czechUp
+  _     _    _    _    _    _    _    _    _    _    _    _     _          
+  _     _    _    _    _    _    _    _    _    _    _    _     _     _    
+  _     _  🔣É  🔣Ě  🔣Ř  🔣Ť  🔣Ý  🔣Ů  🔣Í  🔣Ó    _    _     _     _    
+  _   🔣Á  🔣Š  🔣Ď    _    _    _  🔣Ú    _    _    _    _     _                              
+  _   🔣Ž   _   🔣Č    _    _  🔣Ň    _    _    _    _    _                     
+  _     _    _                 bspc             _         _     _           
+)
+
+(defalias
+  cz    (layer-toggle czechLow)
+  czU   (layer-toggle czechUp)
+  s-m 	(tap-hold $tap-time $hold-time 
+  		spc 
+		lmet)
+)
