@@ -1,9 +1,12 @@
 -- Super pretty diagnostic/quickfix/telescope list
 return {
     "folke/trouble.nvim",
+    dependencies = { 'nvim-tree/nvim-web-devicons' }, -- FIXME: icons not showing
     opts = {
-        focus = true, -- focus on toggle
-        warn_no_results = false
+        focus = true,                                 -- focus on toggle
+        warn_no_results = true,
+        auto_close = true,
+        indent_guides = false,
     },
     -- cmd: Trouble [mode] [action] [options]
     cmd = "Trouble",
@@ -21,25 +24,30 @@ return {
             desc = "Buffer Diagnostics",
         },
         -- Many other features ... + can redirect Telescope results to this
-        -- {
-        --     "<leader>Ts",
-        --     "<cmd>Trouble symbols toggle focus=false<cr>",
-        --     desc = "Symbols (Trouble)",
-        -- },
-        -- {
-        --     "<leader>Td",
-        --     "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-        --     desc = "LSP Definitions / references / ... (Trouble)",
-        -- },
-        -- {
-        --     "<leader>Tl",
-        --     "<cmd>Trouble loclist toggle<cr>",
-        --     desc = "Location List (Trouble)",
-        -- },
-        -- {
-        --     "<leader>Tq",
-        --     "<cmd>Trouble qflist toggle<cr>",
-        --     desc = "Quickfix List (Trouble)",
-        -- },
+        -- testing...
+        -- Good
+        {
+            "<leader>qs",
+            "<cmd>Trouble symbols toggle focus=false<cr>",
+            desc = "Doc Symbols",
+        },
+        -- Good
+        {
+            "<leader>qd",
+            "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+            desc = "LSP Definitions / references / ... ",
+        },
+        -- idk what this does
+        {
+            "<leader>ql",
+            "<cmd>Trouble loclist toggle<cr>",
+            desc = "Location List (Trouble)",
+        },
+        -- did not find use yet
+        {
+            "<leader>qf",
+            "<cmd>Trouble qflist toggle<cr>",
+            desc = "Quickfix List (Trouble)",
+        },
     },
 }

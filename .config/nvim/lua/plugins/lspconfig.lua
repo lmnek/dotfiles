@@ -59,7 +59,12 @@ return {
 
         local servers = {
             pyright = {},
-            rust_analyzer = {},
+            rust_analyzer = {
+                -- FIXME: no clippy diagnostics
+                check = {
+                    command = "clippy",
+                },
+            },
             bashls = {},
             lua_ls = {},
             tinymist = { -- typst
