@@ -1,0 +1,72 @@
+{
+    "e09c7073-3b40-42c4-b419-53b5873d086d": {
+        "id": "e09c7073-3b40-42c4-b419-53b5873d086d",
+        "name": "Google Search",
+        "keyword": "g",
+        "cmd": "https://google.com/search?q=%s",
+        "icon": "/usr/share/ulauncher/media/google-search-icon.png",
+        "is_default_search": true,
+        "run_without_argument": false,
+        "added": 1736595098.2882295
+    },
+    "5b89e0e7-e191-4bc0-8e26-e6c9e313a177": {
+        "id": "5b89e0e7-e191-4bc0-8e26-e6c9e313a177",
+        "name": "Stack Overflow",
+        "keyword": "so",
+        "cmd": "https://stackoverflow.com/search?q=%s",
+        "icon": "/usr/share/ulauncher/media/stackoverflow-icon.svg",
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1736595098.2882416
+    },
+    "b7e9956e-d231-4d7c-be14-21bf91d1af4b": {
+        "id": "b7e9956e-d231-4d7c-be14-21bf91d1af4b",
+        "name": "Wikipedia",
+        "keyword": "w",
+        "cmd": "https://en.wikipedia.org/wiki/%s",
+        "icon": "/usr/share/ulauncher/media/wikipedia-icon.png",
+        "is_default_search": true,
+        "run_without_argument": false,
+        "added": 1736595098.2882495
+    },
+    "6e7738c6-9f76-4a97-82d8-05716b67b19c": {
+        "id": "6e7738c6-9f76-4a97-82d8-05716b67b19c",
+        "name": "Google Maps",
+        "keyword": "gm",
+        "cmd": "https://google.com/maps?q=%s",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1736972752.5934103
+    },
+    "253fda30-4a34-4a94-8e21-afba7e514ce6": {
+        "id": "253fda30-4a34-4a94-8e21-afba7e514ce6",
+        "name": "Seznam mapy",
+        "keyword": "sm",
+        "cmd": "https://en.mapy.cz/turisticka?q=%s",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1736972859.5950642
+    },
+    "0f95ba90-18ad-4e44-a983-bcf3451e87d5": {
+        "id": "0f95ba90-18ad-4e44-a983-bcf3451e87d5",
+        "name": "Youtube",
+        "keyword": "yt",
+        "cmd": "https://www.youtube.com/results?search_query=%s",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1736972943.8521333
+    },
+    "b6747629-829a-4415-b0a2-c16209018c0d": {
+        "id": "b6747629-829a-4415-b0a2-c16209018c0d",
+        "name": "GitHub",
+        "keyword": "gh",
+        "cmd": "https://github.com/search?q=%s",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1736974308.2687004
+    }
+}
