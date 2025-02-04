@@ -13,7 +13,7 @@ font pango: Noto Sans Regular 10
 # set the mod key to the winkey:
 set $mod Mod4
 set $term wezterm
-set $browser /usr/bin/brave --password-store=basic
+set $browser /usr/bin/zen-browser
 
 #####################
 # workspace layout: #
@@ -48,14 +48,14 @@ smart_borders on
 floating_modifier $mod
 
 # switch/iterate between workspaces
-# bindsym $mod+Tab workspace next
-# bindsym $mod+Shift+Tab workspace prev
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
 
 # Tapping on current workspace swaps to last one
 workspace_auto_back_and_forth yes
 
 # Go to last workspace
-bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+n workspace back_and_forth
 
 # Move workspace to other monitor
 bindsym $mod+Ctrl+Tab move workspace to output next
@@ -159,7 +159,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # open new empty workspace
-bindsym $mod+Shift+n exec ~/.config/i3/scripts/empty_workspace
+# bindsym $mod+Shift+n exec ~/.config/i3/scripts/empty_workspace
 
 # Multimedia Keys
 
@@ -187,7 +187,8 @@ bindsym XF86AudioPrev exec playerctl previous
 # bindsym $mod+p exec /usr/local/bin/switch-audio-port
 
 # sticky minized video in top right
-bindsym $mod+y fullscreen disable; floating enable; resize set 422 240; sticky enable; move position 1450 25
+# bindsym $mod+y fullscreen disable; floating enable; resize set 422 240; sticky enable; move position 1450 25
+
 
 ##########################################
 # configuration for workspace behaviour: #
@@ -222,7 +223,7 @@ assign [class="Obsidian"] $ws9
 
 # automatic set focus new window if it opens on another workspace than the current:
 for_window [class=wezterm] focus
-for_window [class=(?i)brave] focus
+for_window [class=(?i)zen-browser] focus
 for_window [class=Thunar] focus
 for_window [class=yazi] focus
 
@@ -387,7 +388,7 @@ bindsym $mod+e exec --no-startup-id rofi -show emoji
 ## App launching
 
 bindsym $mod+Return exec $term
-bindsym $mod+n exec "wezterm start --class yazi -- fish -c 'y; exec fish'" 
+bindsym $mod+Shift+f exec "wezterm start --class yazi -- fish -c 'y; exec fish'" 
 
 # Need to install: maim, xclip, xdotool
 # Screenshots in files
@@ -403,7 +404,7 @@ bindsym $mod+Ctrl+l exec brave --app="https://librechat-librechat.hf.space"
 bindsym $mod+w [floating] move scratchpad
 
 # toggle last scratchpad
-bindsym $mod+o exec --no-startup-id ~/.config/i3/scripts/toggle_last_scratchpad
+bindsym $mod+x exec --no-startup-id ~/.config/i3/scripts/toggle_last_scratchpad
 
 for_window [class="term2"] floating enable, resize set 1200 1000, move scratchpad, border pixel 3
 exec wezterm start --class term2 -- zellij attach scratchpad

@@ -58,11 +58,11 @@ abbr sc 'systemctl'
 abbr scu 'systemctl --user'
 abbr ff fastfetch
 
-abbr te  'trans en:cs'
-abbr tc  'trans cs:en'
+abbr tc  'trans en:cs'
+abbr te  'trans cs:en'
 abbr td  'trans -d'
-abbr tse 'trans -shell en:cs'
-abbr tsc 'trans -shell cs:en'
+abbr tsc 'trans -shell en:cs'
+abbr tse 'trans -shell cs:en'
 
 alias yank='xsel --input --clipboard'
 alias paste='xsel --output --clipboard'
