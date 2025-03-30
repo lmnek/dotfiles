@@ -3,7 +3,6 @@ vim.g.maplocalleader = ","
 
 -- move blocks of code
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- stay in the position with J
@@ -15,10 +14,6 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
--- paste over and stay copied
--- vim.keymap.set("x", "<leader>p", "\"_dP")
--- delete to void register...
-
 vim.keymap.set({ "n", "v" }, "<leader>y", "\"+y", { desc = "Yank to Cliboard" })
 vim.keymap.set("n", "<leader>p", "\"+p", { desc = "Paste Clipboard" })
 
@@ -26,8 +21,9 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "gl", "<nop>")
 vim.keymap.set("n", "gh", "<nop>")
 
+-- Create newline above/bellow
 vim.keymap.set("n", "<Enter>", "o<ESC>")
-vim.keymap.set("n", "<S-CR>", "O<ESC>")
+vim.keymap.set("n", "<S-Enter>", "O<ESC>")
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -36,15 +32,24 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', '<leader>w', "<cmd>up<CR>", { desc = 'Save file - :up' })
 vim.keymap.set('n', '<leader>W', "<cmd>wa<CR>", { desc = 'Save all files - :wa' })
 
+-- Splits navigation
+vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+vim.keymap.set('n', '<C-q>', '<cmd>q<CR>', { desc = ':q' })
+
+-- Clear highlights on search when pressing <Esc> in normal mode
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Floating diagnostic' })
--- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' }) --> replaced with trouble
+-- vim.diagnostic.setloclist -> diagnostic list replaced with trouble
 
--- Inlay hints -> needs to enabled for each lang server
-vim.keymap.set('n', '<leader>th', function()
-    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-end, { desc = 'Inlay hints' })
-
-vim.keymap.set('n', '<leader>gm', "<cmd>Git<CR>", { desc = ':Git Menu' })
-
--- TODO: paste into / delete with void register
+vim.keymap.set('n', '<leader>tv', function()
+    if vim.diagnostic.config().virtual_lines then
+        vim.diagnostic.config({ virtual_lines = false })
+    else
+        vim.diagnostic.config({ virtual_lines = { current_line = true } })
+    end
+end, { desc = 'Virtual lines diagnostics' })

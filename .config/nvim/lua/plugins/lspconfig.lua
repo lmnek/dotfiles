@@ -1,4 +1,6 @@
 -- LSP config and plugins
+-- TODO: lspconfig not necessary after neovim v0.11
+-- https://github.com/boltlessengineer/NativeVim
 
 return {
     'neovim/nvim-lspconfig',
@@ -29,27 +31,43 @@ return {
             end
 
             nmap('<leader>mr', vim.lsp.buf.rename, 'Rename')
+
+            -- FIXME: some key-mappings overridden by new defaults
             nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
             nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
             nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+
             nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
             nmap('<leader>sd', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
-            -- nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+            nmap('<leader>sw', require('telescope.builtin').lsp_dynamic_workspace_symbols,
+                'Workspace Symbols (everywhere)')
 
-            -- nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+            -- nmap('<C-s>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
             -- Lesser used LSP functionality
             nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-            -- nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-            -- nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-            -- nmap('<leader>wl', function()
-            --     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-            -- end, '[W]orkspace [L]ist Folders')
+
+            nmap('<leader>Wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
+            nmap('<leader>Wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+            nmap('<leader>Wl', function()
+                print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+            end, '[W]orkspace [L]ist Folders')
 
             -- Create a command `:Format` local to the LSP buffer
             vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
                 vim.lsp.buf.format()
             end, { desc = 'Format current buffer with LSP' })
+
+            -- The following code creates a keymap to toggle inlay hints in your
+            -- code, if the language server you are using supports them
+            if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, bufnr) then
+                nmap('<leader>th', function()
+                    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr })
+                end, '[T]oggle Inlay [H]ints')
+
+                -- Enable inlay hints by default
+                vim.lsp.inlay_hint.enable(true)
+            end
         end
 
         -- mason-lspconfig requires that these setup functions are called in this order
@@ -106,9 +124,5 @@ return {
                 }
             end,
         }
-
-        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-            border = "rounded",
-        })
     end
 }

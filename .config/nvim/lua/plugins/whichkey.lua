@@ -25,7 +25,7 @@ return {
             { "<leader>n",  group = "+Notifications" },
             { "<leader>q",  group = "+Trouble Diagnostics" },
             { "<leader>r",  group = "+gRapple" },
-            -- { "<leader>w",  group = "+Workspace" },
+            { "<leader>W",  group = "+Workspace" },
             -- TODO: move somewhere else + required/dependency?
             { "<leader>o",  group = "+Open" },
             { "<leader>ol", "<cmd>Lazy<CR>",               desc = "Lazy" },

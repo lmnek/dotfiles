@@ -36,5 +36,8 @@ return { -- Collection of various small independent plugins/modules
 
         -- ... and there is more!
         --  Check out: https://github.com/echasnovski/mini.nvim
+
+
+        vim.keymap.set('n', '<leader>gm', "<cmd>Git<CR>", { desc = ':Git Menu' })
     end,
 }
