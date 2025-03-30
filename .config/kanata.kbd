@@ -5,6 +5,8 @@
 
     linux-dev-names-exclude (
         "Keychron Keychron K9 Pro"
+        "JosefAdamcik Sofle"
+        "JosefAdamcik Sofle Keyboard"
     )
     linux-unicode-termination enter
 )
@@ -54,6 +56,7 @@
 	z-    C--
 	z+    C-=
 )
+
 
 
 ;; unmapped keyboard
