@@ -46,8 +46,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- instead raise a dialog asking if you wish to save the current file(s)
 vim.opt.confirm = true
 
--- for all floating windows -> breaks many plugins
--- vim.o.winborder = 'rounded'
+-- for all floating windows -> adds double borders for many plugins :((
+vim.o.winborder = 'rounded'
 
 vim.diagnostic.config {
     severity_sort = true,

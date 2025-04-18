@@ -26,7 +26,7 @@ return {
             { "<leader>q",  group = "+Trouble Diagnostics" },
             { "<leader>r",  group = "+gRapple" },
             { "<leader>W",  group = "+Workspace" },
-            -- TODO: move somewhere else + required/dependency?
+            -- todo: move somewhere else + required/dependency?
             { "<leader>o",  group = "+Open" },
             { "<leader>ol", "<cmd>Lazy<CR>",               desc = "Lazy" },
             { "<leader>om", "<cmd>Mason<CR>",              desc = "Mason" },

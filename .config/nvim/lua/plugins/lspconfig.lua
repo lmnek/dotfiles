@@ -2,127 +2,166 @@
 -- note: lspconfig not necessary after neovim v0.11 (but still easier)
 -- https://github.com/boltlessengineer/NativeVim
 
+local set_lsp_keybinds = function(client, bufnr)
+    -- helper function for DRY
+    local map = function(keys, func, desc, mode)
+        mode = mode or 'n'
+        vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
+    end
+
+    map('<leader>mr', vim.lsp.buf.rename, 'Rename')
+
+    -- FIXME: some key-mappings overridden by new defaults
+    map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+    map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+    map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+
+    map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+    map('<leader>sd', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
+    map('<leader>sw', require('telescope.builtin').lsp_dynamic_workspace_symbols,
+        'Workspace Symbols (everywhere)')
+
+    -- Lesser used LSP functionality
+    map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+    map('<leader>Wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
+    map('<leader>Wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+    map('<leader>Wl', function()
+        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, '[W]orkspace [L]ist Folders')
+
+    -- The following code creates a keymap to toggle inlay hints in your
+    -- code, if the language server you are using supports them
+    if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, bufnr) then
+        map('<leader>th', function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr })
+        end, '[T]oggle Inlay [H]ints')
+
+        -- Enable inlay hints by default
+        vim.lsp.inlay_hint.enable(true)
+    end
+end
+
+local setup_mason = function(capabilities)
+    -- configuration for individual servers
+    local servers = {
+        rust_analyzer = {
+            check = {
+                command = "clippy", -- fixme: no clippy diagnostics
+            },
+        },
+        tinymist = { -- typst
+            single_file_support = true,
+            settings = {},
+        },
+        html = { filetypes = { 'html', 'svelte' } },
+    }
+
+    local ensure_installed = vim.tbl_keys(servers or {})
+
+    -- add servers without configuration
+    vim.list_extend(ensure_installed, {
+        'ts_ls', 'prettier', 'svelte', 'tailwindcss',  -- 'emmet_ls', -- web
+        'texlab', 'latexindent',                       -- latex
+        'pyright', 'isort', 'flake8', 'black', 'ruff', -- python
+        'clangd', 'lua_ls', 'bashls'                   -- ... others
+    })
+
+    require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+
+    require('mason-lspconfig').setup {
+        ensure_installed = {}, -- explicitly set to an empty table (installs via mason-tool-installer)
+        automatic_installation = false,
+        handlers = {
+            function(server_name)
+                local server = servers[server_name] or {}
+                -- This handles overriding only values explicitly passed
+                -- by the server configuration above. Useful when disabling
+                -- certain features of an LSP (for example, turning off formatting for ts_ls)
+                server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+                require('lspconfig')[server_name].setup(server)
+            end,
+        },
+    }
+end
+
+-- The following two autocommands are used to highlight references of the
+-- word under your cursor when your cursor rests there for a little while.
+-- When you move your cursor, the highlights will be cleared (the second autocommand).
+local set_cursor_highlights = function(client, event)
+    if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
+        local highlight_augroup = vim.api.nvim_create_augroup('mine-lsp-highlight', { clear = false })
+        vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+            buffer = event.buf,
+            group = highlight_augroup,
+            callback = vim.lsp.buf.document_highlight,
+        })
+
+        vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+            buffer = event.buf,
+            group = highlight_augroup,
+            callback = vim.lsp.buf.clear_references,
+        })
+
+        vim.api.nvim_create_autocmd('LspDetach', {
+            group = vim.api.nvim_create_augroup('mine-lsp-detach', { clear = true }),
+            callback = function(event2)
+                vim.lsp.buf.clear_references()
+                vim.api.nvim_clear_autocmds { group = 'mine-lsp-highlight', buffer = event2.buf }
+            end,
+        })
+    end
+end
+
 return {
     'neovim/nvim-lspconfig',
     dependencies = {
-        -- Automatically install LSPs to stdpath for neovim
-        { 'williamboman/mason.nvim', config = true },
+        -- Automatically install LSPs and related tools to stdpath for Neovim
+        -- Mason must be loaded before its dependents
+        { 'williamboman/mason.nvim', opts = {} },
         'williamboman/mason-lspconfig.nvim',
-        -- Useful status updates for LSP
+        'WhoIsSethDaniel/mason-tool-installer.nvim',
+
+
+        { 'j-hui/fidget.nvim',       opts = {} }, -- Useful status updates
+        'saghen/blink.cmp',                       -- completions
+
         {
-            'j-hui/fidget.nvim',
-            opts = {}
-        },
-        -- Additional lua configuration, makes nvim stuff amazing!
-        'folke/neodev.nvim',
-    },
-    config = function()
-        --  This function gets run when an LSP connects to a particular buffer.
-        local on_attach = function(client, bufnr)
-            -- attach breadcrumbs
-            require('nvim-navic').attach(client, bufnr)
-
-            -- helper function for DRY
-            local nmap = function(keys, func, desc)
-                if desc then
-                    desc = 'LSP: ' .. desc
-                end
-                vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
-            end
-
-            nmap('<leader>mr', vim.lsp.buf.rename, 'Rename')
-
-            -- FIXME: some key-mappings overridden by new defaults
-            nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-            nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-            nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-
-            nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-            nmap('<leader>sd', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
-            nmap('<leader>sw', require('telescope.builtin').lsp_dynamic_workspace_symbols,
-                'Workspace Symbols (everywhere)')
-
-            -- nmap('<C-s>', vim.lsp.buf.signature_help, 'Signature Documentation')
-
-            -- Lesser used LSP functionality
-            nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-
-            nmap('<leader>Wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-            nmap('<leader>Wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-            nmap('<leader>Wl', function()
-                print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-            end, '[W]orkspace [L]ist Folders')
-
-            -- Create a command `:Format` local to the LSP buffer
-            vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-                vim.lsp.buf.format()
-            end, { desc = 'Format current buffer with LSP' })
-
-            -- The following code creates a keymap to toggle inlay hints in your
-            -- code, if the language server you are using supports them
-            if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, bufnr) then
-                nmap('<leader>th', function()
-                    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr })
-                end, '[T]oggle Inlay [H]ints')
-
-                -- Enable inlay hints by default
-                vim.lsp.inlay_hint.enable(true)
-            end
-        end
-
-        -- mason-lspconfig requires that these setup functions are called in this order
-        -- before setting up the servers.
-        require('mason').setup()
-        require('mason-lspconfig').setup()
-
-        local servers = {
-            pyright = {},
-            rust_analyzer = {
-                -- FIXME: no clippy diagnostics
-                check = {
-                    command = "clippy",
+            -- configures Lua LSP for Neovim config, runtime and plugins
+            'folke/lazydev.nvim',
+            ft = 'lua',
+            opts = {
+                library = {
+                    -- Load luvit types when the `vim.uv` word is found
+                    { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
                 },
             },
-            bashls = {},
-            lua_ls = {},
-            tinymist = { -- typst
-                single_file_support = true,
-                settings = {},
-            },
-            -- latex
-            texlab = {},
-            ltex = {},
-            -- web
-            -- emmet_ls = {}, -- html snippet expansion
-            svelte = {},
-            tailwindcss = {},
-            -- tsserver = {},
-            html = { filetypes = { 'html', 'svelte' } },
-        }
+        },
+    },
+    config = function()
+        --  This function gets run when an LSP attaches to a particular buffer.
+        --  -> every time a new file is opened that is associated with
+        --  an lsp, this function will be executed to configure the current buffer
+        vim.api.nvim_create_autocmd('LspAttach', {
+            group = vim.api.nvim_create_augroup('mine-lsp-attach', { clear = true }),
+            callback = function(event)
+                local client = vim.lsp.get_client_by_id(event.data.client_id)
+                local buf = event.buf
 
-        -- Setup neovim lua configuration
-        require('neodev').setup()
+                set_lsp_keybinds(client, buf)
 
-        -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+                require('nvim-navic').attach(client, buf) -- attach breadcrumbs
 
-        -- Ensure the servers above are installed
-        local mason_lspconfig = require 'mason-lspconfig'
+                -- set_cursor_highlights(client, event) -- slow??
+            end
+        })
 
-        mason_lspconfig.setup {
-            ensure_installed = vim.tbl_keys(servers),
-        }
+        -- LSP servers and clients are able to communicate to each other what features they support.
+        --  By default, Neovim doesn't support everything that is in the LSP specification.
+        --  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
+        --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
+        local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-        mason_lspconfig.setup_handlers {
-            function(server_name)
-                require('lspconfig')[server_name].setup {
-                    capabilities = capabilities,
-                    on_attach = on_attach,
-                    settings = servers[server_name],
-                    filetypes = (servers[server_name] or {}).filetypes,
-                }
-            end,
-        }
+        setup_mason(capabilities)
     end
 }

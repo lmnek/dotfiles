@@ -37,7 +37,7 @@ require('which-key').add({
     -- { ",d",  "<Plug>HaskellHoverActionDocs", desc = "Open docs in browser" }
 }, opts)
 
--- TODO:
+-- todo:
 -- vim.keymap.set('n', ',rd', '<Plug>HaskellHoverActionDocs')
 
 -- dont know how to increase opacity?

@@ -49,7 +49,8 @@ return {
     --     },
     --     opts = {},
     -- }
-    -- NOTE: probably will not use (already have navic in lualine)... but it is so niceee
+
+    -- note: probably will not use (already have navic in lualine)... but it is so niceee
     -- {
     -- 'Bekaboo/dropbar.nvim',
     -- dependencies = { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },

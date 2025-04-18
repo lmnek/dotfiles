@@ -1,6 +1,7 @@
 -- Autoformat
 -- TODO: add toggle auto-format (and other advanced features in readmes)
--- TODO: (add nvim-lint package)
+-- https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#command-to-toggle-format-on-save
+-- todo?: (add nvim-lint package)
 return {
     'stevearc/conform.nvim',
     event = { "BufWritePre" },
