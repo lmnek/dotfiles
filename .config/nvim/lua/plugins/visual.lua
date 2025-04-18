@@ -1,5 +1,6 @@
 return {
     {
+        -- Color theme ✨
         "Mofiqul/dracula.nvim",
         name = 'dracula',
         lazy = false,
@@ -19,10 +20,33 @@ return {
         end,
     },
     {
-        -- Set lualine as statusline
+        -- Add indentation guides even on blank lines
+        'lukas-reineke/indent-blankline.nvim',
+        main = 'ibl',
+        event = "VeryLazy",
+        opts = {},
+    },
+    {
+        "folke/zen-mode.nvim",
+        opts = {
+            window = {
+                options = {
+                    signcolumn = "no"
+                }
+            }
+        },
+        keys = {
+            { "<leader>tz", "<cmd>ZenMode<cr>", desc = "Zen mode" },
+        }
+    },
+    {
+        -- Better statusline
         'nvim-lualine/lualine.nvim',
-        -- for breadcrumbs
-        dependencies = { 'nvim-tree/nvim-web-devicons', { 'SmiteshP/nvim-navic', event = "VeryLazy" } },
+        dependencies = {
+            'nvim-tree/nvim-web-devicons',
+            -- for breadcrumbs
+            { 'SmiteshP/nvim-navic', event = "VeryLazy" },
+        },
         opts = {
             options = {
                 icons_enabled = true,
@@ -61,7 +85,8 @@ return {
         },
     },
     {
-        -- Use it only as floating CMD
+        -- Enhanced nvim UI
+        -- -> Use it only as floating CMD
         "folke/noice.nvim",
         event = "VeryLazy",
         dependencies = { "MunifTanjim/nui.nvim", },
@@ -88,25 +113,4 @@ return {
             }
         }
     },
-    {
-        -- Add indentation guides even on blank lines
-        'lukas-reineke/indent-blankline.nvim',
-        main = 'ibl',
-        event = "VeryLazy",
-        opts = {},
-    },
-    {
-        "folke/zen-mode.nvim",
-        opts = {
-            window = {
-                options = {
-                    signcolumn = "no"
-                }
-            }
-        },
-        keys = {
-            { "<leader>tz", "<cmd>ZenMode<cr>", desc = "Zen mode" },
-        }
-    },
-    -- { 'petertriho/nvim-scrollbar', opts = {} },
 }

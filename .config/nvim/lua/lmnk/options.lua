@@ -46,21 +46,20 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- instead raise a dialog asking if you wish to save the current file(s)
 vim.opt.confirm = true
 
--- for all floating windows
-vim.o.winborder = 'rounded'
-
+-- for all floating windows -> breaks many plugins
+-- vim.o.winborder = 'rounded'
 
 vim.diagnostic.config {
     severity_sort = true,
     virtual_text = true,
     underline = true,
     float = { header = false, focusable = true },
-    -- signs = { -- dont like
-    --     text = {
-    --         [vim.diagnostic.severity.ERROR] = " ",
-    --         [vim.diagnostic.severity.WARN] = " ",
-    --         [vim.diagnostic.severity.INFO] = " ",
-    --         [vim.diagnostic.severity.HINT] = " ",
-    --     },
-    -- },
+    signs = { -- dont like
+        text = {
+            [vim.diagnostic.severity.ERROR] = " ",
+            [vim.diagnostic.severity.WARN] = " ",
+            [vim.diagnostic.severity.INFO] = " ",
+            [vim.diagnostic.severity.HINT] = " ",
+        },
+    },
 }

@@ -54,6 +54,7 @@ vim.keymap.set('n', '<leader>tv', function()
         vim.diagnostic.config({ virtual_lines = { current_line = true } })
     end
 end, { desc = 'Virtual lines diagnostics' })
+
 vim.keymap.set('n', '<leader>tu', function()
     vim.diagnostic.config({ underline = not vim.diagnostic.config().underline })
 end, { desc = 'Underline diagnostics' })

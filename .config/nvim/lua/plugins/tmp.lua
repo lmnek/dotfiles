@@ -1,30 +1,6 @@
 -- Plugins currently being tested / worked on
 return {
     {
-        "tris203/precognition.nvim",
-        opts = {
-            startVisible = false,
-        },
-        keys = {
-            { '<leader>tp', function() require("precognition").toggle() end, desc = 'Precognition hints' }
-        }
-    },
-    {
-        'chomosuke/typst-preview.nvim',
-        ft = 'typst',
-        version = '1.*',
-        cmd = { "TypstPreview", "TypstPreviewToggle", "TypstPreviewUpdate" },
-        build = function() require("typst-preview").update() end,
-        opts = {
-            dependencies_bin = { tinymist = "tinymist" }
-        },
-        keys = {
-            { ',p', "<cmd>TypstPreview<CR>",       desc = 'Typst Preview' },
-            { ',t', "<cmd>TypstPreviewToggle<CR>", desc = 'Typst Preview Toggle' },
-            { ',u', "<cmd>TypstPreviewUpdate<CR>", desc = 'Typst Preview Update' },
-        }
-    },
-    {
         "chentoast/marks.nvim",
         event = "VeryLazy",
         opts = {},
@@ -59,7 +35,7 @@ return {
             { "<leader>ag", "<cmd>CopilotChatAgents<cr>",  desc = "Select agent",  mode = { "n", "v" } },
         },
     },
-    { 'subnut/nvim-ghost.nvim' },
+    { 'subnut/nvim-ghost.nvim' }, -- connect to browser input
     -- TODO: zellij nav
     -- {
     --     "https://git.sr.ht/~swaits/zellij-nav.nvim",
@@ -73,7 +49,7 @@ return {
     --     },
     --     opts = {},
     -- }
-    -- NOTE: probably will not use...
+    -- NOTE: probably will not use (already have navic in lualine)... but it is so niceee
     -- {
     -- 'Bekaboo/dropbar.nvim',
     -- dependencies = { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },

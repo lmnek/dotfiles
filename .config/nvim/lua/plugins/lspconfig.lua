@@ -1,5 +1,5 @@
 -- LSP config and plugins
--- TODO: lspconfig not necessary after neovim v0.11
+-- note: lspconfig not necessary after neovim v0.11 (but still easier)
 -- https://github.com/boltlessengineer/NativeVim
 
 return {

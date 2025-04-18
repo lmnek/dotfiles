@@ -1,4 +1,40 @@
+-- Plugins for specific filetypes / languages
+-- So far: Haskell, Typst, Latex
+-- -> use "ft" to lazy load only on the correct filetype
 return {
+    -- HASKELL -------------------------------------------
+    {
+        "mrcjkb/haskell-tools.nvim",
+        version = "^4",
+        ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
+        dependencies = {
+            { "nvim-telescope/telescope.nvim", optional = true },
+        },
+    },
+    {
+        'tidalcycles/vim-tidal',
+        ft = "tidal",
+        config = function()
+            vim.g.tidal_ghci = "stack exec ghci --"
+        end
+    },
+    -- TYPST --------------------------------------------
+    {
+        'chomosuke/typst-preview.nvim',
+        ft = 'typst',
+        version = '1.*',
+        cmd = { "TypstPreview", "TypstPreviewToggle", "TypstPreviewUpdate" },
+        build = function() require("typst-preview").update() end,
+        opts = {
+            dependencies_bin = { tinymist = "tinymist" }
+        },
+        keys = {
+            { ',p', "<cmd>TypstPreview<CR>",       desc = 'Typst Preview' },
+            { ',t', "<cmd>TypstPreviewToggle<CR>", desc = 'Typst Preview Toggle' },
+            { ',u', "<cmd>TypstPreviewUpdate<CR>", desc = 'Typst Preview Update' },
+        }
+    },
+    -- LATEX -------------------------------------------
     {
         "lervag/vimtex",
         ft = 'tex',
@@ -126,4 +162,5 @@ return {
             }
         }
     }
+
 }

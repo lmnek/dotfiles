@@ -1,16 +1,16 @@
 -- Super pretty diagnostic/quickfix/telescope list
 return {
     "folke/trouble.nvim",
-    dependencies = { 'nvim-tree/nvim-web-devicons' }, -- FIXME: icons not showing
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {
-        focus = true,                                 -- focus on toggle
+        focus = true, -- focus on toggle
         warn_no_results = true,
         auto_close = true,
         indent_guides = false,
     },
     -- cmd: Trouble [mode] [action] [options]
     cmd = "Trouble",
-    -- NOTE: has many useful keybinds in the window (e.g. 's' to change severity filter)
+    -- note: has many useful keybinds in the window (e.g. 's' to change severity filter)
     -- -> '?' for help
     keys = {
         {
