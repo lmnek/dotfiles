@@ -46,6 +46,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Floating diagnostic' })
 -- vim.diagnostic.setloclist -> diagnostic list replaced with trouble
 
+-- Toggle virtual lines and underlines
 vim.keymap.set('n', '<leader>tv', function()
     if vim.diagnostic.config().virtual_lines then
         vim.diagnostic.config({ virtual_lines = false })
@@ -53,3 +54,6 @@ vim.keymap.set('n', '<leader>tv', function()
         vim.diagnostic.config({ virtual_lines = { current_line = true } })
     end
 end, { desc = 'Virtual lines diagnostics' })
+vim.keymap.set('n', '<leader>tu', function()
+    vim.diagnostic.config({ underline = not vim.diagnostic.config().underline })
+end, { desc = 'Underline diagnostics' })

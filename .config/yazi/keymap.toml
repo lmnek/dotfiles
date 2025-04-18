@@ -57,14 +57,14 @@ prepend_keymap = [
         "d",
     ], run = [
         "cd ~/Downloads",
-        "sort modified --reverse",
+        "sort mtime --reverse",
     ], desc = "Go to Downloads" },
     { on = [
         "g",
         "s",
     ], run = [
         "cd ~/pix/screens",
-        "sort modified --reverse",
+        "sort mtime --reverse",
     ], desc = "Go to screenshots" },
 ]
 

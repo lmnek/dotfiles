@@ -20,8 +20,6 @@ vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 10
--- Show which line your cursor is on
-vim.opt.cursorline = true
 
 -- Decrease update time
 vim.o.updatetime = 250

@@ -25,12 +25,6 @@ return {
         }
     },
     {
-        "nvzone/typr",
-        dependencies = "nvzone/volt",
-        opts = {},
-        cmd = { "Typr", "TyprStats" },
-    },
-    {
         "chentoast/marks.nvim",
         event = "VeryLazy",
         opts = {},
@@ -66,16 +60,6 @@ return {
         },
     },
     { 'subnut/nvim-ghost.nvim' },
-    -- TODO: fix inlay hints
-    -- Simple plugin to just enable inlay hints for each LSP server
-    -- {
-    --     "MysticalDevil/inlay-hints.nvim",
-    --     event = "LspAttach",
-    --     dependencies = { "neovim/nvim-lspconfig" },
-    --     config = function()
-    --         require("inlay-hints").setup()
-    --     end
-    -- },
     -- TODO: zellij nav
     -- {
     --     "https://git.sr.ht/~swaits/zellij-nav.nvim",
