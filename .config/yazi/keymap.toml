@@ -1,24 +1,16 @@
 # All keymaps:
-# https://github.com/sxyazi/yazi/blob/main/yazi-config/preset/keymap.toml
+# https://github.com/sxyazi/yazi/blob/main/yazi-config/preset/keymap-default.toml
 
 # !!! FOR KEYBIND HELP: ~
 
 # ---------- CUSTOM KEYBINDS --------------
 
-# TODO: unarchive, remove-spaces, fzf jump to (/copy to/ move to) dir
+# TODO: unarchive, fzf jump to (/copy to/ move to) dir
 
 [manager]
 
 prepend_keymap = [
-    # FIXME: --sync is deprecated
-    { on = "H", run = "plugin --sync hide-preview", desc = "Hide or show preview" },
-    # { on = "l", run  = "plugin --sync fast-enter", desc = "Enter the subfolder faster, or open the file directly" },
-    { on = "z", run = "plugin fzf", desc = "Jump to a directory or reveal a file using fzf" }, # override zoxide
-    # ------ execute ------
-    { on = [
-        "e",
-        "c",
-    ], run = "plugin chmod", desc = "Chmod on selected files" },
+    # ------ EXECUTE SHELL SCRIPTS------
     { on = [
         "e",
         "r",
@@ -27,7 +19,27 @@ prepend_keymap = [
         "e",
         "d",
     ], run = '''shell 'ripdrag -a "$@" -x 2>/dev/null &' --confirm''', desc = "drag&drop" },
-    # ------ jump to dir ------
+
+    # ------ FZF JUMP ------
+    { on = "z", run = '''shell 'ya emit cd $(fd --type directory --hidden | fzf)' --block''', desc = "fzf: search directories" }, # only directories
+    { on = "Z", run = "plugin fzf", desc = "fzf: reveal a file" },
+
+    # ------ PLUGINS ------
+    { on = "m", run = "plugin relative-motions", desc = "Trigger new VIM relative motion" }, # TODO: show relative line numbers only on command
+    { on = [
+        "e",
+        "C",
+    ], run = "plugin ouch", desc = "Compress with ouch" },
+    { on = [
+        "e",
+        "c",
+    ], run = "plugin chmod", desc = "Chmod on selected files" },
+    { on = "U", run = "plugin restore", desc = "Restore last deleted files/dirs" },
+
+    { on = "M", run = "plugin toggle-pane max-preview", desc = "Maximize or restore the preview pane" },
+    { on = "T", run = "plugin toggle-pane min-preview", desc = "Show or hide the preview pane" },
+
+    # ------ GOTO DIR ------
     { on = [
         "g",
         "m",
@@ -67,11 +79,3 @@ prepend_keymap = [
         "sort mtime --reverse",
     ], desc = "Go to screenshots" },
 ]
-
-# Image scaling to max doesnt work
-# [[manager.prepend_keymap]]
-# on   = [ "T" ]
-# run  = "plugin --sync max-preview"
-# desc = "Maximize or restore preview"
-
-# Other not used plugins: smart filter, jump to char

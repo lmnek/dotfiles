@@ -1,4 +1,6 @@
--- This file is used to extend the functionality of Yazi
--- (e.g. status bar behavior)
+-- This file is used to:
+-- - extend the functionality of Yazi (e.g. status bar behavior)
+-- - customize plugins
 
-require("starship"):setup()
+-- cmd for installing/listing/updating plugins: "ya pack ..."
+-- nice plugins list: https://yazi-rs.github.io/docs/resources
