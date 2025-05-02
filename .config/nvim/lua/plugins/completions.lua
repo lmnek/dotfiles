@@ -28,8 +28,8 @@ return {
     },
     opts = {
         keymap = {
-            preset = 'none',
-            ['<CR>'] = { 'select_and_accept' },
+            preset = 'enter',
+            -- ['<Enter>'] = { 'select_and_accept' },
             ['<C-e>'] = { 'hide' },
 
             ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback_to_mappings' },
@@ -54,7 +54,7 @@ return {
             -- will fuzzy match on the text before _and_ after the cursor
             keyword = { range = 'full' },
 
-            ghost_text = { enabled = true },
+            ghost_text = { enabled = false },
         },
 
         sources = {

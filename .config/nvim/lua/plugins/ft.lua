@@ -143,6 +143,7 @@ return {
         end,
         config = function()
             vim.g.vimtex_fold_enabled = true
+            vim.g.vimtex_quickfix_enabled = 0
         end
     },
     {
