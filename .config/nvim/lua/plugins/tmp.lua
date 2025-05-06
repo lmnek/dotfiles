@@ -8,7 +8,13 @@ return {
     {
         "CopilotC-Nvim/CopilotChat.nvim",
         dependencies = {
-            { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+            {
+                "github/copilot.vim",
+                config = function()
+                    vim.api.nvim_set_keymap('i', '<C-l>', 'copilot#Accept()',
+                        { expr = true, silent = true, noremap = false })
+                end
+            }, -- or zbirenbaum/copilot.lua
             { "nvim-lua/plenary.nvim", branch = "master" },
         },
         build = "make tiktoken",

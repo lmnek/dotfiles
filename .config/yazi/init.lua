@@ -4,3 +4,5 @@
 
 -- cmd for installing/listing/updating plugins: "ya pack ..."
 -- nice plugins list: https://yazi-rs.github.io/docs/resources
+
+-- require("starship"):setup() -- a bit distracting..
