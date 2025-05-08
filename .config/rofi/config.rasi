@@ -1,8 +1,9 @@
-@theme "/usr/share/rofi/themes/DarkBlue.rasi"
-
 configuration {
   show-icons: true;
   display-drun: "Apps";
   display-window: "Windows";
+  display-emoji: "";
   modi: "window,drun,run,emoji,clipboard:greenclip print";
 }
+
+@import "~/.config/rofi/dracula_theme.rasi"
