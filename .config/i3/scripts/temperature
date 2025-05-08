@@ -71,7 +71,7 @@ if ($temperature < 45) {
 }
 # Print short_text, full_text
 print "${label}";
-print " $temperature°C\n";
+print "$temperature°C\n";
 print "${label}";
 print " $temperature°C\n";
 

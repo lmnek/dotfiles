@@ -8,7 +8,8 @@
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango: Noto Sans Regular 10
+# font pango: Noto Sans Regular 10
+font pango: JetBrainsMono 10
 
 # set the mod key to the winkey:
 set $mod Mod4
@@ -21,9 +22,6 @@ set $browser /usr/bin/zen-browser
 
 # default i3 tiling mode:
 workspace_layout default
-
-# Each new window will open fullscreen as a tab (left to right)
-#workspace_layout tabbed
 
 ##############################
 # extra options for windows: #
@@ -41,8 +39,8 @@ gaps outer 3
 smart_gaps on
 smart_borders on
 
-# window title alignment
-#title_align center
+# window title alignment (tabbed)
+title_align center
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -122,9 +120,6 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to update i3)
 bindsym $mod+Shift+r restart
 
-# keybinding in fancy rofi (automated):
-bindsym F1 exec ~/.config/i3/scripts/keyhint-2
-
 # Backlight setting using dunst osc
 bindsym XF86MonBrightnessUp exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh brightness_up
 bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh brightness_down
@@ -196,16 +191,18 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:"
+# search here: https://www.nerdfonts.com/cheat-sheet
+set $ws1 "1:"
 set $ws2 "2:"
 set $ws3 "3:"
 set $ws4 "4"
-set $ws5 "5"
+set $ws5 "5:󰭹"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
-set $ws9 "9:"
-set $ws10 "10:"
+set $ws9 "9:󰏪"
+set $ws10 "10:󰚩"
+# other nice icons: 󰧑, 󰁤
 
 # use workspaces on different displays:
 # where you have to replace VGA-0/HDMI-0 with the names for your displays
@@ -312,25 +309,15 @@ for_window [class="ripdrag"] floating enable
 # color settings for bar and windows #
 ######################################
 
-# Define colors variables:
-set $darkbluetrans	#08052be6
-set $darkblue		#08052b
-set $lightblue		#5294e2
-set $urgentred		#e53935
-set $white	    	#ffffff
-set $black	    	#000000
-set $purple	    	#e345ff
-set $darkgrey		#383c4a
-set $grey	    	#b0b5bd
-set $mediumgrey		#8b8b8b
-set $yellowbrown	#e1b700
+# define colors for windows (Dracula):
+# class                 border  bground text    indicator child_border
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 
-# define colors for windows:
-#class		        	    border		bground		text		indicator	child_border
-client.focused		    	$lighblue	$darkblue	$white		$mediumgrey	$mediumgrey
-client.unfocused	    	$darkblue	$darkblue	$grey		$darkgrey	$darkgrey
-client.focused_inactive		$darkblue	$darkblue	$grey		$black		$black
-client.urgent		    	$urgentred	$urgentred	$white		$yellowbrown	$yellowbrown
+client.background       #F8F8F2
 
 ############################################
 # bar settings (input comes from i3blocks) #
@@ -339,30 +326,34 @@ client.urgent		    	$urgentred	$urgentred	$white		$yellowbrown	$yellowbrown
 # Start i3bar to display a workspace bar
 # (plus the system information i3status finds out, if available)
 bar {
-		font pango: Noto Sans Regular 10
+        # note: jetbrains without nerd font + fallback nerd font
+        # -> because JetBrains nerd font had some icons width weird margins/sizes
+        font pango: JetBrains Mono, SymbolsNerdFont 11
 		status_command i3blocks -c ~/.config/i3/i3blocks.conf
 	    position bottom
+		tray_padding 4
+
         # i3bar_command i3bar --transparency
         # it could be that you have no primary display set: set one (xrandr --output <output> --primary)
         # reference: https://i3wm.org/docs/userguide.html#_tray_output
 		#tray_output primary
-		tray_padding 0
 
         # When strip_workspace_numbers is set to yes,
         # any workspace that has a name of the form
         # “[n][:][NAME]” will display only the name.
         strip_workspace_numbers yes
-        ##strip_workspace_name no
 
         colors {
-		    separator          $purple
-		    background         $darkgrey
-		    statusline         $white
-#                          		border 		    bg		    txt		    indicator
-            focused_workspace	$mediumgrey	   	$grey		$darkgrey	$purple
-            active_workspace	$lightblue      $mediumgrey	$darkgrey	$purple
-            inactive_workspace	$darkgrey   	$darkgrey	$grey		$purple
-            urgent_workspace	$urgentred	    $urgentred	$white		$purple
+            # Dracula:
+            background #282A36
+            statusline #F8F8F2
+            separator  #44475A
+
+            focused_workspace  #44475A #44475A #F8F8F2
+            active_workspace   #282A36 #44475A #F8F8F2
+            inactive_workspace #282A36 #282A36 #BFBFBF
+            urgent_workspace   #FF5555 #FF5555 #F8F8F2
+            binding_mode       #FF5555 #FF5555 #F8F8F2
 	}
 }
 
