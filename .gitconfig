@@ -1,7 +1,0 @@
-[init]
-	defaultBranch = main
-[core]
-	editor = nvim
-[user]
-        name = Krystof Gartner
-	email = krystofgartner@proton.me
