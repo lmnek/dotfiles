@@ -377,9 +377,15 @@ bindsym $mod+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -show
 
 bindsym $mod+e exec --no-startup-id rofi -show emoji
 
+### ulauncher -> easier setup mainly for
+# - search queries and shortcuts
+# - calculate anything plugin
+# use "kw" for listing available keywords
+bindsym $mod+u exec --no-startup-id ulauncher-toggle
+
 #####################################
 # Keybinds for launching apps #
-
+#####################################
 
 bindsym $mod+Return exec $term
 bindsym $mod+period exec "wezterm start --class yazi -- fish -c 'y; exec fish'" 
