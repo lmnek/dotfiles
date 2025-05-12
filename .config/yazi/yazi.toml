@@ -30,3 +30,9 @@ prepend_previewers = [
 extract = [
     { run = 'ouch d -y "$@"', desc = "Extract here with ouch", for = "unix" },
 ]
+display = [
+    { run = 'feh -F -Z --start-at "$0"', orphan = true, desc = "Display with feh", for = "unix" },
+]
+
+[open]
+prepend_rules = [{ mime = "image/*", use = "display" }]

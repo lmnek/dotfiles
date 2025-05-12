@@ -43,39 +43,46 @@ prepend_keymap = [
     { on = [
         "g",
         "m",
-    ], run = "cd /mnt", desc = "Go to mounted dirs" },
+    ], run = "cd /mnt", desc = "cd mounted dirs" },
     { on = [
         "g",
         "D",
-    ], run = "cd ~/dox", desc = "Go to dox" },
+    ], run = "cd ~/dox", desc = "cd dox" },
     { on = [
         "g",
         ".",
-    ], run = "cd ~/repos/dotfiles", desc = "Go to dotfiles" },
+    ], run = "cd ~/repos/dotfiles", desc = "cd dotfiles" },
     { on = [
         "g",
         "r",
-    ], run = "cd ~/repos", desc = "Go to repos" },
+    ], run = "cd ~/repos", desc = "cd repos" },
     { on = [
         "g",
         "f",
-    ], run = "cd ~/dox/fit", desc = "Go to Fit" },
+    ], run = "cd ~/dox/fit", desc = "cd Fit" },
     { on = [
         "g",
         "p",
-    ], run = "cd ~/pix", desc = "Go to pix" },
+    ], run = "cd ~/pix", desc = "cd pix" },
     { on = [
         "g",
         "d",
     ], run = [
         "cd ~/Downloads",
         "sort mtime --reverse",
-    ], desc = "Go to Downloads" },
+    ], desc = "cd Downloads" },
     { on = [
         "g",
         "s",
     ], run = [
         "cd ~/pix/screens",
         "sort mtime --reverse",
-    ], desc = "Go to screenshots" },
+    ], desc = "cd screenshots" },
+    { on = [
+        "g",
+        "t",
+    ], run = [
+        "cd ~/.local/share/Trash/files/",
+        "sort mtime --reverse",
+    ], desc = "cd .Trash" },
 ]
