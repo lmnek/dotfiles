@@ -5,6 +5,8 @@ return {
         event = "VeryLazy",
         opts = {},
     },
+    -- display color codes in their bg (+ can add blink.cmp integration later)
+    { 'brenoprata10/nvim-highlight-colors', opts = {} },
     {
         "CopilotC-Nvim/CopilotChat.nvim",
         dependencies = {

@@ -193,16 +193,26 @@ bindsym XF86AudioPrev exec playerctl previous
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 # search here: https://www.nerdfonts.com/cheat-sheet
+
+# terminal thingies
 set $ws1 "1:"
+# browser
 set $ws2 "2:"
+# productivity: todo app, calendar
 set $ws3 "3:"
-set $ws4 "4"
-set $ws5 "5:󰭹"
-set $ws6 "6"
+# messaging: beeper, legcord
+set $ws4 "4:󰭹"
+# email (thunderbird)
+set $ws5 "5:󰇮"
+# throwaway archive workspace
+set $ws6 "6:"
 set $ws7 "7"
 set $ws8 "8"
+# obsidian notes
 set $ws9 "9:󰏪"
+# AI chat (LibreChat)
 set $ws10 "10:󰚩"
+
 # other nice icons: 󰧑, 󰁤
 
 # use workspaces on different displays:
@@ -213,10 +223,15 @@ set $ws10 "10:󰚩"
 
 # bind program to workspace and focus to them on startup:
 assign [class="yazi"] $ws1
+
 assign [class="Todoist"] $ws3
 assign [class="Morgen"] $ws3
-assign [class="thunderbird"] $ws3
-assign [class="Signal"] $ws5
+
+assign [class="Signal"] $ws4
+assign [class="Beeper"] $ws4
+assign [class="Legcord"] $ws4
+
+assign [class="thunderbird"] $ws5
 assign [class="Obsidian"] $ws9 
 
 # automatic set focus new window if it opens on another workspace than the current:
@@ -256,7 +271,10 @@ exec --no-startup-id ~/.screenlayout/monitor.sh
 
 # set wallpaper
 # exec --no-startup-id sleep 2 && nitrogen --restore
-exec --no-startup-id sleep 1 && feh --bg-fill ~/.config/bg.png
+# exec --no-startup-id sleep 1 && feh --bg-fill ~/.config/bg.png
+
+# generate and set wallpaper from pacman packages
+exec --no-startup-id sleep 120 && pacwall
 
 # set powersavings for display:
 exec --no-startup-id xset s 480 dpms 600 600 600
