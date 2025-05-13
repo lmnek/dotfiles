@@ -68,5 +68,15 @@
         "is_default_search": false,
         "run_without_argument": false,
         "added": 1746981023.2010477
+    },
+    "ca3a7b16-e774-4e4f-868e-b66de299309a": {
+        "id": "ca3a7b16-e774-4e4f-868e-b66de299309a",
+        "name": "Reddit",
+        "keyword": "r",
+        "cmd": "https://www.google.com/search?q=site%3Areddit.com+%s",
+        "icon": "~/.config/ulauncher/icons/reddit.png",
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1747146092.9799798
     }
 }
