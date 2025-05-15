@@ -2,7 +2,7 @@ configuration {
   show-icons: true;
   display-drun: "Apps";
   display-window: "Windows";
-  display-emoji: "";
+  display-emoji: "Emoji";
   modi: "window,drun,run,emoji,clipboard:greenclip print";
 }
 

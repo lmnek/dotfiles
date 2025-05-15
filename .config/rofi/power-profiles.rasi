@@ -3,9 +3,7 @@
  * Maintainer: joekamprad [joekamprad //a_t// endeavouros.com]
  *******************************************************/
 configuration {
-    font:             "Noto Sans Regular 10";
     show-icons:       false;
-    icon-theme:       "Qogir";
     scroll-method:    0;
     disable-history:  false;
     fullscreen:       false;
@@ -28,12 +26,6 @@ listview {
     lines:   4;
     columns: 1;
 }
-element {
-    border:  0;
-    padding: 1px;
-}
 textbox-prompt-colon {
-    expand:     false;
     str:        "Set:";
-    margin:     0px 0.3em 0em 0em;
 }

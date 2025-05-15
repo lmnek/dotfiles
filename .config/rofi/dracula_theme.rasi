@@ -1,7 +1,7 @@
 /*Dracula theme based on the Purple official rofi theme*/
 
 * {
-    font: "Jetbrains Mono 12";
+    font: "Jetbrains Mono 14";
     foreground: #f8f8f2;
     background-color: #282a36;
     active-background: #6272a4;
@@ -107,6 +107,7 @@
 #entry {
     spacing:    0;
     text-color: @foreground;
+    font:   "Jetbrains Mono ExtraBold 14";
 }
 #prompt {
     spacing:    0;
@@ -117,7 +118,7 @@
 }
 #textbox-prompt-colon {
     expand:     false;
-    str:        ">";
+    str:        ":";
     margin:     0px 0.3em 0em 0em ;
     text-color: @foreground;
 }
