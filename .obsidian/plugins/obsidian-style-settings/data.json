@@ -1,0 +1,10 @@
+{
+  "blue-topaz-theme@@admonition-bg-color-same": true,
+  "blue-topaz-theme@@remove-first-folder-icon": true,
+  "blue-topaz-theme@@folder-icons": false,
+  "blue-topaz-theme@@remove-arrow": false,
+  "blue-topaz-theme@@folder-note-underline": false,
+  "blue-topaz-theme@@folder-note-dot": false,
+  "blue-topaz-theme@@folder-style-change-options-colorful": "folder-style-change-options-colorful-title",
+  "blue-topaz-theme@@bt-toggle-colorful-folder": true
+}
