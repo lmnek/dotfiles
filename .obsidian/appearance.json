@@ -1,0 +1,9 @@
+{
+  "accentColor": "",
+  "cssTheme": "Blue Topaz",
+  "theme": "obsidian",
+  "enabledCssSnippets": [
+    "big-math"
+  ],
+  "showRibbon": true
+}

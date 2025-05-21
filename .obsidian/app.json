@@ -1,0 +1,23 @@
+{
+  "vimMode": true,
+  "spellcheck": false,
+  "alwaysUpdateLinks": true,
+  "userIgnoreFilters": [
+    "Extra/templates/",
+    "Extra/files/",
+    "Extra/literature/"
+  ],
+  "attachmentFolderPath": "Extra/files",
+  "newFileLocation": "folder",
+  "newFileFolderPath": "000 Inbox 📥",
+  "showLineNumber": false,
+  "readableLineLength": true,
+  "promptDelete": false,
+  "pdfExportSettings": {
+    "includeName": true,
+    "pageSize": "Letter",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 100
+  }
+}
