@@ -6,5 +6,8 @@
   "blue-topaz-theme@@folder-note-underline": false,
   "blue-topaz-theme@@folder-note-dot": false,
   "blue-topaz-theme@@folder-style-change-options-colorful": "folder-style-change-options-colorful-title",
-  "blue-topaz-theme@@bt-toggle-colorful-folder": true
+  "blue-topaz-theme@@bt-toggle-colorful-folder": true,
+  "blue-topaz-theme@@colorful-unordered-list": false,
+  "blue-topaz-theme@@bt-connected-indent-hover": false,
+  "blue-topaz-theme@@color-scheme-options": "color-scheme-options-default"
 }
