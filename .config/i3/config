@@ -13,7 +13,7 @@ font pango: JetBrainsMono 10
 
 # set the mod key to the winkey:
 set $mod Mod4
-set $term wezterm
+set $term ghostty
 set $browser /usr/bin/zen-browser
 
 #####################
@@ -238,8 +238,8 @@ assign [class="thunderbird"] $ws5
 assign [class="Obsidian"] $ws9 
 
 # automatic set focus new window if it opens on another workspace than the current:
-for_window [class=wezterm] focus
-for_window [class=(?i)zen-browser] focus
+for_window [class=ghostty] focus
+for_window [class=zen] focus
 for_window [class=Thunar] focus
 for_window [class=yazi] focus
 
@@ -411,12 +411,12 @@ bindsym $mod+g exec --no-startup-id ~/.config/rofi/scripts/rofi-web-search.sh
 #####################################
 
 bindsym $mod+Return exec $term
-bindsym $mod+period exec "wezterm start --class yazi -- fish -c 'y; exec fish'" 
+bindsym $mod+period exec "ghostty --class=com.lmnk.yazi -e 'fish -c '\''y; exec fish'\'''"
 
 # Need to install: maim, xclip, xdotool
 # Screenshots in files
 bindsym Print       exec --no-startup-id flameshot gui -c
-bindsym Shift+Print exec --no-startup-id flameshot gui -p "/home/$USER/pix/screens/"
+bindsym Shift+Print exec --no-startup-id flameshot gui -c -p "/home/$USER/pix/screens/"
 
 # adding x11 class to brave window is broken -> cant create scratchpad
 bindsym $mod+Ctrl+l exec brave --app="https://librechat-librechat.hf.space"
@@ -430,7 +430,7 @@ bindsym $mod+w [floating] move scratchpad
 bindsym $mod+x exec --no-startup-id ~/.config/i3/scripts/toggle_last_scratchpad
 
 for_window [class="term2"] floating enable, resize set 1200 1000, move scratchpad, border pixel 3
-exec wezterm start --class term2 -- zellij attach scratchpad
+exec ghostty --class=com.lmnk.term2 -e 'zellij attach scratchpad'
 bindsym $mod+t [class="term2"] scratchpad show move position center
 
 for_window [class="Caprine"] floating enable, resize set 1400 1000, move scratchpad, border pixel 3

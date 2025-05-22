@@ -10,3 +10,4 @@ font-family = JetBrainsMono Nerd Font
 theme = "Dracula"
 window-decoration = none
 
+confirm-close-surface = false
