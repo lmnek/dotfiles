@@ -79,7 +79,7 @@ return {
                     }
                 },
                 lualine_x = { 'grapple' },
-                lualine_y = { 'branch', 'diff', 'diagnostics' },
+                lualine_y = { 'diff', 'diagnostics' },
                 lualine_z = { 'progress' }
             }
         },

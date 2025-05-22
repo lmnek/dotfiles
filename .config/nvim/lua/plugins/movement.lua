@@ -18,11 +18,26 @@ return {
         },
         config = function()
             require('telescope').setup({
+                defaults = {
+                    border = false, -- telescope broken since v0.11 global borders
+                    vimgrep_arguments = {
+                        'rg',
+                        '--color', 'never',
+                        '--no-heading',
+                        '--with-filename',
+                        '--line-number',
+                        '--column',
+                        '--smart-case',
+                        '--hidden',
+                        '--follow',
+                        "--glob=!.git/",
+                    }
+                },
                 extensions = {
                     ["ui-select"] = {
                         require("telescope.themes").get_dropdown {}
                     }
-                }
+                },
             })
             -- Load extensions
             require('telescope').load_extension('fzf')
