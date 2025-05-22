@@ -405,6 +405,8 @@ bindsym $mod+e exec --no-startup-id rofi -show emoji
 ## Web search with prefixes
 bindsym $mod+g exec --no-startup-id ~/.config/rofi/scripts/rofi-web-search.sh
 
+## Attach zellij sessions
+bindsym $mod+z exec --no-startup-id ~/.config/rofi/scripts/rofi-zellij.sh
 
 #####################################
 # Keybinds for launching apps #
