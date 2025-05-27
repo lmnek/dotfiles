@@ -21,8 +21,11 @@ prepend_keymap = [
     ], run = '''shell 'ripdrag -a "$@" -x 2>/dev/null &' --confirm''', desc = "drag&drop" },
 
     # ------ FZF JUMP ------
-    { on = "z", run = '''shell 'ya emit cd $(fd --type directory --hidden | fzf)' --block''', desc = "fzf: search directories" }, # only directories
-    { on = "Z", run = "plugin fzf", desc = "fzf: reveal a file" },
+    { on = "z", run = '''shell 'ya emit cd $(fd --type directory | fzf)' --block''', desc = "fzf: dirs" },
+    { on = "Z", run = '''shell 'ya emit cd $(fd --type directory --hidden | fzf)' --block''', desc = "fzf: dirs + hidden" },
+    { on = "s", run = "plugin fzf", desc = "fzf: files" },
+    { on = "S", run = '''shell 'ya emit reveal $(fd --type file --hidden | fzf)' --block''', desc = "fzf: files + hidden" },
+    # -> overrides default search mode ("s" - fd, "S" - ripgrep!!)
 
     # ------ PLUGINS ------
     { on = "m", run = "plugin relative-motions", desc = "Trigger new VIM relative motion" }, # TODO: show relative line numbers only on command
@@ -52,6 +55,10 @@ prepend_keymap = [
         "g",
         ".",
     ], run = "cd ~/repos/dotfiles", desc = "cd dotfiles" },
+    { on = [
+        "g",
+        ",",
+    ], run = "cd ~/repos/secret-dotfiles", desc = "cd secret-dotfiles" },
     { on = [
         "g",
         "r",

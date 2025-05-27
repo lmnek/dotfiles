@@ -22,10 +22,6 @@ abbr gst 'git stash'
 abbr pS 'sudo pacman -S'
 abbr py 'sudo pacman -Syyu'
 abbr pr 'sudo pacman -Rs'
-# Select package to install with fzf
-abbr psq 'pacman -Slq | fzf --multi --preview "pacman -Si {1}" | xargs -ro sudo pacman -S'
-# Select installed package to remove with fzf
-abbr pq 'pacman -Qq | fzf --multi --preview "pacman -Qi {1}" | xargs -ro sudo pacman -Rns'
 abbr ys 'yay -S'
 abbr yr 'yay -Rs'
 
@@ -43,6 +39,10 @@ abbr la 'eza -a'
 abbr ll 'eza --long --header --git'
 abbr lla 'eza --long --header -a --git'
 
+# --- Goto dirs (subset of Yazi keybinds) ---
+abbr h 'cd ~/'
+abbr r 'cd ~/repos'
+
 # --- Other random goodies ---
 abbr dnd dragon-drop
 abbr c 'codium .'
@@ -51,9 +51,13 @@ abbr zl 'zellij'
 abbr zls 'zellij --session' 
 abbr zla 'zellij attach'
 abbr p 'python'
-abbr sc 'systemctl'
-abbr scu 'systemctl --user'
 abbr ff fastfetch
+
+# --- Systemd services ---
+abbr scsp 'systemctl stop'
+abbr scst 'systemctl start'
+abbr scr 'systemctl restart'
+abbr scs 'systemctl status'
 
 # --- Translate shell ---
 abbr tc  'trans en:cs'
@@ -61,4 +65,3 @@ abbr te  'trans cs:en'
 abbr td  'trans -d'
 abbr tsc 'trans -shell en:cs'
 abbr tse 'trans -shell cs:en'
-
