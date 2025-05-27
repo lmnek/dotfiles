@@ -1,3 +1,6 @@
+### Source: https://github.com/hunkyburrito/xdg-desktop-portal-termfilechooser?tab=readme-ov-file ###
+### + need to set one option in firefox about:config ###
+
 [filechooser]
 cmd=/home/lmnk/.config/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
 default_dir=/home/lmnk/Downloads
