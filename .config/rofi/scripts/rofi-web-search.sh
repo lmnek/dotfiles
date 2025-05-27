@@ -33,7 +33,7 @@ MENU=(
 gen_list() {
     for entry in "${MENU[@]}"; do
         IFS='|' read -r prefix label url <<< "$entry"
-        echo "${prefix} → ${label}"
+        echo "${prefix} → <b>${label}</b>"
     done
 }
 
@@ -61,7 +61,7 @@ compose_url() {
 }
 
 # run rofi
-input="$(gen_list | rofi -dmenu -matching prefix -location 0 -p 'Search')"
+input="$(gen_list | rofi -dmenu -matching prefix -location 0 -markup-rows -p 'Search')"
 
 [[ -z "$input" ]] && exit 0
 
