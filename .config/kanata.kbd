@@ -75,7 +75,7 @@
   _     1    2    3    4    5    6    7    8    9    0    _     _    bspc    
   tab   q    w    e    r    t    y    u    i    o    p    @nav  _    _      
   @ch   a    s    d    f    g    h    j    k    l    @ctl _     ret                              
-  lsft  z    x    c    v    b    n    m   @,cz  .    _    rsft                          
+  lsft  z    x    c    v    b    n    m    ,  .    _    rsft                          
   _     ∅    lalt             @s-m               @cz      cmps  rctl           
 )
 
@@ -117,64 +117,6 @@
   _     _    _                 bspc             _         _     _           
 )
 
-;; have to do this for Wezterm and 
-;; its character input selection
-;; -> horrible solution, hopefully will figure out 
-;; smthing better later
-
-(defalias
-    ä (macro (🔣ä) 20 ret)
-    é (macro (🔣é) 20 ret)
-    ě (macro (🔣ě) 20 ret)
-    ř (macro (🔣ř) 20 ret)
-    ť (macro (🔣ť) 20 ret)
-    ý (macro (🔣ý) 20 ret)
-    ů (macro (🔣ů) 20 ret)
-    í (macro (🔣í) 20 ret)
-    ó (macro (🔣ó) 20 ret)
-    á (macro (🔣á) 20 ret)
-    š (macro (🔣š) 20 ret)
-    ď (macro (🔣ď) 20 ret)
-    ú (macro (🔣ú) 20 ret)
-    ž (macro (🔣ž) 20 ret)
-    č (macro (🔣č) 20 ret)
-    ň (macro (🔣ň) 20 ret)
-    Ä (macro (🔣Ä) 20 ret)
-    É (macro (🔣É) 20 ret)
-    Ě (macro (🔣Ě) 20 ret)
-    Ř (macro (🔣Ř) 20 ret)
-    Ť (macro (🔣Ť) 20 ret)
-    Ý (macro (🔣Ý) 20 ret)
-    Ů (macro (🔣Ů) 20 ret)
-    Í (macro (🔣Í) 20 ret)
-    Ó (macro (🔣Ó) 20 ret)
-    Á (macro (🔣Á) 20 ret)
-    Š (macro (🔣Š) 20 ret)
-    Ď (macro (🔣Ď) 20 ret)
-    Ú (macro (🔣Ú) 20 ret)
-    Ž (macro (🔣Ž) 20 ret)
-    Č (macro (🔣Č) 20 ret)
-    Ň (macro (🔣Ň) 20 ret)
-)
-
-(deflayer czechLow2
-  _     _    _    _    _    _    _    _    _    _    _    _     _          
-  _     _    _    _    _    _    _    _    _    _    _    _     _     _    
-  _    @ä   @é   @ě   @ř   @ť   @ý   @ů   @í   @ó    _    _     _     _    
-  _    @á   @š   @ď    _    _    _   @ú    _    _    _    _     _                              
-@czU2  @ž    _   @č    _    _   @ň    _    _    _    _    _                     
-  _     _    _                 bspc             _         _     _           
-)
-
-(deflayer czechUp2
-  _     _    _    _    _    _    _    _    _    _    _    _     _          
-  _     _    _    _    _    _    _    _    _    _    _    _     _     _    
-  _    @Ä   @É   @Ě   @Ř   @Ť   @Ý   @Ů   @Í   @Ó    _    _     _     _    
-  _    @Á   @Š   @Ď    _    _    _   @Ú    _    _    _    _     _                              
-  _    @Ž    _   @Č    _    _   @Ň    _    _    _    _    _                     
-  _     _    _                 bspc             _         _     _           
-)
-
 ;; meta keys and layer switching
 (defalias
   ch 	(tap-hold $tap-time $hold-time 
@@ -191,9 +133,8 @@
 		lmet)
   cz    (layer-toggle czechLow)
   czU   (layer-toggle czechUp)
-  ;; not bound right meow...
-  czU2  (layer-toggle czechUp2)
-  ,cz   (tap-hold $tap-time $hold-time 
-  		,
-		(layer-toggle czechLow2))
+
+  ;;,cz   (tap-hold $tap-time $hold-time 
+  ;; 		,
+  ;;        (layer-toggle czechLow))
 )

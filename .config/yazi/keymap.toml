@@ -7,7 +7,7 @@
 
 # TODO: unarchive, fzf jump to (/copy to/ move to) dir
 
-[manager]
+[mgr]
 
 prepend_keymap = [
     # ------ EXECUTE SHELL SCRIPTS------
