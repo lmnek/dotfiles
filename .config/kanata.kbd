@@ -12,6 +12,7 @@
         "JosefAdamcik Sofle Keyboard"
     )
     linux-unicode-termination enter
+    danger-enable-cmd true
 )
 
 ;; unmapped keyboard
@@ -28,7 +29,7 @@
 (deflayer base
   ⇪     f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12          
   ∅     1    2    3    4    5    6    7    8    9    0    🔉    🔊   ⌫    
-  ⭾     q    w    e    r    t    y    u    i    o    p   @⌫+   ∅      
+  ⭾     q    w    e    r    t    y    u    i    o    p   @⌫+   @󰐎       
  @⎋+🔣  a    s    d    f    g    h    j    k    l   @↩+⌃  ∅     ∅    ↩                         
   ‹⇧    z    x    c    v    b    n    m    ,    .    /    ⇧›                          
   ‹⌃   ‹⌘   ‹⎇             @␣+⌘           @🇨🇿   _    ⌃›           
@@ -94,6 +95,11 @@
     hold-time 250
 )
 
+;; (need to run kanata compiled with cmd flag)
+(defalias
+    󰐎     (cmd playerctl play-pause)
+)
+
 ;; vim keybindings emulation
 (defalias
     b    C-left
@@ -137,9 +143,4 @@
 	<  S-,
 	>  S-.
 )
-
-;; commands -> need to compile kanata with cmd flag
-;;(defalias
-;;    pp (cmd playerctl play-pause)
-;;)
 
