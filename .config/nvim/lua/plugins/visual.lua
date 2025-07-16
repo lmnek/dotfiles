@@ -45,7 +45,13 @@ return {
         dependencies = {
             'nvim-tree/nvim-web-devicons',
             -- for breadcrumbs
-            { 'SmiteshP/nvim-navic', event = "VeryLazy" },
+            {
+                'SmiteshP/nvim-navic',
+                event = "VeryLazy",
+                config = function()
+                    vim.g.navic_silence = true
+                end
+            },
         },
         opts = {
             options = {
@@ -73,13 +79,21 @@ return {
                         navic_opts = {
                             depth_limit = 6,
                             separator = " ",
-                            -- bug: true adds one last char with wrong color
-                            highlight = false
+                            highlight = true,
+                            -- click = true,
                         },
                     }
                 },
                 lualine_x = { 'grapple' },
-                lualine_y = { 'diff', 'diagnostics' },
+                lualine_y = { 'diff', {
+                    'diagnostics',
+                    symbols = {
+                        error = " ",
+                        warn = " ",
+                        info = " ",
+                        hint = " ",
+                    },
+                } },
                 lualine_z = { 'progress' }
             }
         },

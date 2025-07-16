@@ -79,10 +79,13 @@ return {
             { "<leader>rr", "<cmd>Grapple toggle_tags<cr>",     desc = "Tags window" },
 
             -- Harpoon-like workflow
-            { "<leader>1",  "<cmd>Grapple select index=1<cr>",  desc = "Select first tag" },
-            { "<leader>2",  "<cmd>Grapple select index=2<cr>",  desc = "Select second tag" },
-            { "<leader>3",  "<cmd>Grapple select index=3<cr>",  desc = "Select third tag" },
-            { "<leader>4",  "<cmd>Grapple select index=4<cr>",  desc = "Select fourth tag" },
+            { "<C-1>",      "<cmd>Grapple select index=1<cr>",  remap = true,               desc = "Select first tag" },
+            { "<C-2>",      "<cmd>Grapple select index=2<cr>",  remap = true,               desc = "Select second tag" },
+            { "<C-3>",      "<cmd>Grapple select index=3<cr>",  remap = true,               desc = "Select third tag" },
+            { "<C-4>",      "<cmd>Grapple select index=4<cr>",  remap = true,               desc = "Select fourth tag" },
+            { "<C-5>",      "<cmd>Grapple select index=5<cr>",  remap = true,               desc = "Select fifth tag" },
+            { "<C-6>",      "<cmd>Grapple select index=6<cr>",  remap = true,               desc = "Select sixth tag" },
+            { "<C-7>",      "<cmd>Grapple select index=7<cr>",  remap = true,               desc = "Select seventh tag" },
 
             { "<leader>rn", "<cmd>Grapple cycle_tags next<cr>", desc = "Go to next tag" },
             { "<leader>rp", "<cmd>Grapple cycle_tags prev<cr>", desc = "Go to previous tag" },

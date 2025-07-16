@@ -1,5 +1,12 @@
 -- Plugins currently being tested / worked on
 return {
+    -- {
+    --     'luochen1990/rainbow',
+    --     opts = {},
+    --     config = function()
+    --         vim.g.rainbow_active = 1
+    --     end
+    -- }, -- colorful matching parens
     {
         "chentoast/marks.nvim",
         event = "VeryLazy",
@@ -43,7 +50,6 @@ return {
             { "<leader>ag", "<cmd>CopilotChatAgents<cr>",  desc = "Select agent",  mode = { "n", "v" } },
         },
     },
-    { 'subnut/nvim-ghost.nvim' }, -- connect to browser input
     -- TODO: zellij nav
     -- {
     --     "https://git.sr.ht/~swaits/zellij-nav.nvim",
