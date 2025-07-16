@@ -20,10 +20,10 @@ abbr gst 'git stash'
 
 # --- Pacman ---
 abbr pS 'sudo pacman -S'
-abbr py 'sudo pacman -Syyu'
-abbr pr 'sudo pacman -Rs'
-abbr ys 'yay -S'
-abbr yr 'yay -Rs'
+abbr pY 'sudo pacman -Syyu'
+abbr pR 'sudo pacman -Rs'
+abbr yS 'yay -S'
+abbr yR 'yay -Rs'
 
 # --- Abbrs to use (and NOT FORGET!) improved coreutils ---
 abbr find fd
@@ -44,13 +44,11 @@ abbr h 'cd ~/'
 abbr r 'cd ~/repos'
 
 # --- Other random goodies ---
-abbr dnd dragon-drop
+abbr dnd ripdrag
 abbr c 'codium .'
-abbr n nvim
 abbr zl 'zellij' 
 abbr zls 'zellij --session' 
 abbr zla 'zellij attach'
-abbr p 'python'
 abbr ff fastfetch
 
 # --- Systemd services ---
