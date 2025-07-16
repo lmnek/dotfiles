@@ -1,0 +1,30 @@
+
+(defvar
+    w-interval 50
+    w-dist     120
+
+    m-interval 2
+    m-acc-time 1000
+    m-min-dist 1
+    m-max-dist 12
+)
+
+;; moving the mouse
+(defalias
+  󰠳↑ (mwheel-up     $w-interval $w-dist)
+  󰠳↓ (mwheel-down   $w-interval $w-dist)
+
+  ↑ (movemouse-accel-up      $m-interval $m-acc-time $m-min-dist $m-max-dist)
+  ← (movemouse-accel-left    $m-interval $m-acc-time $m-min-dist $m-max-dist)
+  ↓ (movemouse-accel-down    $m-interval $m-acc-time $m-min-dist $m-max-dist)
+  → (movemouse-accel-right   $m-interval $m-acc-time $m-min-dist $m-max-dist)
+)
+
+;; scrolling/zooming with mouse
+(defalias
+  w_u ( 🖱☸↑ 40 50 )
+  w_d ( 🖱☸↓ 40 50 )
+   (multi lctl @w_u)
+   (multi lctl @w_d)
+)
+

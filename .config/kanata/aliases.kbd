@@ -1,0 +1,41 @@
+
+;; (need to run kanata compiled with cmd flag)
+(defalias
+    󰐎     (cmd playerctl play-pause)
+)
+
+;; vim keybindings emulation
+(defalias
+    b    C-left
+    e    C-right
+    ^    home
+    $    end
+    cu   pgup
+    cd   pgdn
+)
+
+;; for remapping (shifted) characters
+(defalias
+	!  S-1
+	@  S-2
+	#  S-3
+	$  S-4 
+	%  S-5
+	^  S-6
+	&  S-7
+	*  S-8
+	l  S-9
+	r  S-0
+
+	~  S-`
+	|  S-\
+	+  S-=
+	{  S-[
+	}  S-]
+	?  S-/
+	:  S-; 
+	_  S-- 
+	q  S-'
+	<  S-,
+	>  S-.
+)

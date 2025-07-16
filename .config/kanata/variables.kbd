@@ -1,0 +1,5 @@
+
+(defvar
+    tap-time 200
+    hold-time 250
+)

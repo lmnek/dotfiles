@@ -1,0 +1,147 @@
+;; Docs:
+;; https://github.com/jtroo/kanata/blob/main/docs/config.adoc
+;; https://github.com/jtroo/kanata/blob/main/cfg_samples/fancy_symbols.kbd
+
+(include aliases.kbd)
+(include mouse.kbd)
+
+(defcfg
+    process-unmapped-keys yes
+    log-layer-changes no
+
+    linux-dev-names-exclude (
+        "Keychron Keychron K9 Pro"
+        "JosefAdamcik Sofle"
+        "JosefAdamcik Sofle Keyboard"
+    )
+    linux-unicode-termination enter
+    danger-enable-cmd true
+)
+
+(defvar
+    tap-time 200
+    hold-time 250
+)
+
+
+;; unmapped keyboard
+(defsrc
+  ⎋    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12    
+  `     1    2    3    4    5    6    7    8    9    0    -     =     ⌫ 
+  ⭾     q    w    e    r    t    y    u    i    o    p    [     ]            
+  caps  a    s    d    f    g    h    j    k    l    ;    '     \     ↩                        
+ ‹⇧     z    x    c    v    b    n    m    ,    .    /    ⇧›                         
+ ‹⌃    ‹⌘   ‹⎇              ␣              ⎇›        ⌃›    
+)
+
+;; base layer
+(deflayer base
+  ⇪    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12          
+  ∅     1    2    3    4    5    6    7    8    9    0    🔉    🔊   ⌫    
+  ⭾     q    w    e    r    t    y    u    i    o    p   @⌫+   @󰐎       
+ @⎋+🔣  a    s    d    f    g    h    j    k    l   @↩+⌃ @+󱗻    ∅   ↩                         
+ ‹⇧     z    x    c    v    b    n    m    ,   @.+  /    ⇧›                          
+ ‹⌃    ‹⌘   ‹⎇             @␣+⌘          @⇆🇨🇿        ⌃›           
+)
+
+
+;; layer toggle on hold
+(defalias
+    ⇆nav    (layer-toggle navigation)
+    ⇆char   (layer-toggle characters)
+    ⇆num    (layer-toggle numbers)
+    ⇆mouse  (layer-toggle mouse)
+    ⇆🇨🇿     (layer-toggle czechLow)
+    ⇆⇧🇨🇿    (layer-toggle czechUp)
+)
+
+;; meta and multi-functional keys
+(defalias
+  ⎋+🔣    (tap-hold $tap-time $hold-time 
+  	       ⎋  @⇆char)
+
+  ↩+⌃     (tap-hold $tap-time $hold-time 
+  	       ↩   ‹⌃   )
+
+  ⌫+     (tap-hold $tap-time $hold-time 
+  	       ⌫  @⇆nav )
+
+  .+     (tap-hold $tap-time $hold-time 
+  	       .  @⇆num )
+
+  +󱗻 (tap-dance $tap-time (
+        @⇆mouse             ;; 1 tap -> hold: mouse layer 
+        (multi ‹⌃ ‹⇧)       ;; 2 taps: Control+Shift 
+        (multi ‹⌃ ‹⇧ ‹⎇)    ;; 3 taps: Control+Shift+Alt
+  ))
+)
+
+(platform (linux)
+  (defalias
+        ␣+⌘   (tap-hold $tap-time $hold-time 
+               ␣   ‹⌘   )
+))
+
+;; different meta key for GlazeWM on Windows
+(platform (win)
+  (defalias
+        hyper (multi lctl lsft lalt lmet)
+        ␣+⌘   (tap-hold $tap-time $hold-time 
+               ␣  @hyper)
+))
+
+
+;; vim motions emulation (+other features)
+(deflayer navigation
+  lrld  _    _    _    _    _    _    _    _    _    _    _     _    
+  _     _    _    _    _    _    _    _    _    _    _    _     _     _
+  _     ∅    ∅   @e   ∅    ∅    ∅   @cu  ∅   @  @   _     _
+  _     ∅    ∅   @cd  ∅    ∅    ◀    ▼    ▲    ▶    _    _     _     _
+  _    @^  @$   ∅    ∅   @b   ∅    ∅    ∅    ∅    _    _
+  _     _    _              ↩              _         _
+)
+
+(deflayer characters
+  _     _    _    _    _    _    _    _    _    _    _    _     _
+  _     _    _    _    _    _    _    _    _    _    _    _     _     _     
+  _    @~   @#   @{   @}   @&   @|   @_   @q    '    `    _     _    
+  _    @%    ;   @l   @r   @?   @!    =    -   @+    _    _     _     _          
+  _    @^   @$    [    ]   @@   @:   @*   @<   @>    \    _                                                       
+  _     _    _                 _           _         _           
+)
+
+(deflayer numbers
+  _     _    _    _    _    _    _    _    _    _    _    _     _
+  _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12     _     
+  _     _    7    8    9    _    _    _    _    _    _    _     _    
+  _     _    4    5    6    _    _    _    _    _    _    _     _     _          
+  _     _    1    2    3    _    _    _    _    _    _    _                                                       
+  _     _    _                 _           _         _           
+)
+
+(deflayer mouse
+  _     _    _    _    _    _    _    _    _    _    _    _     _
+  _     _    _    _    _    _    _    _    _    _    _    _     _     _
+  _     _   ‹🖰  @↑  🖰›   _    _   🖰3   _    _    _    _     _    
+  _     _   @←  @↓  @→   _    _   @󰠳↓  @󰠳↑   _    _    _     _     _          
+  _     _    _    _    _    _    _    _    _    _    _    _                                                       
+  _     _    _                 _           _         _           
+)
+
+(deflayer czechLow
+  _     _    _    _    _    _    _    _    _    _    _    _     _          
+  _     _    _    _    _    _    _    _    _    _    _    _     _     _    
+  _   🔣ä  🔣é  🔣ě  🔣ř  🔣ť  🔣ý  🔣ů  🔣í  🔣ó    _    _     _
+  _   🔣á  🔣š  🔣ď    _    _    _  🔣ú    _    _    _    _     _     _                                  
+@⇆⇧🇨🇿 🔣ž   _   🔣č    _    _  🔣ň    _    _    _    _    _                     
+  _     _    _                 _           _         _           
+)
+
+(deflayer czechUp
+  _     _    _    _    _    _    _    _    _    _    _    _     _          
+  _     _    _    _    _    _    _    _    _    _    _    _     _     _    
+  _     _  🔣É  🔣Ě  🔣Ř  🔣Ť  🔣Ý  🔣Ů  🔣Í  🔣Ó    _    _     _
+  _   🔣Á  🔣Š  🔣Ď    _    _    _  🔣Ú    _    _    _    _     _     _                                  
+  _   🔣Ž   _   🔣Č    _    _  🔣Ň    _    _    _    _    _                     
+  _     _    _                 _           _         _           
+)
