@@ -36,6 +36,7 @@ function y
 	end
 	rm -f -- "$tmp"
 end
+alias yy='yazi'
 
 # Created by `pipx` on 2025-01-15 21:16:54
 set PATH $PATH /home/lmnk/.local/bin
