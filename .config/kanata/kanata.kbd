@@ -37,10 +37,10 @@
 ;; base layer
 (deflayer base
   ⇪    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12          
-  ∅     1    2    3    4    5    6    7    8    9    0    🔉    🔊   ⌫    
-  ⭾     q    w    e    r    t    y    u    i    o    p   @⌫+   @󰐎       
- @⎋+🔣  a    s    d    f    g    h    j    k    l   @↩+⌃ @+󱗻    ∅   ↩                         
- ‹⇧     z    x    c    v    b    n    m    ,   @.+  /    ⇧›                          
+  ∅     1    2    3    4    5    6    7    8    9    0    🔉    🔊   ⌫
+  ⭾     q    w    e    r    t    y    u    i    o    p   @⌫+   @󰐎
+ @⎋+🔣  a    s    d    f    g    h    j    k    l   @↩+⌃ @;+🖰    ∅   ↩
+ ‹⇧     z    x    c    v    b    n    m    ,   @.+  /    ⇧›
  ‹⌃    ‹⌘   ‹⎇             @␣+⌘          @⇆🇨🇿        ⌃›           
 )
 
@@ -69,11 +69,17 @@
   .+     (tap-hold $tap-time $hold-time 
   	       .  @⇆num )
 
-  +󱗻 (tap-dance $tap-time (
-        @⇆mouse             ;; 1 tap -> hold: mouse layer 
-        (multi ‹⌃ ‹⇧)       ;; 2 taps: Control+Shift 
-        (multi ‹⌃ ‹⇧ ‹⎇)    ;; 3 taps: Control+Shift+Alt
-  ))
+
+  ;+🖰     (tap-hold $tap-time $hold-time
+            ;  @⇆mouse )
+
+  ;; NOTE: laggy?
+  ;;+󱗻 (tap-dance $tap-time (
+  ;;      (tap-hold $tap-time $hold-time
+  ;;	     ;  @⇆mouse )       ;; 1 tap -> tap: ; hold: mouse layer 
+  ;;      (multi ‹⌃ ‹⇧)       ;; 2 taps: Control+Shift 
+  ;;      (multi ‹⌃ ‹⇧ ‹⎇)    ;; 3 taps: Control+Shift+Alt
+  ;;))
 )
 
 (platform (linux)
