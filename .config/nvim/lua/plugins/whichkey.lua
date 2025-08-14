@@ -17,20 +17,15 @@ return {
         })
 
         wk.add({
-            { "<leader>h",  group = "+Git Hunks" },
-            { "<leader>m",  group = "+Manipulate text" },
-            { "<leader>s",  group = "+Search" },
-            { "<leader>t",  group = "+Toggle" },
-            { "<leader>g",  group = "+Git" },
-            { "<leader>n",  group = "+Notifications" },
-            { "<leader>q",  group = "+Trouble Diagnostics" },
-            { "<leader>r",  group = "+gRapple" },
-            { "<leader>W",  group = "+Workspace" },
-            -- todo: move somewhere else + required/dependency?
+            { "<leader>s",  group = "+Search (Telescope)" },
+            { "<leader>t",  group = "+Text / Treesitter" },
             { "<leader>o",  group = "+Open" },
-            { "<leader>ol", "<cmd>Lazy<CR>",               desc = "Lazy" },
-            { "<leader>om", "<cmd>Mason<CR>",              desc = "Mason" },
-            { "<leader>oL", "<cmd>LspInfo<CR>",            desc = "Lsp Info" },
+            { "<leader>g",  group = "+Git" },
+            { "<leader>gh", group = "+Hunks" },
+            { "<leader>n",  group = "+Notifications" },
+            { "<leader>q",  group = "+Trouble" },
+            { "<leader>r",  group = "+gRapple" },
+            { "<leader>T",  group = "+Toggle" },
         })
     end,
 

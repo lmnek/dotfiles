@@ -33,7 +33,7 @@ local set_lsp_keybinds = function(client, bufnr)
     -- The following code creates a keymap to toggle inlay hints in your
     -- code, if the language server you are using supports them
     if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, bufnr) then
-        map('<leader>th', function()
+        map('<leader>Th', function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr })
         end, '[T]oggle Inlay [H]ints')
 
@@ -83,6 +83,9 @@ local setup_mason = function(capabilities)
             end,
         },
     }
+
+
+    vim.keymap.set({ "n", "v" }, "<leader>ol", "<cmd>Lazy<CR>", { desc = "Lazy" })
 end
 
 -- The following two autocommands are used to highlight references of the
@@ -163,5 +166,9 @@ return {
         local capabilities = require('blink.cmp').get_lsp_capabilities()
 
         setup_mason(capabilities)
-    end
+    end,
+    keys = {
+        { "<leader>oM", "<cmd>Mason<CR>",   desc = "Mason" },
+        { "<leader>oS", "<cmd>LspInfo<CR>", desc = "Lsp Info" },
+    }
 }

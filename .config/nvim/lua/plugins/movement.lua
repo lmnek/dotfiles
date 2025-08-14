@@ -47,9 +47,9 @@ return {
 
             -- Keybinds
             vim.keymap.set('n', '<C-f>', builtin.git_files, { desc = 'Search Git Files' })
+            vim.keymap.set('n', '<leader>ss', builtin.find_files, { desc = 'All Files' })
 
             vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = 'Buffers' })
-            vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = 'All Files' })
             vim.keymap.set('n', '<leader>s?', builtin.oldfiles, { desc = 'Recently opened files' })
             vim.keymap.set('n', '<leader>sm', builtin.marks, { desc = 'Marks' })
 
@@ -104,14 +104,14 @@ return {
                 function()
                     require("yazi").yazi()
                 end,
-                desc = "File manager",
+                desc = "yazi",
             },
             {
                 "<leader>F",
                 function()
                     require("yazi").yazi(nil, vim.fn.getcwd())
                 end,
-                desc = "File manager in home dir",
+                desc = "yazi (home dir)",
             },
         },
         opts = {

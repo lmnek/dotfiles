@@ -17,10 +17,10 @@ return {
         { "<leader>nh", function() Snacks.notifier.show_history() end, desc = "Notification History" },
         { "<leader>nn", function() Snacks.notifier.hide() end,         desc = "Dismiss Notifications" },
         -- Git + LazyGit
-        { "<leader>gg", function() Snacks.lazygit() end,               desc = "Lazygit" },
-        { "<leader>gl", function() Snacks.lazygit.log() end,           desc = "Lazygit Log (cwd)" },
-        { "<leader>gf", function() Snacks.lazygit.log_file() end,      desc = "Lazygit Cur. File History" },
-        { "<leader>gw", function() Snacks.gitbrowse() end,             desc = "Repo Website",             mode = { "n", "v" } },
+        { "<leader>gg", function() Snacks.lazygit() end,               desc = "lg" },
+        { "<leader>gl", function() Snacks.lazygit.log() end,           desc = "lg: log" },
+        { "<leader>gf", function() Snacks.lazygit.log_file() end,      desc = "lg: file History" },
+        { "<leader>gw", function() Snacks.gitbrowse() end,             desc = "Repo Website",         mode = { "n", "v" } },
         { "<leader>gb", function() Snacks.git.blame_line() end,        desc = "Blame Line" },
     },
     init = function()
@@ -28,14 +28,14 @@ return {
             pattern = "VeryLazy",
             callback = function()
                 -- Create mappings for Toggle functionality
-                Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>ts")
-                Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>tw")
-                Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>tL")
-                Snacks.toggle.diagnostics():map("<leader>tD")
-                Snacks.toggle.line_number():map("<leader>tl")
-                Snacks.toggle.treesitter():map("<leader>tT")
-                Snacks.toggle.inlay_hints():map("<leader>th")
-                Snacks.toggle.dim():map("<leader>td")
+                Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>Ts")
+                Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>Tw")
+                Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>TL")
+                Snacks.toggle.diagnostics():map("<leader>TD")
+                Snacks.toggle.line_number():map("<leader>Tl")
+                Snacks.toggle.treesitter():map("<leader>TT")
+                Snacks.toggle.inlay_hints():map("<leader>Th")
+                Snacks.toggle.dim():map("<leader>Td")
             end,
         })
     end,

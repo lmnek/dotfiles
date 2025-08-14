@@ -7,7 +7,7 @@ return {
     event = { "BufWritePre" },
     cmd = { "ConformInfo" },
     keys = {
-        { "<leader>of", "<cmd>ConformInfo<cr>", desc = "Formatting (Conform)" }
+        { "<leader>oF", "<cmd>ConformInfo<cr>", desc = "Formatting (Conform)" }
     },
     config = function()
         require("conform").setup({

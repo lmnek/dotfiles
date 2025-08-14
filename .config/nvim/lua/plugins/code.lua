@@ -28,6 +28,6 @@ return {
         'Wansmer/treesj',
         dependencies = { 'nvim-treesitter/nvim-treesitter' },
         opts = { use_default_keymaps = false },
-        keys = { { '<leader>ms', function() require('treesj').toggle() end, desc = 'split/join block' } }
+        keys = { { '<leader>ts', function() require('treesj').toggle() end, desc = 'split/join block' } }
     },
 }

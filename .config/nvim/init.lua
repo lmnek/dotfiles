@@ -4,7 +4,7 @@
 -- either create lmnk/init.lua with all requires
 -- and here require("lmnk")
 -- or:
-require("lmnk.remap")
+require("lmnk.keybinds")
 require("lmnk.options") -- nvim options
 
 -- lazy.nvim package manager setup

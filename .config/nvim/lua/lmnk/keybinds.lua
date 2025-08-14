@@ -17,10 +17,6 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set({ "n", "v" }, "<leader>y", "\"+y", { desc = "Yank to Cliboard" })
 vim.keymap.set("n", "<leader>p", "\"+p", { desc = "Paste Clipboard" })
 
-vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", "gl", "<nop>")
-vim.keymap.set("n", "gh", "<nop>")
-
 -- Create newline above/bellow
 vim.keymap.set("n", "<Enter>", "o<ESC>")
 vim.keymap.set("n", "<S-Enter>", "O<ESC>")
@@ -47,7 +43,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Floating d
 -- vim.diagnostic.setloclist -> diagnostic list replaced with trouble
 
 -- Toggle virtual lines and underlines
-vim.keymap.set('n', '<leader>tv', function()
+vim.keymap.set('n', '<leader>Tv', function()
     if vim.diagnostic.config().virtual_lines then
         vim.diagnostic.config({ virtual_lines = false })
     else
@@ -55,6 +51,12 @@ vim.keymap.set('n', '<leader>tv', function()
     end
 end, { desc = 'Virtual lines diagnostics' })
 
-vim.keymap.set('n', '<leader>tu', function()
+vim.keymap.set('n', '<leader>Tu', function()
     vim.diagnostic.config({ underline = not vim.diagnostic.config().underline })
 end, { desc = 'Underline diagnostics' })
+
+
+-- I dont like those / use replacements
+vim.keymap.set("n", "Q", "<nop>")
+vim.keymap.set("n", "gl", "<nop>")
+vim.keymap.set("n", "gh", "<nop>")
