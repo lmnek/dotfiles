@@ -14,12 +14,12 @@ return {
     -- -> '?' for help
     keys = {
         {
-            "<leader>qa",
+            "<leader>oD",
             "<cmd>Trouble diagnostics toggle<cr>",
             desc = "Diagnostics"
         },
         {
-            "<leader>qq",
+            "<leader>od",
             "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
             desc = "Buffer Diagnostics",
         },
@@ -27,27 +27,27 @@ return {
         -- testing...
         -- Good
         {
-            "<leader>qs",
+            "<leader>os",
             "<cmd>Trouble symbols toggle focus=false<cr>",
             desc = "Doc Symbols",
         },
-        -- Good
+        -- Good (need to be on symbol)
         {
-            "<leader>qd",
+            "<leader>ol",
             "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-            desc = "LSP Definitions / references / ... ",
+            desc = "LSP definitions / references / ... ",
         },
         -- idk what this does
-        {
-            "<leader>ql",
-            "<cmd>Trouble loclist toggle<cr>",
-            desc = "Location List (Trouble)",
-        },
+        -- {
+        --     "<leader>oL",
+        --     "<cmd>Trouble loclist toggle<cr>",
+        --     desc = "Location List (Trouble)",
+        -- },
         -- did not find use yet
-        {
-            "<leader>qf",
-            "<cmd>Trouble qflist toggle<cr>",
-            desc = "Quickfix List (Trouble)",
-        },
+        -- {
+        --     "<leader>of",
+        --     "<cmd>Trouble qflist toggle<cr>",
+        --     desc = "Quickfix List (Trouble)",
+        -- },
     },
 }

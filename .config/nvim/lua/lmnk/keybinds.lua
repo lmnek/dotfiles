@@ -2,8 +2,8 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
 -- move blocks of code
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move lines up" })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move lines down" })
 
 -- stay in the position with J
 vim.keymap.set("n", "J", "mzJ`z")
@@ -25,8 +25,8 @@ vim.keymap.set("n", "<S-Enter>", "O<ESC>")
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
-vim.keymap.set('n', '<leader>w', "<cmd>up<CR>", { desc = 'Save file - :up' })
-vim.keymap.set('n', '<leader>W', "<cmd>wa<CR>", { desc = 'Save all files - :wa' })
+vim.keymap.set('n', '<leader>w', "<cmd>up<CR>", { desc = '::up' })
+vim.keymap.set('n', '<leader>W', "<cmd>wa<CR>", { desc = '::wa' })
 
 -- Splits navigation
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })

@@ -8,9 +8,9 @@ return {
         wk.setup({
             preset = "helix",
             sort = { "group", "local", "order", "alphanum", "mod" },
-            -- disable default s, because of mini-surround
-            -- https://github.com/folke/which-key.nvim/issues/672
             triggers = {
+                -- disable default s, because of mini-surround
+                -- https://github.com/folke/which-key.nvim/issues/672
                 { "<auto>", mode = "nixsotc" },
                 { "s",      mode = { "n", "v" } },
             }
@@ -26,7 +26,8 @@ return {
             { "<leader>q",  group = "+Trouble" },
             { "<leader>r",  group = "+gRapple" },
             { "<leader>T",  group = "+Toggle" },
+
+            { "<leader>oL", "<cmd>Lazy<CR>",              desc = "Lazy" },
         })
     end,
-
 }

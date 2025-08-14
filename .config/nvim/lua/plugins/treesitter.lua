@@ -1,7 +1,9 @@
+-- Treesitter + Text objects
 return {
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
         'nvim-treesitter/nvim-treesitter-textobjects',
+        'michaeljsmith/vim-indent-object', -- i and I indentation objects, usefull esepcially in Python
     },
     config = function()
         -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'

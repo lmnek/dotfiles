@@ -9,26 +9,47 @@ local set_lsp_keybinds = function(client, bufnr)
         vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
     end
 
-    map('<leader>mr', vim.lsp.buf.rename, 'Rename')
+    map('<leader>tr', vim.lsp.buf.rename, 'Rename')
 
-    -- FIXME: some key-mappings overridden by new defaults
-    map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-    map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-    map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+    ---- Word under cursor
 
-    map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+    -- Find references for the word under your cursor.
+    map('grr', require('telescope.builtin').lsp_references, 'Goto References')
+
+    -- Jump to the definition of the word under your cursor.
+    --  To jump back, press <C-t>.
+    map('grd', require('telescope.builtin').lsp_definitions, 'Goto Definition')
+
+    -- Jump to the implementation of the word under your cursor.
+    --  Useful when your language has ways of declaring types without an actual implementation.
+    map('gri', require('telescope.builtin').lsp_implementations, 'Goto Implementation')
+
+    -- This is not Goto Definition, this is Goto Declaration.
+    -- For example, in C this would take you to the header.
+    map('grD', vim.lsp.buf.declaration, 'Goto Declaration')
+
+    -- Jump to the type of the word under your cursor.
+    --  Useful when you're not sure what type a variable is and you want to see
+    --  the definition of its *type*, not where it was *defined*.
+    map('grt', require('telescope.builtin').lsp_type_definitions, 'Goto Type Definition')
+
+
+
+    -- Fuzzy find all the symbols in your current document.
+    --  Symbols are things like variables, functions, types, etc.
     map('<leader>sd', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
-    map('<leader>sw', require('telescope.builtin').lsp_dynamic_workspace_symbols,
-        'Workspace Symbols (everywhere)')
 
-    -- Lesser used LSP functionality
-    map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+    -- Fuzzy find all the symbols in your current workspace.
+    -- Similar to document symbols, except searches over your entire project.
+    map('<leader>sw', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace Symbols')
+
 
     map('<leader>Wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
     map('<leader>Wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
     map('<leader>Wl', function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, '[W]orkspace [L]ist Folders')
+
 
     -- The following code creates a keymap to toggle inlay hints in your
     -- code, if the language server you are using supports them
@@ -83,41 +104,11 @@ local setup_mason = function(capabilities)
             end,
         },
     }
-
-
-    vim.keymap.set({ "n", "v" }, "<leader>ol", "<cmd>Lazy<CR>", { desc = "Lazy" })
-end
-
--- The following two autocommands are used to highlight references of the
--- word under your cursor when your cursor rests there for a little while.
--- When you move your cursor, the highlights will be cleared (the second autocommand).
-local set_cursor_highlights = function(client, event)
-    if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
-        local highlight_augroup = vim.api.nvim_create_augroup('mine-lsp-highlight', { clear = false })
-        vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-            buffer = event.buf,
-            group = highlight_augroup,
-            callback = vim.lsp.buf.document_highlight,
-        })
-
-        vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-            buffer = event.buf,
-            group = highlight_augroup,
-            callback = vim.lsp.buf.clear_references,
-        })
-
-        vim.api.nvim_create_autocmd('LspDetach', {
-            group = vim.api.nvim_create_augroup('mine-lsp-detach', { clear = true }),
-            callback = function(event2)
-                vim.lsp.buf.clear_references()
-                vim.api.nvim_clear_autocmds { group = 'mine-lsp-highlight', buffer = event2.buf }
-            end,
-        })
-    end
 end
 
 return {
     'neovim/nvim-lspconfig',
+    lazy = false,
     dependencies = {
         -- Automatically install LSPs and related tools to stdpath for Neovim
         -- Mason must be loaded before its dependents
@@ -154,8 +145,6 @@ return {
                 set_lsp_keybinds(client, buf)
 
                 require('nvim-navic').attach(client, buf) -- attach breadcrumbs
-
-                -- set_cursor_highlights(client, event) -- slow??
             end
         })
 
