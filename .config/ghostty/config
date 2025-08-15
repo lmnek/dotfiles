@@ -13,3 +13,14 @@ window-decoration = none
 # distracting UI popups:
 confirm-close-surface = false
 resize-overlay = never
+
+# Disable all keybinds
+# (Alt+nubers stopped working for zellij as it was assigned to tab managements
+# ghostty +list-keybinds --default
+keybind=clear
+
+keybind = ctrl+equal=increase_font_size:1
+keybind = ctrl+minus=decrease_font_size:1
+
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
