@@ -19,7 +19,6 @@ return {
         config = function()
             require('telescope').setup({
                 defaults = {
-                    border = false, -- telescope broken since v0.11 global borders
                     vimgrep_arguments = {
                         'rg',
                         '--color', 'never',
@@ -31,6 +30,12 @@ return {
                         '--hidden',
                         '--follow',
                         "--glob=!.git/",
+                    },
+                    -- layout_config = { vertical = { width = 0.99 } }
+                    layout_strategy = 'horizontal',
+                    layout_config = {
+                        width = 0.95,
+                        preview_width = 0.5
                     }
                 },
                 extensions = {

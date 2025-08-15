@@ -3,6 +3,8 @@ vim.opt.relativenumber = true
 vim.o.mouse = 'a'
 vim.wo.signcolumn = 'yes'
 
+vim.opt.swapfile = false -- annoying ass
+
 -- indenting
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4

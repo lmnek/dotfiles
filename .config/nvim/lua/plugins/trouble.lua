@@ -1,4 +1,9 @@
 -- Super pretty diagnostic/quickfix/telescope list
+-- TODO:
+--  - add path telescope -> trouble
+--  - rethink quickfix list, loc list
+--  - position nicely with edgy.nvim (+ neotree, undolist)
+--  - TODO list
 return {
     "folke/trouble.nvim",
     dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -7,6 +12,14 @@ return {
         warn_no_results = true,
         auto_close = true,
         indent_guides = false,
+        preview = { border = "" },
+        -- modes = {
+        --     symbols = {
+        --         groups = {
+        --             { "filename", format = "{file_icon} {basename:Title} {count}" },
+        --         },
+        --     },
+        -- },
     },
     -- cmd: Trouble [mode] [action] [options]
     cmd = "Trouble",
