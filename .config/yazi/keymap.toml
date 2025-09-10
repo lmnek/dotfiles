@@ -5,10 +5,7 @@
 
 # ---------- CUSTOM KEYBINDS --------------
 
-# TODO: unarchive, fzf jump to (/copy to/ move to) dir
-
 [mgr]
-
 prepend_keymap = [
     # ------ EXECUTE SHELL SCRIPTS------
     { on = [
@@ -71,6 +68,7 @@ prepend_keymap = [
         "g",
         "p",
     ], run = "cd ~/pix", desc = "cd pix" },
+    # TODO: per-directory defined rules
     { on = [
         "g",
         "d",

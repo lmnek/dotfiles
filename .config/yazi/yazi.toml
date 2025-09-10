@@ -12,17 +12,17 @@ max_width = 1700
 max_height = 1000
 
 [plugin]
+
 prepend_fetchers = [
     # faster mime types fetching (O(1) from table) on remote
     { id = "mime", name = "/mnt/**", run = "mime-ext", prio = "high" },
 ]
 # disable previews for remote mounted dirs (would need to be fetched)
 prepend_preloaders = [{ name = "/mnt/**", run = "noop" }]
+
 # custom previewers
 prepend_previewers = [
     { name = "/mnt/**", run = "noop" },
-    # Markdown
-    { name = "*.md", run = "glow" },
     # Archive previewer
     { mime = "application/*zip", run = "ouch" },
     { mime = "application/x-tar", run = "ouch" },
@@ -32,14 +32,23 @@ prepend_previewers = [
     { mime = "application/x-xz", run = "ouch" },
     { mime = "application/xz", run = "ouch" },
 ]
+
 # options when pressing "o" or "O"
 [opener]
 extract = [
     { run = 'ouch d -y "$@"', desc = "Extract here with ouch", for = "unix" },
 ]
-display = [
-    { run = 'feh -F -Z --start-at "$0"', orphan = true, desc = "Display with feh", for = "unix" },
+display_image = [
+    { run = 'feh -F -Z --start-at "$0"', orphan = true, desc = "feh", for = "unix" },
+    { run = 'gwenview "$0"', orphan = true, desc = "gwenview", for = "unix" },
+]
+display_pdf = [
+    { run = 'zathura "$0"', orphan = true, desc = "zathura", for = "unix" },
+    { run = 'okular "$0"', orphan = true, desc = "okular", for = "unix" },
 ]
 
 [open]
-prepend_rules = [{ mime = "image/*", use = "display" }]
+prepend_rules = [
+    { mime = "image/*", use = "display_image" },
+    { mime = "application/pdf", use = "display_pdf" },
+]
