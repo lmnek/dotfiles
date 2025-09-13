@@ -24,6 +24,7 @@ return {
         end
     },
     {
+        -- TODO: replace with https://github.com/echasnovski/mini.splitjoin
         -- Combine multiple lines into single one (or split one line into multiple ones)
         'Wansmer/treesj',
         dependencies = { 'nvim-treesitter/nvim-treesitter' },

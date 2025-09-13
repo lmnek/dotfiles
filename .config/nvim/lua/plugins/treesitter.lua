@@ -48,6 +48,9 @@ return {
                             -- class
                             ['ac'] = '@class.outer',
                             ['ic'] = '@class.inner',
+                            -- comment
+                            ['aC'] = '@comment.outer',
+                            ['iC'] = '@comment.outer', -- inner much less supported..
                         },
                     },
                     move = {

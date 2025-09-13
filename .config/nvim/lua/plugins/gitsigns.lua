@@ -19,7 +19,7 @@ return { -- Adds git related signs to the gutter, hunks, as well as utilities fo
             end
 
             -- Navigation
-            map('n', ']c', function()
+            map('n', ']h', function()
                 if vim.wo.diff then
                     vim.cmd.normal({ ']c', bang = true })
                 else
@@ -27,7 +27,7 @@ return { -- Adds git related signs to the gutter, hunks, as well as utilities fo
                 end
             end, { desc = 'Next hunk' })
 
-            map('n', '[c', function()
+            map('n', '[h', function()
                 if vim.wo.diff then
                     vim.cmd.normal({ '[c', bang = true })
                 else

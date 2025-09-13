@@ -34,9 +34,21 @@ return {
             "nvim-tree/nvim-web-devicons",
         },
         lazy = false, -- neo-tree will lazily load itself
-        opts = {},
+        opts = {
+            filesystem = {
+                hijack_netrw_behavior = "disabled",
+            }
+        },
         keys = {
             { "<leader>of", "<cmd>Neotree filesystem reveal right<cr>", desc = "Neotree", mode = { "n", "v" } },
         }
     },
+
+    {
+        'MeanderingProgrammer/render-markdown.nvim',
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+        opts = {},
+    },
+
+    { "sphamba/smear-cursor.nvim", opts = {} },
 }

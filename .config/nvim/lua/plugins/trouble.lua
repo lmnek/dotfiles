@@ -1,7 +1,10 @@
+local minimalTreeModeOpts = {
+    title = false,
+    groups = {},
+}
+
 -- Super pretty diagnostic/quickfix/telescope list
 -- TODO:
---  - add path telescope -> trouble
---  - rethink quickfix list, loc list
 --  - position nicely with edgy.nvim (+ neotree, undolist)
 --  - TODO list
 return {
@@ -13,13 +16,19 @@ return {
         auto_close = true,
         indent_guides = false,
         preview = { border = "" },
-        -- modes = {
-        --     symbols = {
-        --         groups = {
-        --             { "filename", format = "{file_icon} {basename:Title} {count}" },
-        --         },
-        --     },
-        -- },
+        title = false,
+        modes = {
+            symbols = minimalTreeModeOpts,
+            lsp = minimalTreeModeOpts,
+            todo = {
+                groups = {},
+                format = "{todo_icon} {text} {filename} {pos}",
+                sort = { "tag", "filename", "pos", "message" },
+                filter = {
+                    ['not'] = { tag = "NOTE" },
+                },
+            }
+        },
     },
     -- cmd: Trouble [mode] [action] [options]
     cmd = "Trouble",
@@ -33,34 +42,41 @@ return {
         },
         {
             "<leader>od",
-            "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+            "<cmd>Trouble diagnostics toggle filter.buf=0 groups=false<cr>",
             desc = "Buffer Diagnostics",
         },
-        -- Many other features ... + can redirect Telescope results to this
-        -- testing...
-        -- Good
         {
             "<leader>os",
             "<cmd>Trouble symbols toggle focus=false<cr>",
-            desc = "Doc Symbols",
+            desc = "Buffer Symbols",
         },
-        -- Good (need to be on symbol)
         {
-            "<leader>ol",
-            "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-            desc = "LSP definitions / references / ... ",
+            "<leader>ol", -- (need to be on symbol)
+            "<cmd>Trouble lsp toggle<cr>",
+            desc = "Symbol defs/refs/... ",
         },
-        -- idk what this does
-        -- {
-        --     "<leader>oL",
-        --     "<cmd>Trouble loclist toggle<cr>",
-        --     desc = "Location List (Trouble)",
-        -- },
-        -- did not find use yet
-        -- {
-        --     "<leader>of",
-        --     "<cmd>Trouble qflist toggle<cr>",
-        --     desc = "Quickfix List (Trouble)",
-        -- },
+        {
+            "<leader>ot",
+            "<cmd>Trouble todo toggle<cr>",
+            desc = "TODO comments",
+        },
+        {
+            "[q",
+            function()
+                if require("trouble").is_open() then
+                    require("trouble").prev({ skip_groups = true, jump = true })
+                end
+            end,
+            desc = "Previous Trouble Item",
+        },
+        {
+            "]q",
+            function()
+                if require("trouble").is_open() then
+                    require("trouble").next({ skip_groups = true, jump = true })
+                end
+            end,
+            desc = "Next Trouble Item",
+        },
     },
 }

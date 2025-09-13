@@ -26,6 +26,7 @@ return {
             { "<leader>q",  group = "+Trouble" },
             { "<leader>r",  group = "+gRapple" },
             { "<leader>T",  group = "+Toggle" },
+            { "<leader>W",  group = "+Workspaces" },
 
             { "<leader>oL", "<cmd>Lazy<CR>",              desc = "Lazy" },
         })

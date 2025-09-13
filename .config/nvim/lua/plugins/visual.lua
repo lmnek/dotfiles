@@ -86,7 +86,13 @@ return {
                         },
                     }
                 },
-                lualine_x = { 'grapple' },
+                lualine_x = {
+                    {
+                        require("noice").api.status.command.get,
+                        cond = require("noice").api.status.command.has
+                    },
+                    'grapple',
+                },
                 lualine_y = { 'diff', {
                     'diagnostics',
                     symbols = {

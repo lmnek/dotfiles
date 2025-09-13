@@ -6,7 +6,15 @@ return {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
         },
-        opts = {},
+        opts = {
+            display = {
+                chat = {
+                    window = {
+                        layout = "buffer"
+                    }
+                }
+            }
+        },
     },
     -- {
     --     "zbirenbaum/copilot.lua",

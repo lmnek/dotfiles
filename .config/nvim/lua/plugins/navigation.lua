@@ -17,6 +17,8 @@ return {
             },
         },
         config = function()
+            local open_with_trouble = require("trouble.sources.telescope").open
+
             require('telescope').setup({
                 defaults = {
                     vimgrep_arguments = {
@@ -36,7 +38,11 @@ return {
                     layout_config = {
                         width = 0.95,
                         preview_width = 0.5
-                    }
+                    },
+                    mappings = {
+                        i = { ["<c-t>"] = open_with_trouble },
+                        n = { ["<c-t>"] = open_with_trouble },
+                    },
                 },
                 extensions = {
                     ["ui-select"] = {
