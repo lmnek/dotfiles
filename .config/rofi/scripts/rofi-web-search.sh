@@ -11,6 +11,7 @@
 set -euo pipefail
 
 BROWSER_CLASS="zen"
+BROWSER_I3_WORKSPACE=2
 
 # One single array: each element is "prefix|label|base-URL"
 MENU=(
@@ -83,6 +84,13 @@ if ! xdg-open "$target" >/dev/null 2>&1; then
     exit -1
 fi
 
-i3-msg [class="$BROWSER_CLASS"] focus
+# switch to browser workspace if not on it
+CURRENT_WORKSPACE=$(i3-msg -t get_workspaces \
+            | jq -r '.[] | select(.focused==true).name' \
+            | cut -d ":" -f 1)
+if [[ "$CURRENT_WORKSPACE" != "$BROWSER_I3_WORKSPACE" ]]; then
+    # i3-msg [class="$BROWSER_CLASS"] focus
+    i3-msg workspace number "$BROWSER_I3_WORKSPACE"
+fi
 
 exit 0

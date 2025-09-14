@@ -3,6 +3,16 @@
 NEW_SESSION_PROMPT="-- new zellij session --"
 REPOS_PATH="$HOME/repos"
 
+launch_terminal() {
+    ghostty -e "$1"
+}
+
+new_session_cmd() {
+    REPO_PATH=$1
+    REPO_NAME=$2
+    echo "fish -c 'cd $REPOS_PATH/$REPO_NAME; zellij --session $REPO_NAME'"
+}
+
 set -euo pipefail
 
 gen_list() {
@@ -34,12 +44,12 @@ if [[ "$NEW_SESSION_PROMPT" == "$LINE" ]]; then
     [[ -z "$REPO_NAME" ]] && exit 0
 
     # Create new session and attach
-    ghostty -e "fish -c 'cd $REPOS_PATH/$REPO_NAME; zellij --session $REPO_NAME'"
+    launch_terminal "$(new_session_cmd '$REPOS_PATH' $REPO_NAME)"
 else
     # Launch terminal and attach the session
     CLEAN_LINE="$(remove_markup "$LINE")"
     SESSION_NAME="${CLEAN_LINE%% *}"
-    ghostty -e "zellij attach $SESSION_NAME"
+    launch_terminal "zellij attach $SESSION_NAME"
 fi
 
 exit 0
