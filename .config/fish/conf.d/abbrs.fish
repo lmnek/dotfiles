@@ -34,6 +34,8 @@ abbr curl xh
 abbr du dust
 abbr df duf
 
+abbr nv nvim
+
 abbr ls 'eza'  
 abbr la 'eza -a'
 abbr ll 'eza --long --header --git'

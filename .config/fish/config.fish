@@ -27,16 +27,5 @@ end
 
 starship init fish | source
 
-# Switch to dir with Yazi
-function y
-	set tmp (mktemp -t "yazi-cwd.XXXXXX")
-	yazi $argv --cwd-file="$tmp"
-	if set cwd (cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
-		cd -- "$cwd"
-	end
-	rm -f -- "$tmp"
-end
-alias yy='yazi'
-
 # Created by `pipx` on 2025-01-15 21:16:54
 set PATH $PATH /home/lmnk/.local/bin

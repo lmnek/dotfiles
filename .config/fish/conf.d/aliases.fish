@@ -24,4 +24,3 @@ alias pqer='pacman -Qeq | fzf --multi --preview "pacman -Qi {1}" | xargs -ro sud
 
 
 alias py='python'
-alias nv='nvim'
