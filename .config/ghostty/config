@@ -1,8 +1,8 @@
 # Examples:
 # https://github.com/search?q=path%3Aghostty%2Fconfig&type=code
 
-initial-command = "fish"
-shell-integration = "fish"
+initial-command = fish
+shell-integration = fish
 
 font-size = 16
 font-family = JetBrainsMono Nerd Font

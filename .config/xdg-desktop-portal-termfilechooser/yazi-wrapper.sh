@@ -99,8 +99,8 @@ else
   set -- --chooser-file="$(quote_string "$out")" "$(quote_string "$path")"
 fi
 
-echo "$termcmd -e '$cmd $@'"
-eval "$termcmd -e '$cmd $@'"
+echo "$termcmd -e $cmd $@"
+eval "$termcmd -e $cmd $@"
 
 # case save file
 if [ "$save" = "1" ] && [ -s "$tmpfile" ]; then

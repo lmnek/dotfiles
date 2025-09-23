@@ -4,12 +4,13 @@ NEW_SESSION_PROMPT="-- new zellij session --"
 REPOS_PATH="$HOME/repos"
 
 launch_terminal() {
-    ghostty -e "$1"
+    ghostty -e $1
 }
 
 new_session_cmd() {
     REPO_PATH=$1
     REPO_NAME=$2
+    # FIXME: broken
     echo "fish -c 'cd $REPOS_PATH/$REPO_NAME; zellij --session $REPO_NAME'"
 }
 
