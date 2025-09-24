@@ -9,5 +9,19 @@
   "blue-topaz-theme@@bt-toggle-colorful-folder": true,
   "blue-topaz-theme@@colorful-unordered-list": false,
   "blue-topaz-theme@@bt-connected-indent-hover": false,
-  "blue-topaz-theme@@color-scheme-options": "color-scheme-options-default"
+  "blue-topaz-theme@@color-scheme-options": "color-scheme-options-default",
+  "blue-topaz-theme@@bt-status-on": false,
+  "blue-topaz-theme@@tab-head-style": "default-tab",
+  "blue-topaz-theme@@stack-tabs-text-ori-options": "stack-tab-text-ori-mixed",
+  "blue-topaz-theme@@stack-tabs-background-blur-depth": 40,
+  "blue-topaz-theme@@view-button-front": false,
+  "blue-topaz-theme@@toggle-header-bottom-line": false,
+  "blue-topaz-theme@@layout-style-options": "layout-style-options-default",
+  "blue-topaz-theme@@hide-titlebar-text": false,
+  "blue-topaz-theme@@muted-activeline-bg": false,
+  "blue-topaz-theme@@title-justify-start": false,
+  "blue-topaz-theme@@scrollbar-style-option": "hover-scrollbars",
+  "blue-topaz-theme@@tab-title-bar-position": false,
+  "blue-topaz-theme@@fancy-hr": "default-hr",
+  "blue-topaz-theme@@canvas-card-focus-mode": true
 }

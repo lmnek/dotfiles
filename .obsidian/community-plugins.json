@@ -1,20 +1,20 @@
 [
   "url-into-selection",
   "obsidian-excalidraw-plugin",
-  "obsidian-kanban",
-  "obsidian-outliner",
   "obsidian-list-callouts",
   "darlal-switcher-plus",
   "homepage",
-  "obsidian-image-toolkit",
-  "janitor",
-  "cmdr",
   "dataview",
   "obsidian42-brat",
   "breadcrumbs",
   "frontmatter-markdown-links",
-  "obsidian-style-settings",
   "share-note",
   "obsidian-paste-image-rename",
-  "obsidian-focus-mode"
+  "obsidian-kanban",
+  "templater-obsidian",
+  "janitor",
+  "obsidian-style-settings",
+  "persistent-graph",
+  "obsidian-another-quick-switcher",
+  "snippet-commands-obsidian"
 ]

@@ -17,5 +17,30 @@
       "key": "P"
     }
   ],
-  "command-palette:open": []
+  "command-palette:open": [],
+  "templater-obsidian:replace-in-file-templater": [],
+  "snippet-commands-obsidian:snippet-command-hide-tabs": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "T"
+    }
+  ],
+  "app:toggle-right-sidebar": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "L"
+    }
+  ],
+  "app:toggle-left-sidebar": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "H"
+    }
+  ]
 }

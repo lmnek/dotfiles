@@ -3,8 +3,17 @@
   "cssTheme": "Blue Topaz",
   "theme": "obsidian",
   "enabledCssSnippets": [
-    "big-math"
+    "better-tables",
+    "ultra-compact",
+    "big-math",
+    "disable-table-padding",
+    "enlarge-image-hover",
+    "hide-sibebar-toggle-buttons",
+    "hide-status",
+    "inverted-image",
+    "local-graph-color"
   ],
-  "showRibbon": true,
-  "monospaceFontFamily": "Jetbrains Mono"
+  "showRibbon": false,
+  "monospaceFontFamily": "Jetbrains Mono",
+  "showViewHeader": false
 }
