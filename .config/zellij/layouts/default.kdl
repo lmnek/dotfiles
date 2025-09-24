@@ -1,12 +1,12 @@
 layout {
-    tab name="shell" {
-        pane
-    }
     tab name="nvim" {
         pane command="nvim"
     }
     tab name="lazygit" {
         pane command="lazygit"
+    }
+    tab name="shell" {
+        pane
     }
 
     default_tab_template {
