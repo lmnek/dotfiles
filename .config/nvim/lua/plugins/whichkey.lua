@@ -16,6 +16,8 @@ return {
             }
         })
 
+        -- TODO: add icons to groups that doesnt have them
+        -- eg: icon = { icon = "", color = "orange" }
         wk.add({
             { "<leader>s",  group = "+Search (Telescope)" },
             { "<leader>t",  group = "+Text / Treesitter" },
