@@ -1,0 +1,8 @@
+.theme-dark img[alt*="inv"] {
+  filter: invert(1) hue-rotate(180deg);
+  mix-blend-mode: screen;
+}
+
+.theme-dark img[alt*="inv2"] {
+  filter: brightness(1.5) invert(1) !important;
+}

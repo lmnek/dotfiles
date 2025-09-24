@@ -1,0 +1,11 @@
+/* Hide status bar */
+.status-bar {
+  opacity: 0;
+  transition: opacity var(--focus-animation-duration) ease-in-out;
+}
+
+.status-bar:hover {
+  opacity: 1;
+  transition: opacity var(--focus-animation-duration) ease-in-out;
+}
+
