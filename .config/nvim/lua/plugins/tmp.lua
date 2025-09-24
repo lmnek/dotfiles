@@ -14,6 +14,9 @@ return {
     -- smart incremental select: "." in visual mode
     { 'RRethy/nvim-treesitter-textsubjects', opts = {},          config = function() end },
 
+    -- automatic markdown bullet lists + toggle checkbox via "<leader>x"
+    { 'bullets-vim/bullets.vim',             opts = {},          config = function() end },
+
     -- Make ] or [ motions repeatable with ; and ,
     {
         'mawkler/demicolon.nvim',
@@ -43,12 +46,4 @@ return {
             { "<leader>of", "<cmd>Neotree filesystem reveal right<cr>", desc = "Neotree", mode = { "n", "v" } },
         }
     },
-
-    {
-        'MeanderingProgrammer/render-markdown.nvim',
-        dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
-        opts = {},
-    },
-
-    { "sphamba/smear-cursor.nvim", opts = {} },
 }
