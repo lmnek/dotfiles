@@ -27,19 +27,6 @@ return {
         opts = {},
     },
     {
-        "folke/zen-mode.nvim",
-        opts = {
-            window = {
-                options = {
-                    signcolumn = "no"
-                }
-            }
-        },
-        keys = {
-            { "<leader>Tz", "<cmd>ZenMode<cr>", desc = "Zen mode" },
-        }
-    },
-    {
         -- Better statusline
         'nvim-lualine/lualine.nvim',
         dependencies = {
