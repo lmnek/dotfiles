@@ -12,9 +12,11 @@ window-padding-x = 0
 window-padding-y = 0
 # window-padding-color = extend
 
-theme = "Dracula"
 maximize = true
 window-decoration = none
+
+theme = "Dracula"
+background = "#1e1f29"
 
 # distracting UI popups:
 confirm-close-surface = false
