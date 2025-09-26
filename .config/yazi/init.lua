@@ -1,6 +1,6 @@
 -- This file is used to:
 -- - extend the functionality of Yazi (e.g. status bar behavior)
--- - customize plugins
+-- - customize / import plugins
 
 -- Show symlink in statusbar (from 'tips' in docs)
 Status:children_add(function(self)
@@ -37,4 +37,4 @@ end, 9000, Header.RIGHT)
 -- cmd for installing/listing/updating plugins: "ya pack ..."
 -- nice plugins list: https://yazi-rs.github.io/docs/resources
 
--- require("starship"):setup() -- a bit distracting..
+require("folder-rules"):setup()

@@ -68,13 +68,11 @@ prepend_keymap = [
         "g",
         "p",
     ], run = "cd ~/pix", desc = "cd pix" },
-    # TODO: per-directory defined rules
     { on = [
         "g",
         "d",
     ], run = [
         "cd ~/Downloads",
-        "sort mtime --reverse",
     ], desc = "cd Downloads" },
     { on = [
         "g",
