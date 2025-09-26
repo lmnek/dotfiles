@@ -1,10 +1,8 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
 # adds blank line when new shell opened
-add_newline = false 
+add_newline = false
 
-format = '${custom.yazi}$all'
-
-
-[custom.yazi]
-description = "Indicate the shell was launched by `yazi`"
-symbol = " "
-when = """ test -n "$YAZI_LEVEL" """
+[git_status]
+disabled = true

@@ -2,13 +2,6 @@ return { -- Adds git related signs to the gutter, hunks, as well as utilities fo
     'lewis6991/gitsigns.nvim',
     event = "VeryLazy",
     opts = {
-        signs = {
-            add = { text = '+' },
-            change = { text = '~' },
-            delete = { text = '_' },
-            topdelete = { text = '‾' },
-            changedelete = { text = '~' },
-        },
         on_attach = function(bufnr)
             local gitsigns = require('gitsigns')
 
@@ -43,14 +36,13 @@ return { -- Adds git related signs to the gutter, hunks, as well as utilities fo
             map('v', '<leader>ghr', function() gitsigns.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end,
                 { desc = 'Reset hunk' })
             map('n', '<leader>ghS', gitsigns.stage_buffer, { desc = 'Stage buffer' })
-            map('n', '<leader>ghu', gitsigns.undo_stage_hunk, { desc = 'Undo stage hunk' })
             map('n', '<leader>ghR', gitsigns.reset_buffer, { desc = 'Reset buffer' })
             map('n', '<leader>ghp', gitsigns.preview_hunk, { desc = 'Preview hunk' })
+            map('n', '<leader>ghP', gitsigns.preview_hunk_inline, { desc = 'Preview hunk inline' })
             map('n', '<leader>ghb', function() gitsigns.blame_line { full = true } end, { desc = 'Blame line' })
             map('n', '<leader>ghB', gitsigns.toggle_current_line_blame, { desc = 'Toggle git Blame' })
             map('n', '<leader>ghd', gitsigns.diffthis, { desc = 'Diff' })
             map('n', '<leader>ghD', function() gitsigns.diffthis('~') end, { desc = 'Diff ~' })
-            map('n', '<leader>ght', gitsigns.toggle_deleted, { desc = 'Toggle git Deleted' })
 
             -- Text object
             map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')

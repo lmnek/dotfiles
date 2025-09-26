@@ -5,6 +5,8 @@ git:
     pager: delta --dark --paging=never
 
 gui:
+  commitHashLength: 3
+
   # DRACULA
   theme:
     activeBorderColor:
