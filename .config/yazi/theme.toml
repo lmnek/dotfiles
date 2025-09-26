@@ -4,3 +4,15 @@ dark = "dracula"
 [status]
 sep_left = { open = "", close = "" }
 sep_right = { open = "", close = "" }
+
+[icon]
+prepend_dirs = [
+    { fg = "#50FA7B", name = "repos", text = "" },
+    { fg = "#F1FA8C", name = "Downloads", text = "󰇚" },
+    { fg = "#FF79C6", name = "music", text = "" },
+    { fg = "#FF79C6", name = "pix", text = "" },
+    { fg = "#FF79C6", name = "vids", text = "" },
+    { fg = "#FF79C6", name = "screens", text = "" },
+    { fg = "#8BE9FD", name = "dox", text = "󱔗" },
+    # ...
+]
