@@ -33,3 +33,8 @@ keybind = ctrl+minus=decrease_font_size:1
 
 keybind = ctrl+shift+c=copy_to_clipboard
 keybind = ctrl+shift+v=paste_from_clipboard
+
+keybind = shift+page_down=scroll_page_down
+keybind = shift+page_up=scroll_page_up
+keybind = shift+end=scroll_to_bottom
+keybind = shift+home=scroll_to_top
