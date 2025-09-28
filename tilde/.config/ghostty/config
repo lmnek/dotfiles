@@ -22,6 +22,8 @@ background = "#1e1f29"
 confirm-close-surface = false
 resize-overlay = never
 
+app-notifications = no-clipboard-copy
+
 # Disable all keybinds
 # (Alt+nubers stopped working for zellij as it was assigned to tab managements
 # ghostty +list-keybinds --default
