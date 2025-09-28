@@ -238,11 +238,14 @@ assign [class="Legcord"] $ws4
 assign [class="thunderbird"] $ws5
 assign [class="Obsidian"] $ws9 
 
+assign [class="w_librechat"] $ws10
+
 # automatic set focus new window if it opens on another workspace than the current:
 for_window [class=ghostty] focus
 for_window [class=zen] focus
 for_window [class=Thunar] focus
 for_window [class=yazi] focus
+for_window [class="w_librechat"] focus
 
 ##############
 # compositor #
@@ -326,7 +329,8 @@ for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
 for_window [class="Pamac-manager"] floating enable
 for_window [window_role="About"] floating enable
-for_window [class="ripdrag"] floating enable
+
+for_window [class="ripdrag"] floating enable, sticky enable, move position 20 650, border pixel 3
 
 ######################################
 # color settings for bar and windows #
@@ -421,33 +425,36 @@ bindsym $mod+period exec "ghostty --class=com.lmnk.yazi -e fish -c 'y; exec fish
 bindsym Print       exec --no-startup-id flameshot gui -c
 bindsym Shift+Print exec --no-startup-id flameshot gui -c -p "/home/$USER/pix/screens/"
 
-# adding x11 class to brave window is broken -> cant create scratchpad
-bindsym $mod+Ctrl+l exec brave --app="https://librechat-librechat.hf.space"
-
 ## Scratchpads
-
-# hide all scratchpads
-bindsym $mod+w [floating] move scratchpad
 
 # toggle last scratchpad
 bindsym $mod+x exec --no-startup-id ~/.config/i3/scripts/toggle_last_scratchpad
 
-for_window [class="term2"] floating enable, resize set 1200 1000, move scratchpad, border pixel 3
-exec ghostty --class=com.lmnk.term2 -e zellij attach scratchpad
-bindsym $mod+t [class="term2"] scratchpad show move position center
+# hide all scratchpads
+bindsym $mod+Shift+x [floating] move scratchpad
 
-for_window [class="Caprine"] floating enable, resize set 1400 1000, move scratchpad, border pixel 3
-bindsym $mod+Ctrl+m [class="Caprine"] scratchpad show move position center
-bindsym $mod+Ctrl+Shift+m exec caprine
+for_window [class="scratchterm"] floating enable, resize set 1200 1000, move scratchpad, border pixel 3
+bindsym $mod+t [class="scratchterm"] scratchpad show move position center
+exec ghostty --class=com.lmnk.scratchterm -e zellij attach --create scratchpad
 
-for_window [class="Raindrop.io"] floating enable, resize set 1600 1000, move scratchpad, border pixel 3
-bindsym $mod+Ctrl+r [class="Raindrop.io"] scratchpad show move position center
-bindsym $mod+Ctrl+Shift+r exec raindrop
+for_window [class="Raindrop.io"] floating enable, resize set 1600 1000, move scratchpad, border pixel 3, focus, move position center
+for_window [title="Blanket"] floating enable, resize set 600 800, move scratchpad, border pixel 3, focus, move position center
+for_window [title="tidal-hifi"] floating enable, resize set 1600 1000, move scratchpad, border pixel 1, focus, move position center
 
-for_window [class="Spotify"] floating enable, resize set 1200 1000, move scratchpad, border pixel 3
-bindsym $mod+Ctrl+s [class="Spotify"] scratchpad show move position center
-bindsym $mod+Ctrl+Shift+s exec spotify
+bindsym $mod+o mode "open"
+mode "open" {
+    bindsym t [class="tidal-hifi"] scratchpad show move position center , mode "default" 
+    bindsym Shift+t exec tidal-hifi , mode "default"
 
-for_window [title="Blanket"] floating enable, resize set 600 800, move scratchpad, border pixel 3
-bindsym $mod+Ctrl+b [title="Blanket"] scratchpad show move position center
-bindsym $mod+Ctrl+Shift+b exec blanket
+    bindsym r [class="Raindrop.io"] scratchpad show move position center , mode "default"
+    bindsym Shift+r exec raindrop , mode "default"
+
+    bindsym b [title="Blanket"] scratchpad show move position center , mode "default"
+    bindsym Shift+b exec blanket , mode "default"
+
+    bindsym Shift+l exec chromium --class="w_librechat" --app="https://librechat-librechat.hf.space" , mode "default"
+
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+
+}
