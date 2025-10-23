@@ -8,8 +8,7 @@
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-# font pango: Noto Sans Regular 10
-font pango: JetBrainsMono 10
+font pango: JetBrainsMono 8
 
 # set the mod key to the winkey:
 set $mod Mod4
@@ -438,23 +437,45 @@ bindsym $mod+t [class="scratchterm"] scratchpad show move position center
 exec ghostty --class=com.lmnk.scratchterm -e zellij attach --create scratchpad
 
 for_window [class="Raindrop.io"] floating enable, resize set 1600 1000, move scratchpad, border pixel 3, focus, move position center
-for_window [title="Blanket"] floating enable, resize set 600 800, move scratchpad, border pixel 3, focus, move position center
+for_window [title="Blanket"] floating enable, resize set 600 800, move scratchpad, focus, move position center
 for_window [title="tidal-hifi"] floating enable, resize set 1600 1000, move scratchpad, border pixel 1, focus, move position center
+
+set $show_tidal   [class="tidal-hifi"] scratchpad show move position center
+set $show_raindrop [class="Raindrop.io"] scratchpad show move position center
+set $show_blanket [title="Blanket"] scratchpad show move position center
 
 bindsym $mod+o mode "open"
 mode "open" {
-    bindsym t [class="tidal-hifi"] scratchpad show move position center , mode "default" 
-    bindsym Shift+t exec tidal-hifi , mode "default"
+    bindsym o mode "launch"
+    bindsym $mod+o mode "launch"
 
-    bindsym r [class="Raindrop.io"] scratchpad show move position center , mode "default"
-    bindsym Shift+r exec raindrop , mode "default"
+    # Tidal
+    bindsym t         exec --no-startup-id i3-msg "$show_tidal", mode "default"
+    bindsym $mod+t    exec --no-startup-id i3-msg "$show_tidal", mode "default"
 
-    bindsym b [title="Blanket"] scratchpad show move position center , mode "default"
-    bindsym Shift+b exec blanket , mode "default"
+    # Raindrop
+    bindsym r         exec --no-startup-id i3-msg "$show_raindrop", mode "default"
+    bindsym $mod+r    exec --no-startup-id i3-msg "$show_raindrop", mode "default"
 
-    bindsym Shift+l exec chromium --class="w_librechat" --app="https://librechat-librechat.hf.space" , mode "default"
+    # Blanket
+    bindsym b         exec --no-startup-id i3-msg "$show_blanket", mode "default"
+    bindsym $mod+b    exec --no-startup-id i3-msg "$show_blanket", mode "default"
 
-    bindsym Escape mode "default"
-    bindsym Return mode "default"
+    bindsym Escape    mode "default"
+}
 
+mode "launch" {
+    bindsym t        exec --no-startup-id tidal-hifi, mode "default"
+    bindsym $mod+t   exec --no-startup-id tidal-hifi, mode "default"
+
+    bindsym r        exec --no-startup-id raindrop, mode "default"
+    bindsym $mod+r   exec --no-startup-id raindrop, mode "default"
+
+    bindsym b        exec --no-startup-id blanket, mode "default"
+    bindsym $mod+b   exec --no-startup-id blanket, mode "default"
+
+    bindsym l        exec --no-startup-id chromium --class="w_librechat" --app="https://librechat-librechat.hf.space", mode "default"
+    bindsym $mod+l   exec --no-startup-id chromium --class="w_librechat" --app="https://librechat-librechat.hf.space", mode "default"
+
+    bindsym Escape    mode "default"
 }
