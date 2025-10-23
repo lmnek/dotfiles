@@ -23,5 +23,8 @@
   "blue-topaz-theme@@scrollbar-style-option": "hover-scrollbars",
   "blue-topaz-theme@@tab-title-bar-position": false,
   "blue-topaz-theme@@fancy-hr": "default-hr",
-  "blue-topaz-theme@@canvas-card-focus-mode": true
+  "blue-topaz-theme@@canvas-card-focus-mode": true,
+  "blue-topaz-theme@@colorful-ordered-list": false,
+  "blue-topaz-theme@@unordered-list-style-options": "bt-default-unordered-list",
+  "blue-topaz-theme@@folder-dataview-list-style": "dataview-list-style-normal"
 }

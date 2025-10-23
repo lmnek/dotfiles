@@ -11,7 +11,8 @@
     "hide-sibebar-toggle-buttons",
     "hide-status",
     "inverted-image",
-    "local-graph-color"
+    "local-graph-color",
+    "hide-tabs"
   ],
   "showRibbon": false,
   "monospaceFontFamily": "Jetbrains Mono",
