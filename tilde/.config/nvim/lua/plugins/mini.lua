@@ -29,7 +29,6 @@ return { -- Collection of various small independent plugins/modules
                 suffix_next = 'n',     -- Suffix to search with "next" method
             }
         }
-        -- require('mini.surround').setup()
 
         -- Automatically write pairing {([ ...
         -- require('mini.pairs').setup()

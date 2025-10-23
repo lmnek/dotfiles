@@ -7,6 +7,10 @@
 
 [mgr]
 prepend_keymap = [
+    # more vim-like, defualts are H and L
+    { on = "<C-o>", run = "back", desc = "Back to previous directory" },
+    { on = "<C-i>", run = "forward", desc = "Forward to next directory" },
+
     # ------ EXECUTE SHELL SCRIPTS------
     { on = [
         "e",

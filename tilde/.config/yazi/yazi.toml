@@ -41,11 +41,14 @@ extract = [
 display_image = [
     { run = 'feh -F -Z --start-at "$0"', orphan = true, desc = "feh", for = "unix" },
     { run = 'gwenview "$0"', orphan = true, desc = "gwenview", for = "unix" },
+    { run = 'pinta "$0"', orphan = true, desc = "pinta", for = "unix" },
+    # { run = 'nsxiv -r "$0"', orphan = true, desc = "nsxiv", for = "unix" }, # TODO: thumbnail mode
 ]
 display_pdf = [
-    { run = 'zathura "$0"', orphan = true, desc = "zathura", for = "unix" },
     { run = 'okular "$0"', orphan = true, desc = "okular", for = "unix" },
+    { run = 'zathura "$0"', orphan = true, desc = "zathura", for = "unix" },
     { run = 'pdfmixtool "$0"', orphan = true, desc = "pdfmixtool", for = "unix" },
+    { run = 'xournalpp "$0"', orphan = true, desc = "xournalpp", for = "unix" },
 ]
 
 [open]

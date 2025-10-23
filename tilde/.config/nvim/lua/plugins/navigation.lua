@@ -33,11 +33,10 @@ return {
                         '--follow',
                         "--glob=!.git/",
                     },
-                    -- layout_config = { vertical = { width = 0.99 } }
                     layout_strategy = 'horizontal',
                     layout_config = {
                         width = 0.95,
-                        preview_width = 0.5
+                        -- preview_width = 0.5 -- makes actions-preview.nvim vertical layout error out
                     },
                     mappings = {
                         i = { ["<c-t>"] = open_with_trouble },
