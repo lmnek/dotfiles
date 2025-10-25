@@ -235,9 +235,13 @@ assign [class="Beeper"] $ws4
 assign [class="Legcord"] $ws4
 
 assign [class="thunderbird"] $ws5
+assign [class="pwa_proton"] $ws5
+
 assign [class="Obsidian"] $ws9 
 
-assign [class="w_librechat"] $ws10
+assign [class="pwa_librechat"] $ws10
+assign [class="pwa_chatgpt"] $ws10
+assign [class="pwa_gemini"] $ws10
 
 # automatic set focus new window if it opens on another workspace than the current:
 for_window [class=ghostty] focus
@@ -474,8 +478,26 @@ mode "launch" {
     bindsym b        exec --no-startup-id blanket, mode "default"
     bindsym $mod+b   exec --no-startup-id blanket, mode "default"
 
-    bindsym l        exec --no-startup-id chromium --class="w_librechat" --app="https://librechat-librechat.hf.space", mode "default"
-    bindsym $mod+l   exec --no-startup-id chromium --class="w_librechat" --app="https://librechat-librechat.hf.space", mode "default"
+    # Zen browser: default profile
+    bindsym z              exec --no-startup-id zen-browser, mode "default"
+    bindsym $mod+z         exec --no-startup-id zen-browser, mode "default"
+    # Zen browser: chill profile
+    bindsym Shift+z        exec --no-startup-id zen-browser -P Chill, mode "default"
+    bindsym $mod+Shift+z   exec --no-startup-id zen-browser -P Chill, mode "default"
+
+    # Zen browser: PWAs with WebApp profile
+    ## LibreChat
+    bindsym l        exec --no-startup-id zen-browser -P WebApp --class="pwa_librechat" --new-window "https://librechat-librechat.hf.space", mode "default"
+    bindsym $mod+l   exec --no-startup-id zen-browser -P WebApp --class="pwa_librechat" --new-window "https://librechat-librechat.hf.space", mode "default"
+    ## ChatGPT
+    bindsym c        exec --no-startup-id zen-browser -P WebApp --class="pwa_chatgpt" --new-window "https://chatgpt.com/", mode "default"
+    bindsym $mod+c   exec --no-startup-id zen-browser -P WebApp --class="pwa_chatgpt" --new-window "https://chatgpt.com/", mode "default"
+    ## Gemini
+    bindsym g        exec --no-startup-id zen-browser -P WebApp --class="pwa_gemini" --new-window "https://gemini.google.com/", mode "default"
+    bindsym $mod+g   exec --no-startup-id zen-browser -P WebApp --class="pwa_gemini" --new-window "https://gemini.google.com/", mode "default"
+    ## Proton mail
+    bindsym p        exec --no-startup-id zen-browser -P WebApp --class="pwa_proton" --new-window "https://mail.proton.me", mode "default"
+    bindsym $mod+p   exec --no-startup-id zen-browser -P WebApp --class="pwa_proton" --new-window "https://mail.proton.me", mode "default"
 
     bindsym Escape    mode "default"
 }
