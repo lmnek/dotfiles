@@ -10,8 +10,16 @@ launch_terminal() {
 new_session_cmd() {
     REPO_PATH=$1
     REPO_NAME=$2
-    # FIXME: broken
     echo "fish -c 'cd $REPOS_PATH/$REPO_NAME; zellij --session $REPO_NAME'"
+}
+launch_terminal() {
+  ghostty -e "$@"            # forward all args as argv
+}
+
+new_session_cmd() {
+  local repo_path=$1
+  local repo_name=$2
+  NEW_SESSION_CMD=(fish -c "cd \"$repo_path/$repo_name\"; zellij --session \"$repo_name\"")
 }
 
 set -euo pipefail
@@ -45,12 +53,13 @@ if [[ "$NEW_SESSION_PROMPT" == "$LINE" ]]; then
     [[ -z "$REPO_NAME" ]] && exit 0
 
     # Create new session and attach
-    launch_terminal "$(new_session_cmd '$REPOS_PATH' $REPO_NAME)"
+    new_session_cmd "$REPOS_PATH" "$REPO_NAME"
+    launch_terminal "${NEW_SESSION_CMD[@]}"
 else
     # Launch terminal and attach the session
     CLEAN_LINE="$(remove_markup "$LINE")"
     SESSION_NAME="${CLEAN_LINE%% *}"
-    launch_terminal "zellij attach $SESSION_NAME"
+    launch_terminal zellij attach $SESSION_NAME
 fi
 
 exit 0
