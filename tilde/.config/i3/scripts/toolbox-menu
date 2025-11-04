@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+#
+# TUI launcher (rofi only): pick common terminal TUIs (bluetooth, pulsemixer, etc.)
+# Based on your power menu script, simplified and zenity-free.
+#
+# Copyright 2015 Benjamin Chrétien ...
+# (original header kept; modified for a TUI launcher)
+
+# NOTE: not styled
+# ROFI_OPTIONS=(-theme ~/.config/rofi/powermenu.rasi)
+ROFI_TEXT="Launch"
+
+set -euo pipefail
+
+# Check whether a command exists
+command_exists() { command -v "$1" >/dev/null 2>&1; }
+
+TERMINAL="ghostty -e "
+
+# Menu defined as an associative array: "Label" -> "command"
+# Tip: many entries use fallbacks (cmd1 || cmd2 ...), so you don't need to prune the list.
+typeset -A menu
+
+menu=(
+  [13 Docker  [lazydocker]]="$TERMINAL lazydocker"
+  [12 Github  [gh-dash]]="$TERMINAL gh-dash"
+  [11 SSH  [lazyssh]]="$TERMINAL lazyssh"
+
+  [10 Disk  [dua]]="$TERMINAL dua i" # or ncdu
+  [9  Disk visual  [diskonaut]]="$TERMINAL diskonaut"
+
+  [8  Systemd  [systemctl-tui]]="$TERMINAL systemctl-tui"
+  [7  Packages 󰏗 [pacseek]]="$TERMINAL pacseek" # or pacsea
+  [6  Processes  [btop]]="$TERMINAL btop"
+
+  [5  Mount  [BashMount]]="$TERMINAL bashmount"
+  [4  Display  [ARandR]]="arandr"
+
+  [3  Bluetooth  [Blueman]]="blueman-manager" # or TUI: bluetui, bluetuith
+  [2  Network  [nmtui]]="$TERMINAL nmtui" # or GUI networkmanager applet or networkmanager-dmenu or impala
+  [1  Audio  [PulseMixer]]="$TERMINAL pulsemixer" # or GUI pavucontrol
+)
+
+menu_nrows=${#menu[@]}
+
+# Prepare rofi invocation
+launcher=(rofi -dmenu -i -lines "${menu_nrows}" -p "${ROFI_TEXT}" "${rofi_colors[@]}" "${ROFI_OPTIONS[@]}")
+
+# Show menu
+selection="$(printf '%s\n' "${!menu[@]}" | sort -n | "${launcher[@]}")"
+
+# Nothing picked
+[[ -z "${selection}" ]] && exit 0
+
+cmd="${menu[${selection}]}"
+
+# If Cancel, bail out
+[[ -z "${cmd}" ]] && exit 0
+
+# Runner: prefer i3-msg to match your old behavior, else spawn directly
+run_cmd() {
+  if command_exists i3-msg; then
+    # --no-startup-id to avoid clutter
+    i3-msg -q "exec --no-startup-id ${cmd}"
+  else
+    # Wayland/X11-agnostic background spawn
+    nohup bash -lc "${full}" >/dev/null 2>&1 &
+  fi
+}
+
+run_cmd
