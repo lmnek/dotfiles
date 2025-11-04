@@ -1,8 +1,7 @@
 local function setup()
     ps.sub("cd", function()
         local cwd = cx.active.current.cwd
-        if cwd:ends_with("Downloads") or cwd:ends_with("pix/screens") then
-            -- DOWNLOADS:
+        if cwd:ends_with("Downloads") or cwd:ends_with("pix/screens") or cwd:ends_with("Trash/files") then
             ya.emit("sort", { "mtime", reverse = true, dir_first = false })
         else
             -- EVERYTHING ELSE:

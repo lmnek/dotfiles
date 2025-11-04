@@ -227,10 +227,11 @@ set $ws10 "10:󰚩"
 # bind program to workspace and focus to them on startup:
 assign [class="yazi"] $ws1
 
-assign [class="zen"] $ws2
+# assign [class="zen"] $ws2
 
 assign [class="Todoist"] $ws3
 assign [class="Morgen"] $ws3
+assign [class="pwa_morgen"] $ws3
 
 assign [class="Signal"] $ws4
 assign [class="Beeper"] $ws4
@@ -238,6 +239,8 @@ assign [class="Legcord"] $ws4
 
 assign [class="thunderbird"] $ws5
 assign [class="pwa_proton"] $ws5
+
+assign [class="zen_chill"] $ws6
 
 assign [class="Obsidian"] $ws9 
 
@@ -484,22 +487,25 @@ mode "launch" {
     bindsym z              exec --no-startup-id zen-browser, mode "default"
     bindsym $mod+z         exec --no-startup-id zen-browser, mode "default"
     # Zen browser: chill profile
-    bindsym Shift+z        exec --no-startup-id zen-browser -P Chill, mode "default"
-    bindsym $mod+Shift+z   exec --no-startup-id zen-browser -P Chill, mode "default"
+    bindsym Shift+z        exec --no-startup-id zen-browser --class="zen_chill" -P Chill, mode "default"
+    bindsym $mod+Shift+z   exec --no-startup-id zen-browser --class="zen_chill" -P Chill, mode "default"
 
     # Zen browser: PWAs with WebApp profile
     ## LibreChat
     bindsym l        exec --no-startup-id zen-browser -P WebApp --class="pwa_librechat" --new-window "https://librechat-librechat.hf.space", mode "default"
     bindsym $mod+l   exec --no-startup-id zen-browser -P WebApp --class="pwa_librechat" --new-window "https://librechat-librechat.hf.space", mode "default"
     ## ChatGPT
-    bindsym c        exec --no-startup-id zen-browser -P WebApp --class="pwa_chatgpt" --new-window "https://chatgpt.com/", mode "default"
-    bindsym $mod+c   exec --no-startup-id zen-browser -P WebApp --class="pwa_chatgpt" --new-window "https://chatgpt.com/", mode "default"
+    bindsym c        exec --no-startup-id zen-browser -P WebApp --class="pwa_chatgpt" --new-window "https://chatgpt.com", mode "default"
+    bindsym $mod+c   exec --no-startup-id zen-browser -P WebApp --class="pwa_chatgpt" --new-window "https://chatgpt.com", mode "default"
     ## Gemini
-    bindsym g        exec --no-startup-id zen-browser -P WebApp --class="pwa_gemini" --new-window "https://gemini.google.com/", mode "default"
-    bindsym $mod+g   exec --no-startup-id zen-browser -P WebApp --class="pwa_gemini" --new-window "https://gemini.google.com/", mode "default"
+    bindsym g        exec --no-startup-id zen-browser -P WebApp --class="pwa_gemini" --new-window "https://gemini.google.com", mode "default"
+    bindsym $mod+g   exec --no-startup-id zen-browser -P WebApp --class="pwa_gemini" --new-window "https://gemini.google.com", mode "default"
     ## Proton mail
     bindsym p        exec --no-startup-id zen-browser -P WebApp --class="pwa_proton" --new-window "https://mail.proton.me", mode "default"
     bindsym $mod+p   exec --no-startup-id zen-browser -P WebApp --class="pwa_proton" --new-window "https://mail.proton.me", mode "default"
+    ## Morgen calendar
+    bindsym m        exec --no-startup-id zen-browser -P WebApp --class="pwa_morgen" --new-window "https://web.morgen.so", mode "default"
+    bindsym $mod+m   exec --no-startup-id zen-browser -P WebApp --class="pwa_morgen" --new-window "https://web.morgen.so", mode "default"
 
     bindsym Escape    mode "default"
 }

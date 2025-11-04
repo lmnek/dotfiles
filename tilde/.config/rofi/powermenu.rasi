@@ -20,7 +20,7 @@ window {
     x-offset:       -15;
 }
 listview {
-    lines:     7;
+    lines:     6;
     columns:   1;
 }
 textbox-prompt-colon {

@@ -3,93 +3,40 @@
 
 # !!! FOR KEYBIND HELP: ~
 
-# ---------- CUSTOM KEYBINDS --------------
-
 [mgr]
 prepend_keymap = [
-    # more vim-like, defualts are H and L
-    { on = "<C-o>", run = "back", desc = "Back to previous directory" },
-    { on = "<C-i>", run = "forward", desc = "Forward to next directory" },
+  # more vim-like, defualts are H and L
+  { on = "<C-o>", run = "back", desc = "Back to previous directory" },
+  { on = "<C-i>", run = "forward", desc = "Forward to next directory" },
 
-    # ------ EXECUTE SHELL SCRIPTS------
-    { on = [
-        "e",
-        "r",
-    ], run = '''shell 'remove-space-filename.sh "$0"' --confirm''', desc = "Remove spaces from filename" },
-    { on = [
-        "e",
-        "d",
-    ], run = '''shell 'ripdrag -a "$@" -x 2>/dev/null &' --confirm''', desc = "drag&drop" },
+  # ------ EXECUTE SHELL SCRIPTS------
+  { on = [ "e", "r" ], run = '''shell 'remove-space-filename.sh "$0"' --confirm''', desc = "Remove spaces from filename" },
+  { on = [ "e", "d" ], run = '''shell 'ripdrag -a "$@" -x 2>/dev/null &' --confirm''', desc = "drag&drop" },
 
-    # ------ FZF JUMP ------
-    { on = "z", run = '''shell 'ya emit cd $(fd --type directory | fzf)' --block''', desc = "fzf: dirs" },
-    { on = "Z", run = '''shell 'ya emit cd $(fd --type directory --hidden | fzf)' --block''', desc = "fzf: dirs + hidden" },
-    { on = "s", run = "plugin fzf", desc = "fzf: files" },
-    { on = "S", run = '''shell 'ya emit reveal $(fd --type file --hidden | fzf)' --block''', desc = "fzf: files + hidden" },
-    # -> overrides default search mode ("s" - fd, "S" - ripgrep!!)
+  # ------ SEARCH MODE ------
+  { on = [ "s", "d" ], run = '''shell 'ya emit cd $(fd --type directory | fzf)' --block''', desc = "dirs" },
+  { on = [ "s", "h", "d" ], run = '''shell 'ya emit cd $(fd --type directory --hidden | fzf)' --block''', desc = "dirs [hidden]" },
+  { on = [ "s", "f" ], run = "plugin fzf", desc = "files" },
+  { on = [ "s", "h", "f" ], run = '''shell 'ya emit reveal $(fd --type file --hidden | fzf)' --block''', desc = "files [hidden]" },
+  { on = [ "s", "g" ], run = "search --via=rg", desc = "ripgrep" },
+ 
+  # ------ PLUGINS ------
+  { on = "m", run = "plugin relative-motions", desc = "Trigger new VIM relative motion" },  # TODO: show relative line numbers only on command
+  { on = [ "e", "C" ], run = "plugin ouch", desc = "Compress with ouch" },
+  { on = [ "e", "c" ], run = "plugin chmod", desc = "Chmod on selected files" },
+  { on = "U", run = "plugin restore", desc = "Restore last deleted files/dirs" },
+  { on = "M", run = "plugin toggle-pane max-preview", desc = "Maximize or restore the preview pane" },
+  { on = "T", run = "plugin toggle-pane min-preview", desc = "Show or hide the preview pane" },
 
-    # ------ PLUGINS ------
-    { on = "m", run = "plugin relative-motions", desc = "Trigger new VIM relative motion" }, # TODO: show relative line numbers only on command
-    { on = [
-        "e",
-        "C",
-    ], run = "plugin ouch", desc = "Compress with ouch" },
-    { on = [
-        "e",
-        "c",
-    ], run = "plugin chmod", desc = "Chmod on selected files" },
-    { on = "U", run = "plugin restore", desc = "Restore last deleted files/dirs" },
-
-    { on = "M", run = "plugin toggle-pane max-preview", desc = "Maximize or restore the preview pane" },
-    { on = "T", run = "plugin toggle-pane min-preview", desc = "Show or hide the preview pane" },
-
-    # ------ GOTO DIR ------
-    { on = [
-        "g",
-        "m",
-    ], run = "cd /mnt", desc = "cd mounted dirs" },
-    { on = [
-        "g",
-        "D",
-    ], run = "cd ~/dox", desc = "cd dox" },
-    { on = [
-        "g",
-        ".",
-    ], run = "cd ~/repos/dotfiles", desc = "cd dotfiles" },
-    { on = [
-        "g",
-        ",",
-    ], run = "cd ~/repos/secret-dotfiles", desc = "cd secret-dotfiles" },
-    { on = [
-        "g",
-        "r",
-    ], run = "cd ~/repos", desc = "cd repos" },
-    { on = [
-        "g",
-        "f",
-    ], run = "cd ~/dox/fit", desc = "cd Fit" },
-    { on = [
-        "g",
-        "p",
-    ], run = "cd ~/pix", desc = "cd pix" },
-    { on = [
-        "g",
-        "d",
-    ], run = [
-        "cd ~/Downloads",
-    ], desc = "cd Downloads" },
-    { on = [
-        "g",
-        "s",
-    ], run = [
-        "cd ~/pix/screens",
-        "sort mtime --reverse",
-    ], desc = "cd screenshots" },
-    { on = [
-        "g",
-        "t",
-    ], run = [
-        "cd ~/.local/share/Trash/files/",
-        "sort mtime --reverse",
-    ], desc = "cd .Trash" },
+  # ------ GOTO DIR ------
+  { on = [ "g", "m" ], run = "cd /mnt", desc = "cd mounted dirs" },
+  { on = [ "g", "D" ], run = "cd ~/dox", desc = "cd dox" },
+  { on = [ "g", "." ], run = "cd ~/repos/dotfiles", desc = "cd dotfiles" },
+  { on = [ "g", "," ], run = "cd ~/repos/secret-dotfiles", desc = "cd secret-dotfiles" },
+  { on = [ "g", "r" ], run = "cd ~/repos", desc = "cd repos" },
+  { on = [ "g", "f" ], run = "cd ~/dox/fit", desc = "cd Fit" },
+  { on = [ "g", "p" ], run = "cd ~/pix", desc = "cd pix" },
+  { on = [ "g", "d" ], run = "cd ~/Downloads", desc = "cd Downloads" },
+  { on = [ "g", "s", ], run = "cd ~/pix/screens", desc = "cd screenshots" },
+  { on = [ "g", "t" ], run = "cd ~/.local/share/Trash/files/", desc = "cd .Trash" },
 ]

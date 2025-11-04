@@ -120,7 +120,6 @@ menu=(
   [3  Hibernate]="systemctl hibernate"
   [2  Lock]="~/.config/i3/scripts/blur-lock"
   [1  Logout]="i3-msg exit"
-  [0  Cancel]=""
 )
 
 menu_nrows=${#menu[@]}

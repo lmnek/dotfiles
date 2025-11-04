@@ -1,29 +1,15 @@
-## Abbreviations
 
 # --- Git ---
 abbr lg 'lazygit' # only important thing lol
-abbr g 'git'
-abbr ga 'git add'
-abbr gb 'git branch'
-abbr gbl 'git blame'
-abbr gc 'git commit -m'
-abbr gca 'git commit --amend -m'
-abbr gd 'git diff'
-abbr gf 'git fetch'
 abbr gl 'git log --all --decorate --oneline --graph'
-abbr gm 'git merge'
-abbr gp 'git push'
-abbr gpl 'git pull'
-abbr gr 'git remote'
-abbr gs 'git status'
-abbr gst 'git stash'
+abbr gc 'git clone'
 
 # --- Pacman ---
-abbr pS 'sudo pacman -S'
-abbr pY 'sudo pacman -Syyu'
-abbr pR 'sudo pacman -Rs'
-abbr yS 'yay -S'
-abbr yR 'yay -Rs'
+abbr pms 'sudo pacman -S'
+abbr pmy 'sudo pacman -Syyu'
+abbr pm 'sudo pacman -Rs'
+abbr ys 'yay -S'
+abbr yr 'yay -Rs'
 
 # --- Abbrs to use (and NOT FORGET!) improved coreutils ---
 abbr find fd
@@ -45,14 +31,6 @@ abbr lla 'eza --long --header -a --git'
 abbr h 'cd ~/'
 abbr r 'cd ~/repos'
 
-# --- Other random goodies ---
-abbr dnd ripdrag
-abbr c 'codium .'
-abbr zl 'zellij' 
-abbr zls 'zellij --session' 
-abbr zla 'zellij attach'
-abbr ff fastfetch
-
 # --- Systemd services ---
 abbr scsp 'systemctl stop'
 abbr scst 'systemctl start'
@@ -65,3 +43,12 @@ abbr te  'trans cs:en'
 abbr td  'trans -d'
 abbr tsc 'trans -shell en:cs'
 abbr tse 'trans -shell cs:en'
+
+# --- Other random goodies ---
+abbr dnd ripdrag
+abbr c 'codium .'
+abbr zl 'zellij'
+abbr zls 'zellij --session'
+abbr zla 'zellij attach'
+abbr ff fastfetch
+

@@ -124,7 +124,6 @@ menu=(
   [3  Performance]="powerprofilesctl set performance"
   [2  Balanced]="powerprofilesctl set balanced"
   [1  Power Saver]="powerprofilesctl set power-saver"
-  [0  Cancel]=""
 )
 
 menu_nrows=${#menu[@]}
