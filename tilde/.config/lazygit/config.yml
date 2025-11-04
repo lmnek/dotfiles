@@ -1,8 +1,10 @@
 
 git:
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never
+  pagers:
+    - pager: delta --dark --paging=never --hunk-header-decoration-style "ul"
+      colorArg: always
+    - pager: delta --dark --paging=never --hunk-header-decoration-style "ul" -s
+      colorArg: always
 
 gui:
   commitHashLength: 3
