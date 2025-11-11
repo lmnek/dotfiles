@@ -1,8 +1,0 @@
-
-(platorm (linux)
-  (defoverrides)
-)
-
-(platorm (win)
-  (defoverrides)
-)
