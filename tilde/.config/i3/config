@@ -107,7 +107,7 @@ bindsym $mod+q kill
 bindsym $mod+Shift+p exec ~/.config/i3/scripts/power-profiles
 bindsym $mod+p exec ~/.config/i3/scripts/powermenu
 
-bindsym $mod+m exec ~/.config/i3/scripts/toolbox-menu
+bindsym $mod+u exec ~/.config/i3/scripts/utils-toolbox
 
 # Lock the system
 # lock with a picture:
@@ -453,14 +453,13 @@ set $show_tidal   [class="tidal-hifi"] scratchpad show move position center
 set $show_raindrop [class="Raindrop.io"] scratchpad show move position center
 set $show_blanket [title="Blanket"] scratchpad show move position center
 
+# m -> music
+bindsym $mod+m exec --no-startup-id i3-msg "$show_tidal", mode "default"
+
 bindsym $mod+o mode "open"
 mode "open" {
     bindsym o mode "launch"
     bindsym $mod+o mode "launch"
-
-    # Tidal
-    bindsym t         exec --no-startup-id i3-msg "$show_tidal", mode "default"
-    bindsym $mod+t    exec --no-startup-id i3-msg "$show_tidal", mode "default"
 
     # Raindrop
     bindsym r         exec --no-startup-id i3-msg "$show_raindrop", mode "default"
@@ -474,8 +473,8 @@ mode "open" {
 }
 
 mode "launch" {
-    bindsym t        exec --no-startup-id tidal-hifi, mode "default"
-    bindsym $mod+t   exec --no-startup-id tidal-hifi, mode "default"
+    bindsym m        exec --no-startup-id tidal-hifi, mode "default"
+    bindsym $mod+m   exec --no-startup-id tidal-hifi, mode "default"
 
     bindsym r        exec --no-startup-id raindrop, mode "default"
     bindsym $mod+r   exec --no-startup-id raindrop, mode "default"
@@ -504,8 +503,8 @@ mode "launch" {
     bindsym p        exec --no-startup-id zen-browser -P WebApp --class="pwa_proton" --new-window "https://mail.proton.me", mode "default"
     bindsym $mod+p   exec --no-startup-id zen-browser -P WebApp --class="pwa_proton" --new-window "https://mail.proton.me", mode "default"
     ## Morgen calendar
-    bindsym m        exec --no-startup-id zen-browser -P WebApp --class="pwa_morgen" --new-window "https://web.morgen.so", mode "default"
-    bindsym $mod+m   exec --no-startup-id zen-browser -P WebApp --class="pwa_morgen" --new-window "https://web.morgen.so", mode "default"
+    # bindsym m        exec --no-startup-id zen-browser -P WebApp --class="pwa_morgen" --new-window "https://web.morgen.so", mode "default"
+    # bindsym $mod+m   exec --no-startup-id zen-browser -P WebApp --class="pwa_morgen" --new-window "https://web.morgen.so", mode "default"
 
     bindsym Escape    mode "default"
 }
