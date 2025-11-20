@@ -1,0 +1,19 @@
+#!/bin/sh
+# config examples: https://codeberg.org/jos/dotfiles/src/branch/master/nsxiv/.config/nsxiv/exec
+# other goodies: https://codeberg.org/nsxiv/nsxiv-extra
+
+# To execute this file you need to press ctrl + x and then press key you can see below.
+# (Need to recompille with config.h to overwrite the default keybinds..)
+
+while read file;
+do
+  case "$1" in
+    "r") rotate_mode "$file" ;; 
+	"C-r") magick "$file" -rotate 90 "$file" ;;
+	"C-R") magick "$file" -rotate -90 "$file" ;;
+	"C-y") xclip -selection clipboard "$file" -t image/png ;;
+	"C-Y") readlink -f "$file" | xclip -selection clipboard ;;
+	"C-x") trash-put "$file" ;; # or delete here..
+    "C-d") ripdrag -a -x "$file" ;;
+  esac
+done
