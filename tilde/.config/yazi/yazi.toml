@@ -11,8 +11,42 @@ sort_dir_first = true
 max_width = 1700
 max_height = 1000
 
-[plugin]
+# options when pressing "o" or "O"
+[opener]
+extract = [
+    { run = 'ouch d -y "$@"', desc = "Extract here with ouch", for = "unix" },
+]
+display_image = [
+    { run = 'nsxiv-rifle "$0"', orphan = true, desc = "nsxiv", for = "unix" },
+    { run = 'gwenview "$0"', orphan = true, desc = "gwenview", for = "unix" },
+    { run = 'pinta "$0"', orphan = true, desc = "pinta", for = "unix" },
+]
+display_directory = [
+    { run = 'nsxiv --recursive --thumbnail "$0"', orphan = true, desc = "nsxiv", for = "unix" },
+]
+display_pdf = [
+    { run = 'okular "$0"', orphan = true, desc = "okular", for = "unix" },
+    { run = 'zathura "$0"', orphan = true, desc = "zathura", for = "unix" },
+    { run = 'pdfmixtool "$0"', orphan = true, desc = "pdfmixtool", for = "unix" },
+    { run = 'xournalpp "$0"', orphan = true, desc = "xournalpp", for = "unix" },
+]
+edit_tabular = [
+    { run = 'vd "$0"', desc = "visidata", block = true, for = "unix" },
+]
 
+[open]
+prepend_rules = [
+    { mime = "image/*", use = "display_image" },
+    { mime = "application/pdf", use = "display_pdf" },
+    { name = "*.csv", use = "edit_tabular" },
+    { name = "*.xlsx", use = "edit_tabular" },
+]
+append_rules = [
+	{ name = "*/", use = [ "edit", "display_directory", "open", "reveal" ] }, # directory
+]
+
+
+[plugin]
 prepend_fetchers = [
     # faster mime types fetching (O(1) from table) on remote
     { id = "mime", name = "/mnt/**", run = "mime-ext", prio = "high" },
@@ -33,31 +67,3 @@ prepend_previewers = [
     { mime = "application/xz", run = "ouch" },
 ]
 
-# options when pressing "o" or "O"
-[opener]
-extract = [
-    { run = 'ouch d -y "$@"', desc = "Extract here with ouch", for = "unix" },
-]
-display_image = [
-    { run = 'nsxiv-rifle "$0"', orphan = true, desc = "nsxiv", for = "unix" },
-    { run = 'gwenview "$0"', orphan = true, desc = "gwenview", for = "unix" },
-    { run = 'pinta "$0"', orphan = true, desc = "pinta", for = "unix" },
-]
-display_directory = [
-    { run = 'nsxiv --recursive --thumbnail "$0"', orphan = true, desc = "nsxiv", for = "unix" },
-]
-display_pdf = [
-    { run = 'okular "$0"', orphan = true, desc = "okular", for = "unix" },
-    { run = 'zathura "$0"', orphan = true, desc = "zathura", for = "unix" },
-    { run = 'pdfmixtool "$0"', orphan = true, desc = "pdfmixtool", for = "unix" },
-    { run = 'xournalpp "$0"', orphan = true, desc = "xournalpp", for = "unix" },
-]
-
-[open]
-prepend_rules = [
-    { mime = "image/*", use = "display_image" },
-    { mime = "application/pdf", use = "display_pdf" },
-]
-append_rules = [
-	{ name = "*/", use = [ "edit", "display_directory", "open", "reveal" ] }, # directory
-]

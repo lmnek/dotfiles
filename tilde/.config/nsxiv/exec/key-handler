@@ -5,10 +5,11 @@
 # To execute this file you need to press ctrl + x and then press key you can see below.
 # (Need to recompille with config.h to overwrite the default keybinds..)
 
+# TODO: delete multiple selected files? (https://codeberg.org/nsxiv/nsxiv/issues/472)
+
 while read file;
 do
   case "$1" in
-    "r") rotate_mode "$file" ;; 
 	"C-r") magick "$file" -rotate 90 "$file" ;;
 	"C-R") magick "$file" -rotate -90 "$file" ;;
 	"C-y") xclip -selection clipboard "$file" -t image/png ;;

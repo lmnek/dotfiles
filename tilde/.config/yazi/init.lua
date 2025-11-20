@@ -38,3 +38,4 @@ end, 9000, Header.RIGHT)
 -- nice plugins list: https://yazi-rs.github.io/docs/resources
 
 require("folder-rules"):setup()
+-- require("relative-motions"):setup({ show_numbers = "relative" })

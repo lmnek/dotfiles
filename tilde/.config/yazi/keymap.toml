@@ -5,32 +5,30 @@
 
 [mgr]
 prepend_keymap = [
-  # more vim-like, defualts are H and L
-  { on = "<C-o>", run = "back", desc = "Back to previous directory" },
-  { on = "<C-i>", run = "forward", desc = "Forward to next directory" },
-
-  # ------ EXECUTE SHELL SCRIPTS------
+  # ------ EXECUTE ------
   { on = [ "e", "r" ], run = '''shell 'remove-space-filename.sh "$0"' --confirm''', desc = "Remove spaces from filename" },
   { on = [ "e", "d" ], run = '''shell 'ripdrag -a "$@" -x 2>/dev/null &' --confirm''', desc = "drag&drop" },
+  { on = [ "e", "C" ], run = "plugin ouch", desc = "Compress with ouch" }, # note: compress.yazi is potentially better (e.g. input for archive password) 
+  { on = [ "e", "c" ], run = "plugin chmod", desc = "Chmod on selected files" },
+  { on = [ "e", "u" ], run = "plugin restore", desc = "Restore last deleted files/dirs" },
 
   # ------ SEARCH MODE ------
+  # TODO: directly search from home
   { on = [ "s", "d" ], run = '''shell 'ya emit cd $(fd --type directory | fzf)' --block''', desc = "dirs" },
   { on = [ "s", "h", "d" ], run = '''shell 'ya emit cd $(fd --type directory --hidden | fzf)' --block''', desc = "dirs [hidden]" },
   { on = [ "s", "f" ], run = "plugin fzf", desc = "files" },
   { on = [ "s", "h", "f" ], run = '''shell 'ya emit reveal $(fd --type file --hidden | fzf)' --block''', desc = "files [hidden]" },
   { on = [ "s", "g" ], run = "search --via=rg", desc = "ripgrep" },
  
-  # ------ PLUGINS ------
-  { on = "m", run = "plugin relative-motions", desc = "Trigger new VIM relative motion" },  # TODO: show relative line numbers only on command
-  { on = [ "e", "C" ], run = "plugin ouch", desc = "Compress with ouch" },
-  { on = [ "e", "c" ], run = "plugin chmod", desc = "Chmod on selected files" },
-  { on = "U", run = "plugin restore", desc = "Restore last deleted files/dirs" },
+  # ------ other PLUGINS ------
+  # { on = "m", run = "plugin relative-motions", desc = "Trigger new VIM relative motion" },  # TODO: show relative line numbers only on command
   { on = "M", run = "plugin toggle-pane max-preview", desc = "Maximize or restore the preview pane" },
   { on = "T", run = "plugin toggle-pane min-preview", desc = "Show or hide the preview pane" },
 
   # ------ GOTO DIR ------
   { on = [ "g", "m" ], run = "cd /mnt", desc = "cd mounted dirs" },
-  { on = [ "g", "D" ], run = "cd ~/dox", desc = "cd dox" },
+  { on = [ "g", "G" ], run = 'shell -- ya emit cd "$(git rev-parse --show-toplevel)"', desc = "cd git root" },
+  { on = [ "g", "x" ], run = "cd ~/dox", desc = "cd dox" },
   { on = [ "g", "." ], run = "cd ~/repos/dotfiles", desc = "cd dotfiles" },
   { on = [ "g", "," ], run = "cd ~/repos/secret-dotfiles", desc = "cd secret-dotfiles" },
   { on = [ "g", "r" ], run = "cd ~/repos", desc = "cd repos" },

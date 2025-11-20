@@ -44,6 +44,12 @@
  ‹⌃    ‹⌘   ‹⎇             @␣+⌘          @⇆🇨🇿        ⌃›           
 )
 
+;; doesnt work???
+;; (defoverrides
+;;   (lsft 🔉) (🔅)
+;;   (lsft 🔊) (🔆)
+;; )
+
 
 ;; layer toggle on hold
 (defalias
