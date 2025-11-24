@@ -1,13 +1,7 @@
-# This file is a modified version based on default i3-config-wizard config
-# source is available here:
-# https://raw.githubusercontent.com/endeavouros-team/endeavouros-i3wm-setup/master/.config/i3/config
-#
-# iconic font icon search: https://fontawesome.com/v4.7/cheatsheet/
+# Initially template from: https://raw.githubusercontent.com/endeavouros-team/endeavouros-i3wm-setup/master/.config/i3/config
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango: JetBrainsMono 8
 
 # set the mod key to the winkey:
@@ -28,9 +22,6 @@ workspace_layout default
 
 # border indicator on windows:
 default_border pixel 1
-
-# thin borders
-# hide_edge_borders both
 
 # Set inner/outer gaps
 gaps inner 6
@@ -109,17 +100,10 @@ bindsym $mod+p exec ~/.config/i3/scripts/powermenu
 
 bindsym $mod+u exec ~/.config/i3/scripts/utils-toolbox
 
-# Lock the system
-# lock with a picture:
-# bindsym $mod+l exec i3lock -i  ~/.config/i3/i3-lock-screen.png -p default|win -t
-# lock by blurring the screen:
-# bindsym $mod+Ctrl+l exec ~/.config/i3/scripts/blur-lock -> can get to from power rofi
-
 # reload the configuration file
 bindsym $mod+Shift+r reload
 
 # restart i3 inplace (preserves your layout/session, can be used to update i3)
-# FIXME: better keybind
 bindsym $mod+Alt+Shift+r restart 
 
 # Backlight setting using dunst osc
@@ -147,7 +131,6 @@ bindsym $mod+s layout toggle tabbed split
 # Toggle horizontal/vertical orientation
 bindsym $mod+Shift+s layout toggle split    
 
-# TODO: better keybind
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
@@ -182,20 +165,9 @@ bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-# Redirect sound to headphones
-# bindsym $mod+p exec /usr/local/bin/switch-audio-port
-
-# sticky minized video in top right
-# bindsym $mod+y fullscreen disable; floating enable; resize set 422 240; sticky enable; move position 1450 25
-
-
 ##########################################
 # configuration for workspace behaviour: #
 ##########################################
-
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
-# search here: https://www.nerdfonts.com/cheat-sheet
 
 # terminal thingies
 set $ws1 "1:"
@@ -217,6 +189,7 @@ set $ws9 "9:󰏪"
 set $ws10 "10:󰚩"
 
 # other nice icons: 󰧑, 󰁤
+# search for more: https://www.nerdfonts.com/cheat-sheet
 
 # use workspaces on different displays:
 # where you have to replace VGA-0/HDMI-0 with the names for your displays
@@ -269,6 +242,8 @@ for_window [class="w_librechat"] focus
 # autostart applications/services on login: #
 #############################################
 
+exec --no-startup-id blueman-applet
+
 #get auth work with polkit-gnome
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
@@ -285,7 +260,6 @@ exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id ~/.screenlayout/monitor.sh
 
 # set wallpaper
-# exec --no-startup-id sleep 2 && nitrogen --restore
 # exec --no-startup-id sleep 1 && feh --bg-fill ~/.config/bg.png
 
 # generate and set wallpaper from pacman packages
@@ -294,31 +268,13 @@ exec --no-startup-id sleep 120 && pacwall
 # set powersavings for display:
 exec --no-startup-id xset s 480 dpms 600 600 600
 
-# Desktop notifications
-# dunst config used ~/.config/dunst/dunstrc
-# set alternative config if needed:
-#exec --no-startup-id /usr/bin/dunst --config ~/.config/dunst/dunstrc
+# Desktop notifications (dunst config used ~/.config/dunst/dunstrc)
 # may yneed to run dbus-launch explicitly: 
 #exec --no-startup-id dbus-launch /usr/bin/dunst
 exec --no-startup-id /usr/bin/dunst
 
-# autotiling script
-# https://github.com/nwg-piotr/autotiling
-# `yay -S autotiling ;) (it is in AUR)
-#exec_always --no-startup-id autotiling
-
 # reverse the scrolling order of touchpad
 exec --no-startup-id xinput set-prop "Elan Touchpad" "libinput Natural Scrolling Enabled" 1
-
-###############
-# system tray #
-###############
-
-# start blueberry app for managing bluetooth devices from tray:
-# exec --no-startup-id blueberry-tray
-
-# networkmanager-applet
-#exec --no-startup-id nm-applet
 
 ##################
 # floating rules #
@@ -327,14 +283,11 @@ exec --no-startup-id xinput set-prop "Elan Touchpad" "libinput Natural Scrolling
 # set floating (nontiling) for apps needing it
 for_window [class="Yad" instance="yad"] floating enable
 for_window [class="Galculator" instance="galculator"] floating enable
-for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 
 # set floating (nontiling) for special apps
 for_window [class="Xsane" instance="xsane"] floating enable
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
 for_window [class="qt5ct" instance="qt5ct"] floating enable
-for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
-for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
 for_window [class="Pamac-manager"] floating enable
 for_window [window_role="About"] floating enable
 

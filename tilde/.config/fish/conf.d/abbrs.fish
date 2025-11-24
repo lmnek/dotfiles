@@ -7,7 +7,7 @@ abbr gc 'git clone'
 # --- Pacman ---
 abbr pms 'sudo pacman -S'
 abbr pmy 'sudo pacman -Syyu'
-abbr pm 'sudo pacman -Rs'
+abbr pmr 'sudo pacman -Rs'
 abbr ys 'yay -S'
 abbr yr 'yay -Rs'
 
