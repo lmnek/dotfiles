@@ -29,6 +29,7 @@ return {
             { "<leader>r",  group = "+gRapple" },
             { "<leader>T",  group = "+Toggle" },
             { "<leader>W",  group = "+Workspaces" },
+            { "<leader>a",  group = "+AI" },
 
             { "<leader>oL", "<cmd>Lazy<CR>",              desc = "Lazy" },
         })

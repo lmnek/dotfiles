@@ -18,6 +18,7 @@ return {
     { 'bullets-vim/bullets.vim',             opts = {},          config = function() end },
 
     -- Make ] or [ motions repeatable with ; and ,
+    -- NOTE: overrides local leader :c
     {
         'mawkler/demicolon.nvim',
         dependencies = {

@@ -1,78 +1,5 @@
--- Plugins for specific filetypes / languages
--- So far: Haskell, Typst, Latex
--- -> use "ft" to lazy load only on the correct filetype
+-- Vimtex utils + ltex grammar check (broken)
 return {
-    -- Markdown -------------------------------------------
-    {
-        'MeanderingProgrammer/render-markdown.nvim',
-        dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
-        config = function()
-            local set_heading_color = function(heading_num, col_link)
-                vim.api.nvim_set_hl(0, "@markup.heading." .. heading_num .. ".markdown", { link = col_link })
-                vim.api.nvim_set_hl(0, "RenderMarkdownH" .. heading_num .. "Bg", { link = "Visual" }) -- transparent bg
-            end
-            set_heading_color(1, "rainbowcol2")
-            set_heading_color(2, "rainbowcol3")
-            set_heading_color(3, "rainbowcol4")
-            set_heading_color(4, "rainbowcol5")
-            set_heading_color(5, "rainbowcol6")
-            set_heading_color(6, "rainbowcol1") -- white
-
-            require("render-markdown").setup({
-                sign = {
-                    enabled = false,
-                },
-                heading = {
-                    position = 'inline',
-                },
-                overrides = {
-                    buflisted = {},
-                    buftype = {
-                        nofile = { -- e.g.: hover docs
-                            code = {
-                                style = 'normal',
-                                disable_background = true,
-                            },
-                        },
-                    },
-                    filetype = {},
-                },
-            })
-        end
-    },
-    -- HASKELL -------------------------------------------
-    {
-        "mrcjkb/haskell-tools.nvim",
-        version = "^4",
-        ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
-        dependencies = {
-            { "nvim-telescope/telescope.nvim", optional = true },
-        },
-    },
-    {
-        'tidalcycles/vim-tidal',
-        ft = "tidal",
-        config = function()
-            vim.g.tidal_ghci = "stack exec ghci --"
-        end
-    },
-    -- TYPST --------------------------------------------
-    {
-        'chomosuke/typst-preview.nvim',
-        ft = 'typst',
-        version = '1.*',
-        cmd = { "TypstPreview", "TypstPreviewToggle", "TypstPreviewUpdate" },
-        build = function() require("typst-preview").update() end,
-        opts = {
-            dependencies_bin = { tinymist = "tinymist" }
-        },
-        keys = {
-            { ',p', "<cmd>TypstPreview<CR>",       desc = 'Typst Preview' },
-            { ',t', "<cmd>TypstPreviewToggle<CR>", desc = 'Typst Preview Toggle' },
-            { ',u', "<cmd>TypstPreviewUpdate<CR>", desc = 'Typst Preview Update' },
-        }
-    },
-    -- LATEX -------------------------------------------
     {
         "lervag/vimtex",
         ft = 'tex',
@@ -184,22 +111,25 @@ return {
             vim.g.vimtex_quickfix_enabled = 0
         end
     },
-    {
-        "barreiroleo/ltex_extra.nvim",
-        ft = { "tex" },
-        dependencies = { "neovim/nvim-lspconfig" },
-        opts = {
-            load_langs = { "en-US" },
-            init_check = true, -- load dictionary
-            server_opts = {
-                -- capabilities = your_capabilities,
-                -- on_attach = function(client, bufnr)
-                -- end,
-                -- settings = {
-                --     ltex = { [[ your settings ]] }
-                -- }
-            }
-        }
-    }
-
+    -- NOTE: idk broken
+    -- {
+    --     "barreiroleo/ltex_extra.nvim",
+    --     ft = { "markdown", "tex", "typst" },
+    --     dependencies = { "neovim/nvim-lspconfig" },
+    --     -- yes, you can use the opts field, just I'm showing the setup explicitly
+    --     config = function()
+    --         require("ltex_extra").setup {
+    --             {},
+    --             server_opts = {
+    --                 capabilities = {},
+    --                 on_attach = function(client, bufnr)
+    --                     -- your on_attach process
+    --                 end,
+    --                 settings = {
+    --                     ltex = { {} }
+    --                 }
+    --             },
+    --         }
+    --     end
+    -- }
 }

@@ -17,8 +17,21 @@ return {
                 overrides = {}
             })
             vim.cmd.colorscheme 'dracula'
+
+            -- Make the current line number a different color
+            vim.opt.cursorline = true
+            vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#ff79c6", bold = true })
         end,
     },
+    -- {
+    --     "folke/tokyonight.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         require('tokyonight').setup({})
+    --         vim.cmd.colorscheme 'tokyonight-night'
+    --     end,
+    -- },
     {
         -- Add indentation guides even on blank lines
         'lukas-reineke/indent-blankline.nvim',

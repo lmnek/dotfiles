@@ -43,5 +43,15 @@ local opts = {
 vim.lsp.set_log_level("info")
 vim.env.NVIM_LSP_LOG_FILE = "/~/.cache/nvim/nvim-lsp.log"
 
+local plugins = {
+    { import = 'plugins' },    -- this imports /lua/plugins
+    { import = 'plugins.ft' }, -- this imports /lua/plugins/ft
+    { import = 'plugins.ui' },
+    { import = 'plugins.tools' },
+    { import = 'plugins.collections' },
+    { import = 'plugins.code' },
+    { import = 'plugins.navigation' },
+}
+
 -- Automatically load from plugins folder
-require("lazy").setup('plugins', opts)
+require("lazy").setup(plugins, opts)
