@@ -6,7 +6,7 @@ DOTFILES_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPOS_PATH="$(dirname "$DOTFILES_PATH")"
 OBSIDIAN_VAULT_PATH="$REPOS_PATH/obsidian/Lemonek"
 
-STOW_OPTS=()
+STOW_OPTS=(--no-folding)
 LINK_OBSIDIAN=false
 
 usage() {

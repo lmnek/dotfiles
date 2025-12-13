@@ -8,6 +8,7 @@ git:
 
 gui:
   commitHashLength: 3
+  nerdFontsVersion: "3"
 
   # DRACULA
   theme:

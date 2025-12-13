@@ -30,6 +30,7 @@ abbr lla 'eza --long --header -a --git'
 # --- Goto dirs (subset of Yazi keybinds) ---
 abbr h 'cd ~/'
 abbr r 'cd ~/repos'
+abbr g 'cd "$(git rev-parse --show-toplevel)"'
 
 # --- Systemd services ---
 abbr scsp 'systemctl stop'
@@ -51,4 +52,4 @@ abbr zl 'zellij'
 abbr zls 'zellij --session'
 abbr zla 'zellij attach'
 abbr ff fastfetch
-
+abbr q qalc
