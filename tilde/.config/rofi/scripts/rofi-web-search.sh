@@ -69,9 +69,9 @@ compose_url() {
     printf '%s' "$(url_encode "$base" "$3")"
 }
 
-# run selection (rofi / fzf / nvim vipe)
+# run selection (rofi / fzf / nvipe)
 input="$(gen_comments \
-    | ~/.local/bin/vipe.sh --picker \
+    | ~/.local/bin/nvipe.sh --picker \
     | grep -vE '^\s*(#|$)' )" # remove comments from output
 # input="$(gen_list | rofi -dmenu -matching prefix -location 0 -markup-rows -p 'Search')"
     

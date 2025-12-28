@@ -234,7 +234,7 @@ for_window [class="w_librechat"] focus
 ##################
 
 for_window [class="ripdrag"] floating enable, sticky enable, move position 20 650, border pixel 3
-for_window [class="XTerm" instance="vipe_picker"] floating enable, resize set 100 570, br@der pixel 3, move position center
+for_window [class="XTerm" instance="nvipe_picker"] floating enable, resize set 1000 570, border pixel 3, move position center
 
 for_window [class="Xsane" instance="xsane"] floating enable
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
@@ -367,7 +367,7 @@ bindsym $mod+e exec --no-startup-id rofi -show emoji
 
 ## Web search with prefixes
 bindsym $mod+g exec --no-startup-id ~/.config/rofi/scripts/rofi-web-search.sh
-# bindsym $mod+comma exec xterm -e bash -lc '$HOME/.local/bin/vipe.sh | xargs notify-send "vipe"'
+# bindsym $mod+comma exec xterm -e bash -lc '$HOME/.local/bin/nvipe.sh | xargs notify-send "nvipe"'
 
 ## Attach zellij sessions
 bindsym $mod+z exec --no-startup-id ~/.config/rofi/scripts/rofi-zellij.sh
