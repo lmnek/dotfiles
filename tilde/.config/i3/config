@@ -367,7 +367,6 @@ bindsym $mod+e exec --no-startup-id rofi -show emoji
 
 ## Web search with prefixes
 bindsym $mod+g exec --no-startup-id ~/.config/rofi/scripts/rofi-web-search.sh
-# bindsym $mod+comma exec xterm -e bash -lc '$HOME/.local/bin/nvipe.sh | xargs notify-send "nvipe"'
 
 ## Attach zellij sessions
 bindsym $mod+z exec --no-startup-id ~/.config/rofi/scripts/rofi-zellij.sh
@@ -378,6 +377,7 @@ bindsym $mod+z exec --no-startup-id ~/.config/rofi/scripts/rofi-zellij.sh
 
 bindsym $mod+Return exec $term -e fish
 bindsym $mod+period exec "ghostty --class=com.lmnk.yazi -e fish -c 'y; exec fish'"
+bindsym $mod+comma  exec ~/.local/bin/nvim-copy.sh
 
 # Need to install: maim, xclip, xdotool
 # Screenshots in files
