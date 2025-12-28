@@ -38,6 +38,14 @@ gen_list() {
     done
 }
 
+gen_comments() {
+    echo ""
+    for entry in "${MENU[@]}"; do
+        IFS='|' read -r prefix label _ <<< "$entry"
+        printf "# %-4s -> %s\n" "$prefix" "$label"
+    done
+}
+
 # input: base_url, query
 url_encode() {
     local base="$1"
@@ -61,9 +69,12 @@ compose_url() {
     printf '%s' "$(url_encode "$base" "$3")"
 }
 
-# run rofi
-input="$(gen_list | rofi -dmenu -matching prefix -location 0 -markup-rows -p 'Search')"
-
+# run selection (rofi / fzf / nvim vipe)
+input="$(gen_comments \
+    | ~/.local/bin/vipe.sh --picker \
+    | grep -vE '^\s*(#|$)' )" # remove comments from output
+# input="$(gen_list | rofi -dmenu -matching prefix -location 0 -markup-rows -p 'Search')"
+    
 [[ -z "$input" ]] && exit 0
 
 # split on first space

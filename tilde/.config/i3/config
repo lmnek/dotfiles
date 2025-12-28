@@ -228,6 +228,20 @@ for_window [class=Thunar] focus
 for_window [class=yazi] focus
 for_window [class="w_librechat"] focus
 
+
+##################
+# floating rules #
+##################
+
+for_window [class="ripdrag"] floating enable, sticky enable, move position 20 650, border pixel 3
+for_window [class="XTerm" instance="vipe_picker"] floating enable, resize set 100 570, br@der pixel 3, move position center
+
+for_window [class="Xsane" instance="xsane"] floating enable
+for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
+for_window [class="qt5ct" instance="qt5ct"] floating enable
+for_window [class="Pamac-manager"] floating enable
+for_window [window_role="About"] floating enable
+
 ##############
 # compositor #
 ##############
@@ -275,23 +289,6 @@ exec --no-startup-id /usr/bin/dunst
 
 # reverse the scrolling order of touchpad
 exec --no-startup-id xinput set-prop "Elan Touchpad" "libinput Natural Scrolling Enabled" 1
-
-##################
-# floating rules #
-##################
-
-# set floating (nontiling) for apps needing it
-for_window [class="Yad" instance="yad"] floating enable
-for_window [class="Galculator" instance="galculator"] floating enable
-
-# set floating (nontiling) for special apps
-for_window [class="Xsane" instance="xsane"] floating enable
-for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
-for_window [class="qt5ct" instance="qt5ct"] floating enable
-for_window [class="Pamac-manager"] floating enable
-for_window [window_role="About"] floating enable
-
-for_window [class="ripdrag"] floating enable, sticky enable, move position 20 650, border pixel 3
 
 ######################################
 # color settings for bar and windows #
@@ -370,6 +367,7 @@ bindsym $mod+e exec --no-startup-id rofi -show emoji
 
 ## Web search with prefixes
 bindsym $mod+g exec --no-startup-id ~/.config/rofi/scripts/rofi-web-search.sh
+# bindsym $mod+comma exec xterm -e bash -lc '$HOME/.local/bin/vipe.sh | xargs notify-send "vipe"'
 
 ## Attach zellij sessions
 bindsym $mod+z exec --no-startup-id ~/.config/rofi/scripts/rofi-zellij.sh
