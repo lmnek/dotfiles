@@ -4,3 +4,10 @@ Xcursor.size: 16
 Nsxiv.window.background: #000000
 Nsxiv.window.foreground: #F8F8F2
 Nsxiv.bar.font: Jetbrains Mono-8
+
+XTerm*faceName: JetBrainsMono Nerd Font
+XTerm*faceSize: 17
+Xft.antialias: true
+XTerm*internalBorder: 20
+XTerm*borderWidth: 0
+XTerm*background: #1e1f29
