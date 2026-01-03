@@ -12,51 +12,55 @@ max_width = 1700
 max_height = 1000
 
 # options when pressing "o" or "O"
+# note: new filename selection syntax: https://github.com/sxyazi/yazi/pull/3232
 [opener]
 extract = [
-    { run = 'ouch d -y "$@"', desc = "Extract here with ouch", for = "unix" },
+    { run = 'ouch d -y %s', desc = "Extract here with ouch", for = "unix" },
 ]
 display_image = [
-    { run = 'nsxiv-rifle "$0"', orphan = true, desc = "nsxiv", for = "unix" },
-    { run = 'gwenview "$0"', orphan = true, desc = "gwenview", for = "unix" },
-    { run = 'pinta "$0"', orphan = true, desc = "pinta", for = "unix" },
+    { run = 'nsxiv-rifle %s', orphan = true, desc = "nsxiv", for = "unix" },
+    { run = 'gwenview %s', orphan = true, desc = "gwenview", for = "unix" },
+    { run = 'pinta %s', orphan = true, desc = "pinta", for = "unix" },
 ]
 display_directory = [
-    { run = 'nsxiv --recursive --thumbnail "$0"', orphan = true, desc = "nsxiv", for = "unix" },
+    { run = 'nsxiv --recursive --thumbnail %s', orphan = true, desc = "nsxiv", for = "unix" },
 ]
 display_pdf = [
-    { run = 'okular "$0"', orphan = true, desc = "okular", for = "unix" },
-    { run = 'zathura "$0"', orphan = true, desc = "zathura", for = "unix" },
-    { run = 'pdfmixtool "$0"', orphan = true, desc = "pdfmixtool", for = "unix" },
-    { run = 'xournalpp "$0"', orphan = true, desc = "xournalpp", for = "unix" },
+    { run = 'okular %s', orphan = true, desc = "okular", for = "unix" },
+    { run = 'zathura %s', orphan = true, desc = "zathura", for = "unix" },
+    { run = 'pdfmixtool %s', orphan = true, desc = "pdfmixtool", for = "unix" },
+    { run = 'xournalpp %s', orphan = true, desc = "xournalpp", for = "unix" },
 ]
 edit_tabular = [
-    { run = 'vd "$0"', desc = "visidata", block = true, for = "unix" },
+    { run = 'vd %s', desc = "visidata", block = true, for = "unix" },
 ]
 
 [open]
+# FIX: default openers not present for prepended_rules (e.g. exif data)
 prepend_rules = [
     { mime = "image/*", use = "display_image" },
     { mime = "application/pdf", use = "display_pdf" },
-    { name = "*.csv", use = "edit_tabular" },
-    { name = "*.xlsx", use = "edit_tabular" },
+    { url = "*.csv", use = "edit_tabular" },
+    { url = "*.xlsx", use = "edit_tabular" },
 ]
 append_rules = [
-	{ name = "*/", use = [ "edit", "display_directory", "open", "reveal" ] }, # directory
+	{ url = "*/", use = [ "edit", "display_directory", "open", "reveal" ] }, # directory
 ]
 
 
 [plugin]
-prepend_fetchers = [
-    # faster mime types fetching (O(1) from table) on remote
-    { id = "mime", name = "/mnt/**", run = "mime-ext", prio = "high" },
+fetchers = [
+    { id = "mime", url = "/mnt/**", run = "mime-ext", prio = "high" }, # faster mime types fetching (O(1) from table) on remote
+	{ id = "mime", url = "*/",         run = "mime.dir", prio = "high" },
+	{ id = "mime", url = "local://*",  run = "mime.local", prio = "high" },
+	{ id = "mime", url = "remote://*", run = "mime.remote", prio = "high" },
 ]
 # disable previews for remote mounted dirs (would need to be fetched)
-prepend_preloaders = [{ name = "/mnt/**", run = "noop" }]
+prepend_preloaders = [{ url = "/mnt/**", run = "noop" }]
 
 # custom previewers
 prepend_previewers = [
-    { name = "/mnt/**", run = "noop" },
+    { url = "/mnt/**", run = "noop" },
     # Archive previewer
     { mime = "application/*zip", run = "ouch" },
     { mime = "application/x-tar", run = "ouch" },

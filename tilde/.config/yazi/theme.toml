@@ -1,9 +1,12 @@
 [flavor]
 dark = "dracula"
 
+# disable default rounded corners
 [status]
 sep_left = { open = "", close = "" }
 sep_right = { open = "", close = "" }
+[indicator]
+padding = { open = "█", close = "█" }
 
 [icon]
 prepend_dirs = [
