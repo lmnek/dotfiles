@@ -27,6 +27,10 @@ hash = "8a7c58225816a163a6e8730c0adafbc8"
 use = "yazi-rs/plugins:mime-ext"
 rev = "2301ff8"
 hash = "4c49c446328c4553a4ccab7facc10b21"
+[[plugin.deps]]
+use = "lmnek/pandoc"
+rev = "6230a94"
+hash = "e89631ed41c2531f848dd00e211a6853"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:dracula"

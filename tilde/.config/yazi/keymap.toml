@@ -10,6 +10,11 @@ prepend_keymap = [
   { on = [ "e", "d" ], run = '''shell 'ripdrag -a "$@" -x 2>/dev/null &' --confirm''', desc = "drag&drop" },
   { on = [ "e", "C" ], run = "plugin ouch", desc = "Compress with ouch" }, # note: compress.yazi is potentially better (e.g. input for archive password) 
   { on = [ "e", "c" ], run = "plugin chmod", desc = "Chmod on selected files" },
+  { on = [ "e", "p" ], run = "plugin pandoc", desc = "Convert with pandoc" },
+  { on = [ "e", "P" ], run = "plugin pandoc -- --to_ext=md --defaults=test", desc = "Convert with pandoc" },
+  # works okay for multiple default files
+  # { on = [ "e", "P" ], run = "plugin pandoc -- --to_ext=md --defaults='test1 test2'", desc = "Convert with pandoc" },
+  { on = [ "e", "x" ], run = "plugin pandoc -- --to_ext=md", desc = "Convert with pandoc" },
   { on = [ "e", "u" ], run = "plugin restore", desc = "Restore last deleted files/dirs" },
 
   # ------ SEARCH MODE ------
