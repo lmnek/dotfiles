@@ -29,24 +29,22 @@ display_pdf = [
     { run = 'okular %s', orphan = true, desc = "okular", for = "unix" },
     { run = 'zathura %s', orphan = true, desc = "zathura", for = "unix" },
     { run = 'pdfmixtool %s', orphan = true, desc = "pdfmixtool", for = "unix" },
+    { run = 'pdfarranger %s', orphan = true, desc = "pdfarranger", for = "unix" },
     { run = 'xournalpp %s', orphan = true, desc = "xournalpp", for = "unix" },
 ]
 edit_tabular = [
     { run = 'vd %s', desc = "visidata", block = true, for = "unix" },
 ]
 
+# stupid change in config logic.. -> https://github.com/sxyazi/yazi/issues/3539
 [open]
-# FIX: default openers not present for prepended_rules (e.g. exif data)
 prepend_rules = [
-    { mime = "image/*", use = "display_image" },
-    { mime = "application/pdf", use = "display_pdf" },
-    { url = "*.csv", use = "edit_tabular" },
-    { url = "*.xlsx", use = "edit_tabular" },
-]
-append_rules = [
 	{ url = "*/", use = [ "edit", "display_directory", "open", "reveal" ] }, # directory
+    { mime = "image/*", use = [ "display_image", "open", "reveal" ] },
+    { mime = "application/pdf", use = [ "display_pdf", "reveal" ] },
+    { url = "*.csv", use = [ "edit_tabular", "edit", "open", "reveal" ] },
+    { url = "*.xlsx", use = [ "edit_tabular", "edit", "open", "reveal" ] },
 ]
-
 
 [plugin]
 fetchers = [

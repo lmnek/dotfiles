@@ -12,7 +12,7 @@ padding = { open = "█", close = "█" }
 prepend_dirs = [
     { fg = "#50FA7B", name = "repos", text = "" },
     { fg = "#F1FA8C", name = "Downloads", text = "󰇚" },
-    { fg = "#FF79C6", name = "music", text = "" },
+    { fg = "#FF79C6", name = "aux", text = "" },
     { fg = "#FF79C6", name = "pix", text = "" },
     { fg = "#FF79C6", name = "vids", text = "" },
     { fg = "#FF79C6", name = "screens", text = "" },
