@@ -173,20 +173,20 @@ bindsym XF86AudioPrev exec playerctl previous
 set $ws1 "1:"
 # browser
 set $ws2 "2:"
-# productivity: todo app, calendar
-set $ws3 "3:"
-# messaging: beeper, legcord
-set $ws4 "4:󰭹"
-# email (thunderbird)
-set $ws5 "5:󰇮"
+# obsidian notes
+set $ws3 "3:󰏪"
+# AI tools (LibreChat)
+set $ws4 "4:󰚩"
+set $ws5 "5"
 # throwaway archive workspace
 set $ws6 "6:"
 set $ws7 "7"
-set $ws8 "8"
-# obsidian notes
-set $ws9 "9:󰏪"
-# AI chat (LibreChat)
-set $ws10 "10:󰚩"
+# email (thunderbird)
+set $ws8 "8:󰇮"
+# productivity: todo app, calendar
+set $ws9 "9:"
+# messaging: beeper, legcord
+set $ws10 "10:󰭹"
 
 # other nice icons: 󰧑, 󰁤
 # search for more: https://www.nerdfonts.com/cheat-sheet
@@ -202,24 +202,25 @@ assign [class="yazi"] $ws1
 
 # assign [class="zen"] $ws2
 
-assign [class="Todoist"] $ws3
-assign [class="Morgen"] $ws3
-assign [class="pwa_morgen"] $ws3
+assign [class="Obsidian"] $ws3
 
-assign [class="Signal"] $ws4
-assign [class="Beeper"] $ws4
-assign [class="Legcord"] $ws4
-
-assign [class="thunderbird"] $ws5
-assign [class="pwa_proton"] $ws5
+assign [class="pwa_librechat"] $ws4
+assign [class="pwa_chatgpt"] $ws4
+assign [class="pwa_gemini"] $ws4
 
 assign [class="zen_chill"] $ws6
 
-assign [class="Obsidian"] $ws9 
+assign [class="thunderbird"] $ws8
+assign [class="pwa_proton"] $ws8
 
-assign [class="pwa_librechat"] $ws10
-assign [class="pwa_chatgpt"] $ws10
-assign [class="pwa_gemini"] $ws10
+assign [class="Todoist"] $ws9
+assign [class="Morgen"] $ws9
+assign [class="pwa_morgen"] $ws9
+
+assign [class="Signal"] $ws10
+assign [class="Beeper"] $ws10
+assign [class="Legcord"] $ws10
+
 
 # automatic set focus new window if it opens on another workspace than the current:
 for_window [class=ghostty] focus
