@@ -6,13 +6,14 @@
     "better-tables",
     "ultra-compact",
     "big-math",
-    "disable-table-padding",
     "enlarge-image-hover",
+    "disable-table-padding",
+    "floating-tab-header",
     "hide-sibebar-toggle-buttons",
     "hide-status",
     "inverted-image",
     "local-graph-color",
-    "hide-tabs"
+    "relative-line-numbers"
   ],
   "showRibbon": false,
   "monospaceFontFamily": "Jetbrains Mono",

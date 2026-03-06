@@ -11,6 +11,8 @@
   "headingsListCommand": "#",
   "bookmarksListCommand": "'",
   "commandListCommand": ">",
+  "recentCommandDisplayOrder": "desc",
+  "maxRecentCommands": 25,
   "vaultListCommand": "vault ",
   "relatedItemsListCommand": "~",
   "relatedItemsListActiveEditorCommand": "^ ",
@@ -60,7 +62,12 @@
     "outgoing-link"
   ],
   "showOptionalIndicatorIcons": true,
+  "isFileExtensionIndicatorsEnabled": true,
+  "excludeFileExtensionIndicators": [
+    "md"
+  ],
   "overrideStandardModeBehaviors": true,
+  "overrideStandardModeRendering": true,
   "enabledRibbonCommands": [
     "HeadingsList",
     "SymbolList"
@@ -189,6 +196,27 @@
         "id": "canvas-node-group",
         "mode": 4,
         "label": "groups",
+        "isActive": false,
+        "isAvailable": true
+      },
+      "base-view-table": {
+        "id": "base-view-table",
+        "mode": 4,
+        "label": "table views",
+        "isActive": false,
+        "isAvailable": true
+      },
+      "base-view-list": {
+        "id": "base-view-list",
+        "mode": 4,
+        "label": "list views",
+        "isActive": false,
+        "isAvailable": true
+      },
+      "base-view-cards": {
+        "id": "base-view-cards",
+        "mode": 4,
+        "label": "card views",
         "isActive": false,
         "isAvailable": true
       },
@@ -339,6 +367,7 @@
     ]
   },
   "preferredSourceForTitle": "H1",
+  "frontmatterTitleProperty": "title",
   "closeWhenEmptyKeys": [
     {
       "modifiers": null,
@@ -362,6 +391,8 @@
   "escapeCmdChar": "!",
   "mobileLauncher": {
     "isEnabled": false,
+    "isMobileButtonEnabled": true,
+    "isEmptyTabButtonEnabled": true,
     "modeString": "HeadingsList",
     "iconName": "",
     "coreLauncherButtonIconSelector": "span.clickable-icon",
@@ -399,5 +430,60 @@
       "8",
       "9"
     ]
+  },
+  "openDefaultApp": {
+    "isEnabled": true,
+    "openInDefaultAppKeys": {
+      "modifiers": [
+        "Shift",
+        "Ctrl"
+      ],
+      "key": "o"
+    },
+    "excludeFileExtensions": []
+  },
+  "fulltextSearch": {
+    "isEnabled": true,
+    "searchKeys": {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "f"
+    }
+  },
+  "openInBackground": {
+    "isEnabled": true,
+    "openKeys": [
+      {
+        "openType": "tab",
+        "hotkey": {
+          "modifiers": [
+            "Mod",
+            "Shift"
+          ],
+          "key": "t"
+        }
+      },
+      {
+        "openType": "vertical",
+        "hotkey": null
+      },
+      {
+        "openType": "horizontal",
+        "hotkey": null
+      },
+      {
+        "openType": "window",
+        "hotkey": null
+      }
+    ]
+  },
+  "saveWorkspaceAndSwitchKeys": {
+    "modifiers": [
+      "Mod",
+      "Shift"
+    ],
+    "key": "s"
   }
 }

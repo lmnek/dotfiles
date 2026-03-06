@@ -22,9 +22,12 @@
   "blue-topaz-theme@@title-justify-start": false,
   "blue-topaz-theme@@scrollbar-style-option": "hover-scrollbars",
   "blue-topaz-theme@@tab-title-bar-position": false,
-  "blue-topaz-theme@@fancy-hr": "default-hr",
+  "blue-topaz-theme@@fancy-hr": "fancy-hr-no-icon",
   "blue-topaz-theme@@canvas-card-focus-mode": true,
   "blue-topaz-theme@@colorful-ordered-list": false,
   "blue-topaz-theme@@unordered-list-style-options": "bt-default-unordered-list",
-  "blue-topaz-theme@@folder-dataview-list-style": "dataview-list-style-normal"
+  "blue-topaz-theme@@folder-dataview-list-style": "dataview-list-style-normal",
+  "Blue-Topaz-Codebox-Highlight@@nowrap-edit-codebox": true,
+  "Blue-Topaz-Codebox-Highlight@@whole-code-wrap": true,
+  "blue-topaz-theme@@file-line-width": 60
 }

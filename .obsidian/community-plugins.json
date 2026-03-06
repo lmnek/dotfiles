@@ -1,8 +1,6 @@
 [
-  "url-into-selection",
   "obsidian-excalidraw-plugin",
   "obsidian-list-callouts",
-  "darlal-switcher-plus",
   "homepage",
   "dataview",
   "obsidian42-brat",
@@ -10,11 +8,10 @@
   "frontmatter-markdown-links",
   "share-note",
   "obsidian-paste-image-rename",
-  "obsidian-kanban",
-  "templater-obsidian",
   "janitor",
   "obsidian-style-settings",
-  "persistent-graph",
   "obsidian-another-quick-switcher",
-  "snippet-commands-obsidian"
+  "snippet-commands-obsidian",
+  "spacekeys",
+  "extended-graph"
 ]

@@ -278,13 +278,16 @@
           "sames",
           "nexts",
           "prevs"
-        ]
+        ],
+        "lock_view": false,
+        "lock_path": "100 Index⭐ &  MOCs 🗺️/PKM 📓.md"
       },
       "tree": {
-        "collapse": false,
+        "collapse": true,
         "show_attributes": [],
         "merge_fields": false,
         "field_group_labels": [
+          "ups",
           "downs"
         ],
         "edge_sort_id": {
@@ -295,7 +298,9 @@
           "ext": false,
           "folder": false,
           "alias": false
-        }
+        },
+        "lock_view": false,
+        "lock_path": "100 Index⭐ &  MOCs 🗺️/PKM 📓.md"
       }
     },
     "codeblocks": {
