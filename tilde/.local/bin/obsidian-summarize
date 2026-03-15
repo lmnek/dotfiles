@@ -1,0 +1,353 @@
+#!/usr/bin/env python3
+"""
+Summarize Obsidian notes using an LLM and store the result in frontmatter.
+
+Usage:
+    obsidian-summarize note.md [note2.md ...]
+    obsidian-summarize --vault ~/repos/obsidian/Lemonek
+    obsidian-summarize --vault ~/repos/obsidian/Lemonek --filter-up "Daily notes"
+    find ~/vault -name '*.md' | obsidian-summarize --stdin
+
+The summary is written to the YAML frontmatter property "ai_summary".
+Notes that already have an ai_summary are skipped unless --force is given.
+"""
+
+import argparse
+import io
+import re
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+from ruamel.yaml import YAML
+
+yaml = YAML()
+yaml.preserve_quotes = True
+yaml.width = 4096  # prevent line wrapping in YAML output
+
+
+# ── frontmatter helpers ─────────────────────────────────────────────
+
+FRONTMATTER_SEP = "---"
+
+
+def parse_note(text: str) -> tuple[dict | None, str]:
+    """Return (frontmatter_dict | None, body) from a note's raw text."""
+    if not text.startswith(FRONTMATTER_SEP):
+        return None, text
+
+    # Find closing '---'
+    end = text.find(f"\n{FRONTMATTER_SEP}", len(FRONTMATTER_SEP))
+    if end == -1:
+        return None, text
+
+    fm_raw = text[len(FRONTMATTER_SEP) + 1 : end]
+    body = text[end + len(FRONTMATTER_SEP) + 2 :]  # skip '\n---\n'
+
+    fm = yaml.load(fm_raw)
+    if fm is None:
+        fm = {}
+    return fm, body
+
+
+def serialize_note(fm: dict | None, body: str) -> str:
+    """Reassemble a note from frontmatter dict and body string."""
+    if fm is None:
+        return body
+
+    stream = io.StringIO()
+    yaml.dump(fm, stream)
+    fm_str = stream.getvalue().rstrip("\n")
+
+    return f"{FRONTMATTER_SEP}\n{fm_str}\n{FRONTMATTER_SEP}\n{body}"
+
+
+def get_up_values(fm: dict) -> list[str]:
+    """Extract all values from the 'up' frontmatter property as flat strings.
+
+    Handles both:
+        up: "[[Daily notes 🌅]]"
+        up:
+          - "[[Daily notes 🌅]]"
+    """
+    raw = fm.get("up")
+    if raw is None:
+        return []
+    if isinstance(raw, list):
+        return [str(v) for v in raw]
+    return [str(raw)]
+
+
+def matches_up_filter(fm: dict | None, filter_str: str) -> bool:
+    """Check if any 'up' value contains the filter string (case-insensitive)."""
+    if fm is None:
+        return False
+    needle = filter_str.lower()
+    for val in get_up_values(fm):
+        if needle in val.lower():
+            return True
+    return False
+
+
+# ── LLM summarization ───────────────────────────────────────────────
+
+SYSTEM_PROMPT = """\
+You are a concise note summarizer. Given the full content of a personal \
+Obsidian note, produce a short summary (1-3 sentences, max ~200 characters). \
+The summary should capture the core topic and purpose of the note. \
+Do NOT use markdown formatting. Write plain text only. \
+If the note is in a non-English language, write the summary in that same language."""
+
+
+def summarize(content: str, model: str) -> str:
+    """Call `llm` CLI to generate a summary of the note content."""
+    result = subprocess.run(
+        ["llm", "-m", model, "-s", SYSTEM_PROMPT, "--no-stream", "-n"],
+        input=content,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(f"llm failed: {result.stderr.strip()}")
+    return result.stdout.strip()
+
+
+# ── writing strategies ───────────────────────────────────────────────
+
+
+def write_summary_direct(path: Path, fm: dict | None, body: str, summary: str) -> None:
+    """Write summary by editing the file directly (default)."""
+    if fm is None:
+        fm = {}
+    fm["ai_summary"] = summary
+    new_text = serialize_note(fm, body)
+    path.write_text(new_text, encoding="utf-8")
+
+
+def write_summary_obsidian_cli(
+    path: Path, vault_root: Path | None, summary: str
+) -> None:
+    """Write summary using `obsidian property:set` CLI command.
+
+    Requires Obsidian 1.12+ to be running with CLI enabled.
+    """
+    cmd = ["obsidian"]
+    if vault_root:
+        cmd.append(f"vault={vault_root.name}")
+    # property:set needs the path relative to vault root
+    if vault_root and path.is_relative_to(vault_root):
+        rel = str(path.relative_to(vault_root))
+    else:
+        rel = str(path)
+    # Escape any quotes in the summary
+    safe_summary = summary.replace('"', '\\"')
+    cmd.extend(["property:set", f"path={rel}", 'name=ai_summary', f'value="{safe_summary}"'])
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        raise RuntimeError(
+            f"obsidian property:set failed: {result.stderr.strip() or result.stdout.strip()}"
+        )
+
+
+# ── main logic ───────────────────────────────────────────────────────
+
+
+def process_note(
+    path: Path,
+    *,
+    model: str,
+    force: bool = False,
+    dry_run: bool = False,
+    verbose: bool = False,
+    filter_up: str | None = None,
+    use_obsidian_cli: bool = False,
+    vault_root: Path | None = None,
+) -> str:
+    """Process a single note. Returns status: 'ok', 'skip', or 'error'."""
+    if not path.is_file():
+        print(f"  SKIP  {path}  (not a file)", file=sys.stderr)
+        return "skip"
+
+    text = path.read_text(encoding="utf-8")
+    fm, body = parse_note(text)
+
+    # Apply --filter-up: only process notes whose 'up' contains the value
+    if filter_up and not matches_up_filter(fm, filter_up):
+        return "skip"
+
+    # If there's already a summary and we're not forcing, skip
+    if fm is not None and "ai_summary" in fm and fm["ai_summary"] and not force:
+        if verbose:
+            print(f"  SKIP  {path}  (already has ai_summary)")
+        return "skip"
+
+    # Build the content we send to the LLM (strip frontmatter noise)
+    note_content = body.strip()
+    if not note_content:
+        if verbose:
+            print(f"  SKIP  {path}  (empty body)")
+        return "skip"
+
+    # Prepend the note title (filename without extension) for context
+    title = path.stem
+    prompt_content = f"# {title}\n\n{note_content}"
+
+    if dry_run:
+        print(f"  DRY   {path}")
+        if verbose and fm:
+            up_vals = get_up_values(fm)
+            if up_vals:
+                print(f"        up: {up_vals}")
+        return "skip"
+
+    print(f"  LLM   {path} ...", end="", flush=True)
+    summary = summarize(prompt_content, model)
+    print(f" done ({len(summary)} chars)")
+
+    if verbose:
+        print(f"        → {summary}")
+
+    # Write the summary
+    if use_obsidian_cli:
+        write_summary_obsidian_cli(path, vault_root, summary)
+    else:
+        # For direct writing, body needs to be the original body when fm was None
+        if fm is None:
+            body = text
+        write_summary_direct(path, fm, body, summary)
+
+    return "ok"
+
+
+def collect_notes_from_vault(vault: Path) -> list[Path]:
+    """Recursively find all .md files in a vault, ignoring dotfiles/dirs."""
+    notes = []
+    for p in sorted(vault.rglob("*.md")):
+        # Skip hidden dirs (like .obsidian, .trash)
+        if any(part.startswith(".") for part in p.relative_to(vault).parts):
+            continue
+        notes.append(p)
+    return notes
+
+
+def detect_vault_root(paths: list[Path]) -> Path | None:
+    """Try to find the vault root by looking for .obsidian directory."""
+    for p in paths:
+        current = p.parent if p.is_file() else p
+        while current != current.parent:
+            if (current / ".obsidian").is_dir():
+                return current
+            current = current.parent
+    return None
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Summarize Obsidian notes and store in frontmatter.",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=__doc__,
+    )
+    parser.add_argument("notes", nargs="*", help="Paths to .md note files")
+    parser.add_argument(
+        "--vault",
+        type=Path,
+        help="Process all .md files in an Obsidian vault directory",
+    )
+    parser.add_argument(
+        "--stdin",
+        action="store_true",
+        help="Read note paths from stdin (one per line)",
+    )
+    parser.add_argument(
+        "-m",
+        "--model",
+        default="gpt-4.1",
+        help="LLM model to use (default: gpt-4.1)",
+    )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Overwrite existing summaries",
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Show what would be processed without calling the LLM",
+    )
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="Show skipped files and generated summaries",
+    )
+    parser.add_argument(
+        "--filter-up",
+        metavar="VALUE",
+        help='Only process notes where "up" property contains VALUE '
+        '(e.g. --filter-up "Daily notes")',
+    )
+    parser.add_argument(
+        "--obsidian-cli",
+        action="store_true",
+        help="Use `obsidian property:set` to write summaries (requires Obsidian 1.12+ running)",
+    )
+    args = parser.parse_args()
+
+    # Check obsidian CLI availability if requested
+    if args.obsidian_cli and not shutil.which("obsidian"):
+        print("error: --obsidian-cli requested but `obsidian` not found in PATH", file=sys.stderr)
+        sys.exit(1)
+
+    # Collect note paths
+    paths: list[Path] = []
+    if args.vault:
+        paths.extend(collect_notes_from_vault(args.vault))
+    if args.stdin:
+        for line in sys.stdin:
+            line = line.strip()
+            if line:
+                paths.append(Path(line))
+    if args.notes:
+        for n in args.notes:
+            p = Path(n)
+            if p.is_dir():
+                paths.extend(collect_notes_from_vault(p))
+            else:
+                paths.append(p)
+
+    if not paths:
+        parser.print_help()
+        sys.exit(1)
+
+    vault_root = args.vault or detect_vault_root(paths)
+
+    processed = 0
+    skipped = 0
+    errors = 0
+
+    for path in paths:
+        try:
+            status = process_note(
+                path,
+                model=args.model,
+                force=args.force,
+                dry_run=args.dry_run,
+                verbose=args.verbose,
+                filter_up=args.filter_up,
+                use_obsidian_cli=args.obsidian_cli,
+                vault_root=vault_root,
+            )
+            if status == "ok":
+                processed += 1
+            else:
+                skipped += 1
+        except Exception as e:
+            print(f"  ERR   {path}: {e}", file=sys.stderr)
+            errors += 1
+
+    print(f"\nDone: {processed} summarized, {skipped} skipped, {errors} errors")
+
+
+if __name__ == "__main__":
+    main()
