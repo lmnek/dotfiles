@@ -474,9 +474,37 @@
               "a": 1,
               "rgb": 10651823
             }
+          },
+          {
+            "query": "tag:#🌱  ",
+            "color": {
+              "a": 1,
+              "rgb": 2011904
+            }
+          },
+          {
+            "query": "[\"up\":Daily Notes]",
+            "color": {
+              "a": 1,
+              "rgb": 16774912
+            }
+          },
+          {
+            "query": "[\"up\":Dream Log]",
+            "color": {
+              "a": 1,
+              "rgb": 14393600
+            }
+          },
+          {
+            "query": "tag:#📜  ",
+            "color": {
+              "a": 1,
+              "rgb": 15281005
+            }
           }
         ],
-        "search": "",
+        "search": "-tag:#🫙",
         "hideUnresolved": false,
         "showAttachments": false,
         "showOrphans": true,
