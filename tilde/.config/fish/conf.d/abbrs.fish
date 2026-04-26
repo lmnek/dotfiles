@@ -53,3 +53,6 @@ abbr zls 'zellij --session'
 abbr zla 'zellij attach'
 abbr ff fastfetch
 abbr q qalc
+
+abbr cc claude
+abbr ccd claude --dangerously-skip-permissions
