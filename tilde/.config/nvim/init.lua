@@ -40,7 +40,7 @@ local opts = {
     }
 }
 
-vim.lsp.set_log_level("info")
+vim.lsp.log.set_level("error")
 vim.env.NVIM_LSP_LOG_FILE = "/~/.cache/nvim/nvim-lsp.log"
 
 local plugins = {

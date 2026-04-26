@@ -1,32 +1,42 @@
 -- Plugins currently being tested / worked on
 return {
+    -- {
+    --     "epwalsh/obsidian.nvim",
+    --     version = "*",
+    --     lazy = true,
+    --     ft = "markdown",
+    --     event = { -- load only in vault
+    --         "BufReadPre ~/repos/obsidian/Lemonek/**/*.md",
+    --         "BufNewFile ~/repos/obsidian/Lemonek/**/*.md",
+    --     },
+    --     dependencies = { "nvim-lua/plenary.nvim" },
+    --     opts = {
+    --         workspaces = {
+    --             {
+    --                 name = "personal",
+    --                 path = "~/repos/obsidian/Lemonek",
+    --             }
+    --         },
+    --     },
+    -- },
+
     -- colorful matching parens
     { 'HiPhish/rainbow-delimiters.nvim' },
 
     -- display color codes in their bg (+ can add blink.cmp integration later)
-    { 'brenoprata10/nvim-highlight-colors',  opts = {} },
+    { 'brenoprata10/nvim-highlight-colors', opts = {} },
 
     -- statusline numbers limited for typing numbers only with left hand for j / k jumps
-    { 'mluders/comfy-line-numbers.nvim',     opts = {} },
+    { 'mluders/comfy-line-numbers.nvim',    opts = {} },
 
-    { "chentoast/marks.nvim",                event = "VeryLazy", opts = {}, },
+    { "chentoast/marks.nvim",               event = "VeryLazy", opts = {}, },
 
     -- smart incremental select: "." in visual mode
-    { 'RRethy/nvim-treesitter-textsubjects', opts = {},          config = function() end },
+    -- NOTE: could work, but didnt test it in nvim 0.12 yet
+    -- { 'RRethy/nvim-treesitter-textsubjects', opts = {},          config = function() end },
 
     -- automatic markdown bullet lists + toggle checkbox via "<leader>x"
-    { 'bullets-vim/bullets.vim',             opts = {},          config = function() end },
-
-    -- Make ] or [ motions repeatable with ; and ,
-    -- NOTE: overrides local leader :c
-    {
-        'mawkler/demicolon.nvim',
-        dependencies = {
-            'nvim-treesitter/nvim-treesitter',
-            'nvim-treesitter/nvim-treesitter-textobjects',
-        },
-        opts = {},
-    },
+    { 'bullets-vim/bullets.vim',            opts = {},          config = function() end },
 
     -- NOTE: realized I just like to look at the dir structure.. especially in unknown new projects
     {
