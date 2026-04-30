@@ -1,22 +1,8 @@
 {
+  "permissions": {
+    "defaultMode": "auto"
+  },
   "model": "opus[1m]",
-  "effortLevel": "high",
-  "advisorModel": "opus",
-  "enabledPlugins": {
-    "frontend-design@claude-plugins-official": true,
-    "context7@claude-plugins-official": true,
-    "playwright@claude-plugins-official": true,
-    "pyright-lsp@claude-plugins-official": true,
-    "commit-commands@claude-plugins-official": true
-  },
-  "voiceEnabled": false,
-  "voice": {
-    "enabled": false,
-    "mode": "hold"
-  },
-  "skipDangerousModePermissionPrompt": true,
-  "editorMode": "vim",
-  "autoCompactEnabled": false,
   "hooks": {
     "Notification": [
       {
@@ -25,15 +11,6 @@
           {
             "type": "command",
             "command": "jq -r '.notification_message // \"permission required\"' | xargs -r -d '\\n' notify-send -a 'Claude Code' -i dialog-password -u critical -t 8000 'Claude Code — permission needed 🚨'"
-          }
-        ]
-      },
-      {
-        "matcher": "idle_prompt",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "jq -r '.notification_message // \"idle\"' | xargs -r -d '\\n' notify-send -a 'Claude Code' -i utilities-terminal -t 5000 'Claude Code — idle ✅'"
           }
         ]
       }
@@ -50,5 +27,23 @@
       }
     ]
   },
-  "effortLevel": "xhigh"
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "commit-commands@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true
+  },
+  "effortLevel": "xhigh",
+  "advisorModel": "opus",
+  "voice": {
+    "enabled": false,
+    "mode": "hold"
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "editorMode": "vim",
+  "autoCompactEnabled": false,
+  "skipAutoPermissionPrompt": true,
+  "voiceEnabled": false
 }
