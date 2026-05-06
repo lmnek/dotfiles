@@ -291,6 +291,12 @@ exec --no-startup-id /usr/bin/dunst
 # reverse the scrolling order of touchpad
 exec --no-startup-id xinput set-prop "Elan Touchpad" "libinput Natural Scrolling Enabled" 1
 
+# Handy speech-to-text
+exec --no-startup-id handy
+bindsym $mod+v exec --no-startup-id handy --toggle-transcription
+for_window [class="Handy"] floating enable
+no_focus [class="Handy"]
+
 ######################################
 # color settings for bar and windows #
 ######################################
