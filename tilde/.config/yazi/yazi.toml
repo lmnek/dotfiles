@@ -1,5 +1,5 @@
 
-"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+# "$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
 
 [mgr]
 ratio = [3, 8, 8]
@@ -48,10 +48,10 @@ prepend_rules = [
 
 [plugin]
 fetchers = [
-    { id = "mime", url = "/mnt/**", run = "mime-ext", prio = "high" }, # faster mime types fetching (O(1) from table) on remote
-	{ id = "mime", url = "*/",         run = "mime.dir", prio = "high" },
-	{ id = "mime", url = "local://*",  run = "mime.local", prio = "high" },
-	{ id = "mime", url = "remote://*", run = "mime.remote", prio = "high" },
+    { url = "/mnt/**", run = "mime-ext", prio = "high", group = "mime" }, # faster mime types fetching (O(1) from table) on remote
+	{ url = "*/",         run = "mime.dir", prio = "high", group = "mime" },
+	{ url = "local://*",  run = "mime.local", prio = "high", group = "mime" },
+	{ url = "remote://*", run = "mime.remote", prio = "high", group = "mime" },
 ]
 # disable previews for remote mounted dirs (would need to be fetched)
 prepend_preloaders = [{ url = "/mnt/**", run = "noop" }]

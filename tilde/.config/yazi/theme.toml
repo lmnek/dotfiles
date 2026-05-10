@@ -1,12 +1,15 @@
 [flavor]
-dark = "dracula"
+# dark = "dracula" # FIXME: broken after yazi update
 
 # disable default rounded corners
 [status]
-sep_left = { open = "", close = "" }
+sep_left  = { open = "", close = "" }
 sep_right = { open = "", close = "" }
 [indicator]
-padding = { open = "█", close = "█" }
+padding = { open = "▐", close = "▌" }
+[tabs]
+sep_inner = { open = "", close = "" }
+sep_outer = { open = "", close = "" }
 
 [icon]
 prepend_dirs = [
