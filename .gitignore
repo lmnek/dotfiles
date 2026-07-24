@@ -1,0 +1,14 @@
+/tilde/.config/fish/completions
+/tilde/.config/fish/conf.d/fzf.fish
+/tilde/.config/fish/conf.d/venv.fish
+/tilde/.config/fish/fish_variables
+/tilde/.config/noctalia/plugins
+/tilde/.config/fish/functions
+/tilde/.config/yazi/flavors/dracula.yazi
+/tilde/.config/yazi/plugins/toggle-pane.yazi
+/tilde/.config/yazi/plugins/restore.yazi
+/tilde/.config/yazi/plugins/relative-motions.yazi
+/tilde/.config/yazi/plugins/pandoc.yazi
+/tilde/.config/yazi/plugins/ouch.yazi
+/tilde/.config/yazi/plugins/mime-ext.yazi
+/tilde/.config/yazi/plugins/chmod.yazi
