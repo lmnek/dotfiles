@@ -1,9 +1,10 @@
 
-copy_command "xclip -selection clipboard"
+// copy_command "xclip -selection clipboard"
+copy_command "wl-copy"
 
 default_shell "fish"
 
-scrollback_editor "/usr/bin/nvim"
+scrollback_editor "nvim"
 
 theme "dracula"
 
@@ -12,6 +13,10 @@ pane_frames false
 simplified_ui true
 
 session_serialization true
+pane_viewport_serialization true
+scrollback_lines_to_serialize 10000 // serialize also content of panes
+// fix ressurection on nix (by stripping /nix/store/bin from binaries): 
+post_command_discovery_hook "echo \"$RESURRECT_COMMAND\" | sed -E 's@/nix/store/[^/]+/bin/@@g'"
 
 default_mode "locked"
 
