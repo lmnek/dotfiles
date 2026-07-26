@@ -12,3 +12,4 @@
 /tilde/.config/yazi/plugins/ouch.yazi
 /tilde/.config/yazi/plugins/mime-ext.yazi
 /tilde/.config/yazi/plugins/chmod.yazi
+__pycache__/
