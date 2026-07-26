@@ -1,6 +1,7 @@
 
 # --- Git ---
 abbr lg 'lazygit' # only important thing lol
+abbr ld 'lazydocker'
 abbr gl 'git log --all --decorate --oneline --graph'
 abbr gc 'git clone'
 
@@ -55,4 +56,4 @@ abbr ff fastfetch
 abbr q qalc
 
 abbr cc claude
-abbr ccd claude --dangerously-skip-permissions
+abbr cx codex

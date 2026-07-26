@@ -13,7 +13,6 @@ end
 #       Ctrl+V          search variables
 set fzf_fd_opts --hidden --max-depth 5
 
-fish_add_path /home/lmnk/bin
 
 set -gx EDITOR "nvim"
 set -gx BROWSER "zen-browser"
@@ -27,4 +26,5 @@ end
 
 starship init fish | source
 
-set PATH $PATH /home/lmnk/.local/bin
+fish_add_path /home/lmnk/bin
+fish_add_path /home/lmnk/.local/bin

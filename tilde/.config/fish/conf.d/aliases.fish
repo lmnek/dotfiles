@@ -1,5 +1,7 @@
-alias yank='xsel --input --clipboard'
-alias paste='xsel --output --clipboard'
+# alias yank='xsel --input --clipboard'  # X11
+# alias paste='xsel --output --clipboard'  # X11
+alias yank='wl-copy'
+alias paste='wl-paste'
 alias Y=yank
 alias P=paste
 
