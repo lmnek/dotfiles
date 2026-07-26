@@ -36,4 +36,4 @@ hash = "e89631ed41c2531f848dd00e211a6853"
 [[flavor.deps]]
 use = "yazi-rs/flavors:dracula"
 rev = "f6b425a"
-hash = "c5e49b9e877ca29a3622ec2e35af0b2a"
+hash = "8a39d710722175800a03aaaf755338ba"
