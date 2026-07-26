@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+# Transcribe all audio embeds in an Obsidian note and add a folded
+# callout with the transcript beneath each one. Idempotent: embeds
+# already followed by a transcript callout are skipped.
+# Usage: transcribe-note <note.md>
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+VAULT = Path.home() / "sync/obsidian"
+AUDIO_EMBED = re.compile(r"!\[\[([^\]|]+\.(?:m4a|mp3|wav|ogg|webm|flac))(?:\|[^\]]*)?\]\]")
+
+if len(sys.argv) != 2:
+    sys.exit("usage: transcribe-note <note.md>")
+
+note = Path(sys.argv[1])
+lines = note.read_text().splitlines()
+# ponytail: rglob per embed; fine for a personal vault
+find = lambda name: next(p for p in VAULT.rglob(name) if ".trash" not in p.parts)
+
+out = []
+changed = 0
+for i, line in enumerate(lines):
+    out.append(line)
+    m = AUDIO_EMBED.search(line)
+    if not m:
+        continue
+    if i + 1 < len(lines) and lines[i + 1].startswith("> [!"):
+        continue  # already has a callout
+    audio = find(m.group(1))
+    print(f"Transcribing {audio.name}...", file=sys.stderr)
+    text = subprocess.run(
+        ["transcribe", str(audio)], capture_output=True, text=True, check=True
+    ).stdout.strip()
+    out.append("> [!quote]- Transcript")
+    out.extend(f"> {t}" for t in text.splitlines())
+    out.append("")
+    changed += 1
+
+if changed:
+    note.write_text("\n".join(out) + "\n")
+print(f"{changed} transcript(s) added", file=sys.stderr)

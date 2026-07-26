@@ -1,0 +1,22 @@
+#!/usr/bin/env -S uv run --script --quiet --python-preference only-system
+# /// script
+# dependencies = ["soniox"]
+# ///
+# Transcribe an audio file via Soniox. Needs SONIOX_API_KEY.
+# Usage: transcribe recording.mp3 [> out.txt]
+import os
+import sys
+from pathlib import Path
+
+from soniox import SonioxClient
+
+if len(sys.argv) != 2:
+    sys.exit("usage: transcribe <audio-file>")
+
+if "SONIOX_API_KEY" not in os.environ:
+    secrets = Path.home() / ".config/voxtype/secrets.env"
+    os.environ["SONIOX_API_KEY"] = secrets.read_text().split("SONIOX_API_KEY=")[1].split()[0]
+
+client = SonioxClient()
+result = client.stt.transcribe_and_wait_with_tokens(file=sys.argv[1], delete_after=True)
+print(result.text)
