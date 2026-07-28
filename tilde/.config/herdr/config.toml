@@ -30,14 +30,14 @@ hide_tab_bar_when_single_tab = true
 agent_panel_sort = "spaces"
 show_agent_labels_on_pane_borders = false
 [ui.sidebar.agents]
-# Second row adds the agent's own OSC title: claude puts its chat summary there,
+# Second row is the agent's own OSC title: claude puts its chat summary there,
 # codex puts whatever tui.terminal_title lists (see ~/.codex/config.toml).
-# _stripped drops the leading spinner glyph. Empty title = row is just "claude".
+# _stripped drops the leading spinner glyph. Empty title = second row is empty.
 # Both rows are single tokens composed by herdr-index.py, because herdr joins tokens
 # with " · " and that separator has no config knob. It also means no bold on the space
 # name — built-in "workspace"/"agent" tokens carry their own styling, custom ones don't.
-#   $idx = "<agent row> <space> <tab position>:<tab>"   e.g. "1 dotfiles 3:btop"
-#   $who = "cc: <agent's own OSC title>"                claude→cc, codex→cx
+#   $idx = "<agent row> <space> <tab position>:<kind>"  e.g. "1 dotfiles 3:cc"
+#   $who = "<agent's own OSC title>"                    kind: claude→cc, codex→cx
 rows = [
   ["state_icon", "$idx"],
   [{ token = "$who", bold = true }],

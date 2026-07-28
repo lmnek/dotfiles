@@ -6,8 +6,8 @@ the sidebar row tokens have no index at all. So: subscribe to the socket API, an
 every layout change relabel tabs "<position>:<name>" and push two ready-made sidebar
 rows as pane tokens (see [ui.sidebar.agents] rows in config.toml):
 
-    $idx  "1 dotfiles 3:btop"        agent row number, space, tab position
-    $who  "cc: <agent OSC title>"
+    $idx  "1 dotfiles 3:cc"          agent row number, space, tab position, agent kind
+    $who  "<agent OSC title>"
 
 They're whole rows rather than one token per field because herdr joins tokens with
 " · " and that separator has no config knob.
@@ -85,10 +85,10 @@ def reconcile():
         # One token per sidebar row: herdr joins tokens with " · " and there's no knob
         # for that, so the row is a single token with the spacing already in it.
         name = SHORT.get(agent.get("agent") or "", agent.get("agent") or "?")
-        title = agent.get("terminal_title_stripped") or ""
         tokens = {
-            "idx": f"{i} {space.get(agent['workspace_id'], '')} {label.get(agent['tab_id'], '')}",
-            "who": f"{name}: {title}" if title else name,
+            # Tab position only, not the tab's name — the agent kind reads better there.
+            "idx": f"{i} {space.get(agent['workspace_id'], '')} {position.get(agent['tab_id'], '?')}:{name}",
+            "who": agent.get("terminal_title_stripped") or "",
         }
         if reported.get(agent["pane_id"]) != tokens:
             rpc("pane.report_metadata",
