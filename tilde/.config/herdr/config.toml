@@ -1,0 +1,118 @@
+# herdr — agent-aware multiplexer. Runs alongside zellij, doesn't replace it.
+# Only non-defaults live here; `herdr --default-config` prints the full schema.
+# Validate with `herdr config check`, apply with `herdr server reload-config`.
+
+[theme]
+name = "dracula"
+
+[terminal]
+default_shell = "fish"
+
+[update]
+version_check = false  # nix-managed
+manifest_check = false
+
+[session]
+# Needs the per-agent hook, which is NOT configurable here — it writes into each
+# agent's own config dir, so it can't be symlinked from this repo:
+#   herdr integration install claude   # ~/.claude/hooks/ + settings.json
+#   herdr integration install codex    # ~/.codex/
+# Idempotent and version-checked; re-run after a herdr update. Check with
+# `herdr integration status` — "not installed" means this flag is a no-op.
+resume_agents_on_restore = true
+
+[ui]
+pane_borders = false     # was zellij pane_frames false
+prompt_new_tab_name = false  # zellij NewTab was instant
+# Slimmest the top bar gets — there's no tab-row height/padding knob.
+hide_tab_bar_when_single_tab = true
+
+agent_panel_sort = "spaces"
+show_agent_labels_on_pane_borders = false
+[ui.sidebar.agents]
+# Second row adds the agent's own OSC title: claude puts its chat summary there,
+# codex puts whatever tui.terminal_title lists (see ~/.codex/config.toml).
+# _stripped drops the leading spinner glyph. Empty title = row is just "claude".
+# Both rows are single tokens composed by herdr-index.py, because herdr joins tokens
+# with " · " and that separator has no config knob. It also means no bold on the space
+# name — built-in "workspace"/"agent" tokens carry their own styling, custom ones don't.
+#   $idx = "<agent row> <space> <tab position>:<tab>"   e.g. "1 dotfiles 3:btop"
+#   $who = "cc: <agent's own OSC title>"                claude→cc, codex→cx
+rows = [
+  ["state_icon", "$idx"],
+  [{ token = "$who", bold = true }],
+]
+
+[ui.toast]
+delivery = "system"  # dunst — the whole point is being told when an agent is blocked
+
+[experimental]
+pane_history = true  # closest thing to zellij's scrollback serialization
+# yazi/snacks image previews; needs kitty-graphics outer term (ghostty ok).
+# reload-config isn't enough — the client renders these, so detach+reattach to apply.
+kitty_graphics = true
+
+# Direct alt binds, no mode to enter. Prefix mode stays on ctrl+b for the rest.
+# Layering: bare alt = tabs and spaces (used most), alt+shift = panes.
+[keys]
+# tabs — h/l was MoveFocusOrTab in zellij, here it's purely tabs
+previous_tab = "alt+h"
+next_tab = "alt+l"
+switch_tab = "alt+1..9"
+new_tab = "alt+t"
+# close_tab = "alt+z"
+zoom = "alt+f"
+
+# panes — the whole block lives on alt+shift now: bare alt+i/o moves tabs, alt+j/k
+# walks spaces. Same i/o/j/k shape as before, one modifier up.
+focus_pane_left = "alt+shift+i"
+focus_pane_right = "alt+shift+o"
+focus_pane_down = "alt+shift+j"
+focus_pane_up = "alt+shift+k"
+split_vertical = "alt+m"
+split_horizontal = "alt+shift+m"
+close_pane = "alt+x"
+resize_mode = "alt+r"
+
+# spaces (workspaces)
+new_workspace = "alt+n"
+previous_workspace = "alt+k"   # spaces are a vertical list, so k/j not h/l
+next_workspace = "alt+j"
+workspace_picker = "alt+w"        # navigate mode: spaces list + panes, see below
+goto = "alt+s"                    # fuzzy find a space by name
+switch_workspace = "ctrl+alt+1..9"
+
+# agents — no zellij equivalent, this is the reason herdr exists
+next_agent = "alt+a"
+previous_agent = "alt+shift+a"
+focus_agent = "alt+shift+1..9"    # agents live with the panes on alt+shift; spaces took ctrl+alt
+
+# navigate mode (alt+w), local keys only — mirrors the alt layer above:
+# j/k down-up the spaces list, i/o across panes. Arrows kept for pane up/down
+# because j/k are spoken for; alt+w's own arrows are gone.
+navigate_workspace_down = "j"
+navigate_workspace_up = "k"
+navigate_pane_left = "i"
+navigate_pane_right = "o"
+navigate_pane_down = "down"
+navigate_pane_up = "up"
+
+toggle_sidebar = "alt+b"
+edit_scrollback = "alt+e"
+detach = "alt+q"
+# Left on prefix: close_workspace, rename_*, help, settings.
+# No herdr equivalent at all: NextSwapLayout, floating panes.
+
+# zellij's MoveTab. No built-in action and no `herdr tab move` CLI, but the socket
+# API has tab.move — move-tab.py is that one call plus index arithmetic.
+[[keys.command]]
+key = "alt+i"
+type = "shell"
+command = "~/.config/herdr/move-tab.py left"
+description = "move tab left"
+
+[[keys.command]]
+key = "alt+o"
+type = "shell"
+command = "~/.config/herdr/move-tab.py right"
+description = "move tab right"

@@ -12,4 +12,9 @@
 /tilde/.config/yazi/plugins/ouch.yazi
 /tilde/.config/yazi/plugins/mime-ext.yazi
 /tilde/.config/yazi/plugins/chmod.yazi
+# herdr writes its runtime state (sockets, logs, session dumps) next to the config
+/tilde/.config/herdr/*
+!/tilde/.config/herdr/config.toml
+!/tilde/.config/herdr/move-tab.py
+!/tilde/.config/herdr/herdr-index.py
 __pycache__/
