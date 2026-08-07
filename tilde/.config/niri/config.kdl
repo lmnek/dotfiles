@@ -350,6 +350,13 @@ window-rule {
     open-floating true
 }
 
+// yazi as the system file picker (termfilechooser portal).
+window-rule {
+    match app-id=r#"^com\.lmnk\.termfilechooser$"#
+    open-floating true
+    default-column-width { fixed 1100; }
+}
+
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
 /-window-rule {

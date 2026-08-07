@@ -1,6 +1,13 @@
-### Source: https://github.com/hunkyburrito/xdg-desktop-portal-termfilechooser?tab=readme-ov-file ###
-### + need to set one option in firefox about:config ###
+### https://github.com/hunkyburrito/xdg-desktop-portal-termfilechooser
+### Enabled in nixen: modules/system/desktop.nix (xdg.portal.config.niri).
+### Firefox/Zen needs widget.use-xdg-desktop-portal.file-picker=1
 
 [filechooser]
-cmd=/home/lmnk/.config/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
+# stock wrapper from the nixpkgs package — its dir is in the binary's search path
+cmd=yazi-wrapper.sh
 default_dir=/home/lmnk/Downloads
+create_help_file=0
+# -e must stay last: TERMCMD is prefixed to the yazi command
+env=TERMCMD=ghostty --class=com.lmnk.termfilechooser --title=termfilechooser -e
+open_mode=suggested
+save_mode=last
