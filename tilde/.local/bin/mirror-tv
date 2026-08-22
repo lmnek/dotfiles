@@ -1,0 +1,17 @@
+#!/bin/sh
+# Mirror the laptop screen onto whatever external output is plugged in.
+# niri has no built-in mirroring; wl-mirror draws a copy in a fullscreen window.
+# Run again (or Mod+Shift+M) to stop.
+#
+# Prefer extending (Mod+Ctrl+Right / Mod+Shift+Ctrl+Right) -- mirroring
+# letterboxes, because the laptop is 16:10 and TVs are 16:9.
+set -eu
+
+pkill -x wl-mirror && exit 0
+
+ext=$(niri msg --json outputs | jq -r 'keys[] | select(. != "eDP-1")' | head -1)
+[ -n "$ext" ] || { notify-send "mirror-tv" "no external output connected"; exit 1; }
+
+# fit (default) = whole screen, black bars on the sides.
+# cover          = fills the TV, crops the top and bottom of your screen.
+exec wl-mirror --scaling "${1:-fit}" --fullscreen-output "$ext" eDP-1
