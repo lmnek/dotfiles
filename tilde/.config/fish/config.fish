@@ -15,7 +15,7 @@ set fzf_fd_opts --hidden --max-depth 5
 
 
 set -gx EDITOR "nvim"
-set -gx BROWSER "zen-browser"
+set -gx BROWSER "zen-beta"
 
 fish_vi_key_bindings
 

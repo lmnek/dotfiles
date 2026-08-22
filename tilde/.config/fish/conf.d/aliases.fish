@@ -26,3 +26,4 @@ alias pmqer='pacman -Qeq | fzf --multi --preview "pacman -Qi {1}" | xargs -ro su
 
 
 alias py='python'
+alias j='just'

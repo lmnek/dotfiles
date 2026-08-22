@@ -52,6 +52,9 @@ abbr c 'codium .'
 abbr zl 'zellij'
 abbr zls 'zellij --session'
 abbr zla 'zellij attach'
+abbr hd 'herdr'
+abbr hds 'herdr --session' # attaches if running, creates if not — no separate attach
+abbr hdl 'herdr session list'
 abbr ff fastfetch
 abbr q qalc
 
