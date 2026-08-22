@@ -4,6 +4,11 @@
 command = fish
 shell-integration = fish
 
+# resident server: new windows are handed to the running instance (fast open)
+# note: windows inherit the server's env -- env changes need a full ghostty quit
+gtk-single-instance = true
+quit-after-last-window-closed = false
+
 font-size = 16
 font-family = JetBrainsMono Nerd Font
 
