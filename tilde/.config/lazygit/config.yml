@@ -1,16 +1,13 @@
-
 git:
-  pagers:
-    - pager: delta --dark --paging=never --hunk-header-decoration-style "ul"
+  diffRenderers:
+    - command: delta --dark --paging=never --hunk-header-decoration-style "ul"
       colorArg: always
-    - pager: delta --dark --paging=never --hunk-header-decoration-style "ul" -s
+    - command: delta --dark --paging=never --hunk-header-decoration-style "ul" -s
       colorArg: always
   overrideGpg: true
-
 gui:
   commitHashLength: 3
   nerdFontsVersion: "3"
-
   # DRACULA
   theme:
     activeBorderColor:
@@ -18,34 +15,24 @@ gui:
       - bold
     inactiveBorderColor:
       - "#BD93F9"
-
     searchingActiveBorderColor:
       - "#8BE9FD"
       - bold
-
     optionsTextColor:
       - "#6272A4"
-
     selectedLineBgColor:
       - "#6272A4"
-
     inactiveViewSelectedLineBgColor:
       - bold
-
     cherryPickedCommitFgColor:
       - "#6272A4"
-
     cherryPickedCommitBgColor:
       - "#8BE9FD"
-
     markedBaseCommitFgColor:
       - "#8BE9FD"
-
     markedBaseCommitBgColor:
       - "#F1FA8C"
-
     unstagedChangesColor:
       - "#FF5555"
-
     defaultFgColor:
       - "#F8F8F2"
