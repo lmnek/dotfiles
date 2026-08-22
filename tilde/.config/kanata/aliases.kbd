@@ -1,7 +1,6 @@
 
-;; (need to run kanata compiled with cmd flag)
 (defalias
-    󰐎     (cmd playerctl play-pause)
+    󰐎     pp
 )
 
 ;; vim keybindings emulation
