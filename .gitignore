@@ -18,3 +18,8 @@
 !/tilde/.config/herdr/move-tab.py
 !/tilde/.config/herdr/herdr-index.py
 __pycache__/
+
+# cursor's installer owns these; they exec a node binary that lives next to them
+/tilde/.local/bin/agent
+/tilde/.local/bin/cursor
+/tilde/.local/bin/cursor-agent
