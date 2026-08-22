@@ -3,12 +3,23 @@
 // Check the wiki for a full description of the configuration:
 // https://niri-wm.github.io/niri/Configuration:-Introduction
 
+// GTK 4.20+ dropped its own compose handling and defers to the compositor's
+// text-input protocol, so without an IME no GTK app (ghostty included) resolves
+// Compose sequences -- which is what the kanata czech layer types.
+// "simple" = GTK's built-in compose table. Drop this if an IME is ever added.
+environment {
+    GTK_IM_MODULE "simple"
+}
+
 // Input device configuration.
 // Find the full list of options on the wiki:
 // https://niri-wm.github.io/niri/Configuration:-Input
 input {
     keyboard {
         xkb {
+            // Compose key for the kanata czech layer (kanata sends KEY_COMPOSE).
+            options "compose:menu"
+
             // You can set rules, model, layout, variant and options.
             // For more information, see xkeyboard-config(7).
 

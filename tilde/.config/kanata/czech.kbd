@@ -1,0 +1,78 @@
+;; Czech diacritics as XKB Compose sequences.
+;; Don't use (unicode x) here. For that, kanata types ctrl+shift+u <hex> <enter>
+;; on Linux, which needs an IME or GTK's old hex input to catch it. Under Wayland
+;; nothing does, so the raw hex lands in the buffer: "10d", "159", "161".
+;;
+;; Three things this file depends on, none of them here:
+;;   niri  options "compose:menu"   cmps = KEY_COMPOSE -> xkb <MENU> -> Multi_key
+;;   niri  GTK_IM_MODULE=simple     GTK 4.20+ hands compose to the compositor,
+;;                                  and with no IME that means nobody handles it
+;;   i3    setxkbmap -option compose:menu
+;;
+;; Sequences are the stock ones from X11/locale/en_US.UTF-8/Compose:
+;;   ' + letter = acute, c + letter = caron, o + u = ring, " + letter = diaeresis
+;;
+;; Windows has no compose, so this is Linux only. If that machine ever needs
+;; Czech, split the aliases into (platform (linux) ...) and (platform (win) ...)
+;; and keep the 🔣 unicode ones for Windows, where they work properly.
+
+(defalias
+  á (macro cmps ' a)
+  é (macro cmps ' e)
+  í (macro cmps ' i)
+  ó (macro cmps ' o)
+  ú (macro cmps ' u)
+  ý (macro cmps ' y)
+
+  č (macro cmps c c)
+  ď (macro cmps c d)
+  ě (macro cmps c e)
+  ň (macro cmps c n)
+  ř (macro cmps c r)
+  š (macro cmps c s)
+  ť (macro cmps c t)
+  ž (macro cmps c z)
+
+  ů (macro cmps o u)
+  ä (macro cmps S-' a)
+
+  Á (macro cmps ' S-a)
+  É (macro cmps ' S-e)
+  Í (macro cmps ' S-i)
+  Ó (macro cmps ' S-o)
+  Ú (macro cmps ' S-u)
+  Ý (macro cmps ' S-y)
+
+  Č (macro cmps c S-c)
+  Ď (macro cmps c S-d)
+  Ě (macro cmps c S-e)
+  Ň (macro cmps c S-n)
+  Ř (macro cmps c S-r)
+  Š (macro cmps c S-s)
+  Ť (macro cmps c S-t)
+  Ž (macro cmps c S-z)
+
+  Ů (macro cmps o S-u)
+)
+
+;; deflayermap lists only the keys it changes, so the same two layers work on
+;; every keyboard geometry -- laptop, Keychron, Sofle -- and live here once
+;; instead of once per config.
+
+(defalias
+  🇨🇿   (layer-toggle czechLow)
+  ⇧🇨🇿  (layer-toggle czechUp)
+)
+
+(deflayermap (czechLow)
+  q @ä  w @é  e @ě  r @ř  t @ť  y @ý  u @ů  i @í  o @ó
+  a @á  s @š  d @ď  j @ú
+  z @ž  c @č  n @ň
+  lsft @⇧🇨🇿
+)
+
+(deflayermap (czechUp)
+  w @É  e @Ě  r @Ř  t @Ť  y @Ý  u @Ů  i @Í  o @Ó
+  a @Á  s @Š  d @Ď  j @Ú
+  z @Ž  c @Č  n @Ň
+)

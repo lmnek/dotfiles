@@ -8,7 +8,6 @@
         "JosefAdamcik Sofle"
         "JosefAdamcik Sofle Keyboard"
     )
-    linux-unicode-termination enter
 )
 
 (defvar
@@ -32,28 +31,9 @@
   _     _    _    _    _    _    _    _    _    _    _    _     _     _ 
   _     _    _    _    _    _    _    _    _    _    _    _     _                              
   _     _    _    _    _    _    _    _    _    _    _    _                          
-  _     _    _                   _                  @cz         _     _           
+  _     _    _                   _                  @🇨🇿         _     _           
 )
 
-(deflayer czechLow
-  _     _    _    _    _    _    _    _    _    _    _    _     _          
-  _     _    _    _    _    _    _    _    _    _    _    _     _     _    
-  _   🔣ä  🔣é  🔣ě  🔣ř  🔣ť  🔣ý  🔣ů  🔣í  🔣ó    _    _     _     _    
-  _   🔣á  🔣š  🔣ď    _    _    _  🔣ú    _    _    _    _     _                              
-@czU  🔣ž   _   🔣č    _    _  🔣ň    _    _    _    _    _                     
-  _     _    _                   _              _         _     _           
-)
-
-(deflayer czechUp
-  _     _    _    _    _    _    _    _    _    _    _    _     _          
-  _     _    _    _    _    _    _    _    _    _    _    _     _     _    
-  _     _  🔣É  🔣Ě  🔣Ř  🔣Ť  🔣Ý  🔣Ů  🔣Í  🔣Ó    _    _     _     _    
-  _   🔣Á  🔣Š  🔣Ď    _    _    _  🔣Ú    _    _    _    _     _                              
-  _   🔣Ž   _   🔣Č    _    _  🔣Ň    _    _    _    _    _                     
-  _     _    _                   _              _         _     _           
-)
-
-(defalias
-  cz    (layer-toggle czechLow)
-  czU   (layer-toggle czechUp)
-)
+;; Last on purpose: kanata makes the FIRST layer it sees the default layer,
+;; so this include has to come after (deflayer base).
+(include czech.kbd)

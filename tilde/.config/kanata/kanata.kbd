@@ -9,13 +9,12 @@
     process-unmapped-keys yes
     log-layer-changes no
 
-    linux-dev-names-exclude (
-        "Keychron Keychron K9 Pro"
-        "JosefAdamcik Sofle"
-        "JosefAdamcik Sofle Keyboard"
-    )
-    linux-unicode-termination enter
-    danger-enable-cmd true
+    ;; MSI laptop keyboard, by name rather than /dev/input/by-path/...
+    ;; The path is specific to this machine, the name is what every
+    ;; built-in PS/2 keyboard reports. External boards (Keychron, Sofle)
+    ;; do their own remapping in firmware, so kanata leaves them alone.
+    linux-dev-names-include ("AT Translated Set 2 keyboard")
+    danger-enable-cmd false
 )
 
 (defvar
@@ -41,7 +40,7 @@
   ⭾     q    w    e    r    t    y    u    i    o    p   @⌫+   @󰐎
  @⎋+🔣  a    s    d    f    g    h    j    k    l   @↩+⌃ @;+🖰    ∅   ↩
  ‹⇧     z    x    c    v    b    n    m    ,   @.+  /    ⇧›
- ‹⌃    ‹⌘   ‹⎇             @␣+⌘          @⇆🇨🇿        ⌃›           
+ ‹⌃    ‹⌘   ‹⎇             @␣+⌘          @🇨🇿        ⌃›           
 )
 
 ;; doesnt work???
@@ -57,8 +56,6 @@
     ⇆char   (layer-toggle characters)
     ⇆num    (layer-toggle numbers)
     ⇆mouse  (layer-toggle mouse)
-    ⇆🇨🇿     (layer-toggle czechLow)
-    ⇆⇧🇨🇿    (layer-toggle czechUp)
 )
 
 ;; meta and multi-functional keys
@@ -140,20 +137,6 @@
   _     _    _                 _           _         _           
 )
 
-(deflayer czechLow
-  _     _    _    _    _    _    _    _    _    _    _    _     _          
-  _     _    _    _    _    _    _    _    _    _    _    _     _     _    
-  _   🔣ä  🔣é  🔣ě  🔣ř  🔣ť  🔣ý  🔣ů  🔣í  🔣ó    _    _     _
-  _   🔣á  🔣š  🔣ď    _    _    _  🔣ú    _    _    _    _     _     _                                  
-@⇆⇧🇨🇿 🔣ž   _   🔣č    _    _  🔣ň    _    _    _    _    _                     
-  _     _    _                 _           _         _           
-)
-
-(deflayer czechUp
-  _     _    _    _    _    _    _    _    _    _    _    _     _          
-  _     _    _    _    _    _    _    _    _    _    _    _     _     _    
-  _     _  🔣É  🔣Ě  🔣Ř  🔣Ť  🔣Ý  🔣Ů  🔣Í  🔣Ó    _    _     _
-  _   🔣Á  🔣Š  🔣Ď    _    _    _  🔣Ú    _    _    _    _     _     _                                  
-  _   🔣Ž   _   🔣Č    _    _  🔣Ň    _    _    _    _    _                     
-  _     _    _                 _           _         _           
-)
+;; Last on purpose: kanata makes the FIRST layer it sees the default layer,
+;; so this include has to come after (deflayer base).
+(include czech.kbd)
