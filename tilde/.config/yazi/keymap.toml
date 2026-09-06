@@ -6,8 +6,8 @@
 [mgr]
 prepend_keymap = [
   # ------ EXECUTE ------
-  { on = [ "e", "r" ], run = '''shell 'remove-space-filename.sh "$0"' --confirm''', desc = "Remove spaces from filename" },
-  { on = [ "e", "d" ], run = '''shell 'ripdrag -a "$@" -x 2>/dev/null &' --confirm''', desc = "drag&drop" },
+  { on = [ "e", "r" ], run = '''shell -- remove-space-filename.sh %h''', desc = "Remove spaces from filename" },
+  { on = [ "e", "d" ], run = '''shell --orphan -- ripdrag -a -x %s 2>/dev/null''', desc = "drag&drop" },
   { on = [ "e", "C" ], run = "plugin ouch", desc = "Compress with ouch" }, # note: compress.yazi is potentially better (e.g. input for archive password) 
   { on = [ "e", "c" ], run = "plugin chmod", desc = "Chmod on selected files" },
   { on = [ "e", "p" ], run = "plugin pandoc", desc = "Convert with pandoc" },
